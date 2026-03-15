@@ -19,9 +19,13 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/5.3.0/addon-fit.min.js"></script>
   <style>
     /* ═══════════ GOOGLE FONTS ═══════════ */
-    html { scroll-behavior: smooth; }
-
     @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+    html {
+      scroll-behavior: smooth;
+      /* Smooth scrolling with momentum on supported platforms */
+      -webkit-overflow-scrolling: touch;
+    }
 
     /* ═══════════ THEMES ═══════════ */
     [data-theme="aero"] {
@@ -242,9 +246,11 @@
       color: var(--tp);
       height: 100%; min-height: 100vh;
       overflow: hidden;
-      transition: background 0.5s, color 0.3s;
+      transition: background 0.45s cubic-bezier(0.4,0,0.2,1), color 0.3s;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      /* Prevent layout shift during font load */
+      font-display: swap;
     }
 
     body::before {
@@ -259,14 +265,17 @@
     /* ════ LIQUID GLASS MIXIN ════ */
     .glass {
       background: var(--glass);
-      backdrop-filter: blur(32px) saturate(160%);
-      -webkit-backdrop-filter: blur(32px) saturate(160%);
+      backdrop-filter: blur(28px) saturate(160%) brightness(1.02);
+      -webkit-backdrop-filter: blur(28px) saturate(160%) brightness(1.02);
       border: 1px solid var(--glass-b);
       box-shadow:
         0 8px 32px var(--shadow),
         inset 0 1px 0 var(--glass-s),
-        inset 0 -1px 0 rgba(0,0,0,0.08);
+        inset 0 -1px 0 rgba(0,0,0,0.06);
       position: relative;
+      /* Force GPU compositing layer for better blur perf */
+      will-change: transform;
+      transform: translateZ(0);
     }
 
     /* Refraction highlight on top edge */
@@ -295,14 +304,17 @@
     header {
       grid-column: 1 / -1;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0.62rem 1.2rem; gap: 0.85rem;
-      border-radius: 18px;
+      padding: 0.75rem 1.35rem; gap: 0.85rem;
+      border-radius: 20px;
       position: relative; z-index: 10;
       background: var(--panel-glass, var(--glass));
-      backdrop-filter: var(--card-blur, blur(40px) saturate(180%));
-      -webkit-backdrop-filter: var(--card-blur, blur(40px) saturate(180%));
+      backdrop-filter: var(--card-blur, blur(36px) saturate(180%) brightness(1.02));
+      -webkit-backdrop-filter: var(--card-blur, blur(36px) saturate(180%) brightness(1.02));
       border: 1px solid var(--glass-b);
-      box-shadow: 0 4px 24px var(--shadow), inset 0 1px 0 var(--glass-s), inset 0 -1px 0 rgba(0,0,0,0.05);
+      box-shadow: 0 4px 24px var(--shadow), inset 0 1px 0 var(--glass-s), inset 0 -1px 0 rgba(0,0,0,0.04);
+      transform: translateZ(0);
+      will-change: transform;
+      transition: backdrop-filter 0.3s, background 0.3s;
     }
 
     .header-left { display: flex; align-items: center; gap: 0.65rem; }
@@ -356,12 +368,14 @@
       grid-row: 2; grid-column: 1;
       display: flex; flex-direction: column; min-height: 0; overflow: hidden;
       border-radius: 18px;
-      transition: opacity 0.3s, width 0.3s;
+      transition: opacity 0.3s cubic-bezier(0.4,0,0.2,1), width 0.3s cubic-bezier(0.4,0,0.2,1);
       background: var(--panel-glass, var(--glass));
-      backdrop-filter: var(--card-blur, blur(40px) saturate(180%));
-      -webkit-backdrop-filter: var(--card-blur, blur(40px) saturate(180%));
+      backdrop-filter: var(--card-blur, blur(36px) saturate(180%) brightness(1.02));
+      -webkit-backdrop-filter: var(--card-blur, blur(36px) saturate(180%) brightness(1.02));
       border: 1px solid var(--glass-b);
       box-shadow: 0 4px 24px var(--shadow), inset 0 1px 0 var(--glass-s);
+      transform: translateZ(0);
+      will-change: transform;
     }
     .app.sidebar-hidden .sidebar { opacity: 0; pointer-events: none; width: 0; border: none; }
 
@@ -403,25 +417,13 @@
     .sb-icon-btn:hover { background: var(--glass); border-color: var(--ac); color: var(--tp); }
     .sb-icon-btn img, .sb-icon-btn svg { width: 15px; height: 15px; object-fit: contain; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    .tree { padding: 0.5rem; overflow-y: auto; flex: 1; scrollbar-width: thin; scrollbar-color: var(--ag) transparent; }
+    .tree { padding: 0.5rem; overflow-y: auto; flex: 1; scrollbar-width: thin; scrollbar-color: var(--ag) transparent; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
     .tree::-webkit-scrollbar { width: 3px; }
     .tree::-webkit-scrollbar-thumb { background: var(--ag); border-radius: 2px; }
 
     .tree-node { margin: 0.02rem 0; }
-    .tree-item {
-      display: flex; align-items: center; gap: 0.4rem;
-      padding: 0.42rem 0.6rem; border-radius: 10px; cursor: pointer;
-      transition: all 0.15s ease; color: var(--tp); user-select: none;
-      font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.88rem; font-weight: 400;
-      border: 1px solid transparent;
-    }
+    /* tree-item base rules defined in ADHD improvements section below */
     .tree-item:hover { background: var(--glass-inner); border-color: var(--glass-b); }
-    .tree-item.selected {
-      background: var(--ag);
-      border-color: var(--ac);
-      padding-left: 0.6rem;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 2px 8px var(--ag);
-    }
     .tree-item .expand { width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.2s; opacity: 0.55; }
     .tree-item .expand.collapsed { transform: rotate(-90deg); }
     .tree-item .ti-icon { width: 16px; height: 16px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
@@ -449,23 +451,6 @@
     .toggle-btn:hover { background: var(--glass); border-color: var(--ac); color: var(--tp); }
     .toggle-btn img, .toggle-btn svg { width: 16px; height: 16px; object-fit: contain; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-    .breadcrumb {
-      font-family: 'Outfit', sans-serif; font-style: normal;
-      font-size: 1.0rem; font-weight: 600; letter-spacing: -0.02em;
-      color: var(--tp); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-
-    .add-btn {
-      display: flex; align-items: center; gap: 0.38rem;
-      padding: 0.5rem 1.1rem;
-      background: var(--agr); color: white; border: none; border-radius: 12px;
-      font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.84rem;
-      cursor: pointer; transition: all 0.22s cubic-bezier(0.34,1.2,0.64,1);
-      box-shadow: 0 3px 14px var(--ag), inset 0 1px 0 rgba(255,255,255,0.22);
-      white-space: nowrap; letter-spacing: 0.005em;
-    }
-    .add-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px var(--ag); }
-    .add-btn img, .add-btn svg { width: 13px; height: 13px; object-fit: contain; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
     .btn-ghost {
       background: var(--glass); color: var(--tp);
       box-shadow: none; border: 1px solid var(--glass-b);
@@ -478,29 +463,36 @@
     .grid-scroll {
       flex: 1; overflow-y: auto; overflow-x: hidden;
       scrollbar-width: thin; scrollbar-color: var(--ag) transparent;
-      padding: 8px 4px 0 4px;
+      padding: 8px 4px 4px 4px;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
     }
-    .grid-scroll::-webkit-scrollbar { width: 3px; }
-    .grid-scroll::-webkit-scrollbar-thumb { background: var(--ag); border-radius: 2px; }
+    .grid-scroll::-webkit-scrollbar { width: 4px; }
+    .grid-scroll::-webkit-scrollbar-thumb { background: var(--ag); border-radius: 3px; }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(168px, 215px));
-      gap: 0.85rem; padding-bottom: 1.4rem; padding-top: 4px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 250px));
+      gap: 1rem; padding-bottom: 1.6rem; padding-top: 4px;
     }
 
     /* ════ SERVICE CARD — LIQUID GLASS ════ */
     .card {
       background: var(--card-glass, var(--glass));
-      backdrop-filter: var(--card-blur, blur(28px) saturate(160%));
-      -webkit-backdrop-filter: var(--card-blur, blur(28px) saturate(160%));
+      backdrop-filter: var(--card-blur, blur(24px) saturate(160%) brightness(1.01));
+      -webkit-backdrop-filter: var(--card-blur, blur(24px) saturate(160%) brightness(1.01));
       border: 1px solid var(--glass-b);
-      border-radius: 18px; overflow: hidden;
+      border-radius: 20px; overflow: hidden;
       cursor: pointer;
-      transition: transform 0.26s cubic-bezier(0.34,1.15,0.64,1), box-shadow 0.26s, border-color 0.18s;
-      box-shadow: 0 2px 12px var(--shadow), inset 0 1px 0 var(--glass-s);
+      transition: transform 0.26s cubic-bezier(0.34,1.15,0.64,1),
+                  box-shadow 0.26s cubic-bezier(0.34,1.15,0.64,1),
+                  border-color 0.18s ease,
+                  background 0.2s ease;
+      box-shadow: 0 3px 16px var(--shadow), inset 0 1px 0 var(--glass-s);
       position: relative;
       will-change: transform;
+      transform: translateZ(0);
     }
 
     /* Top refraction line */
@@ -518,8 +510,8 @@
     }
 
     .card:hover {
-      transform: translateY(-4px) scale(1.018);
-      box-shadow: 0 12px 40px var(--shadow), 0 3px 12px var(--ag), inset 0 1px 0 var(--glass-s);
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 14px 44px var(--shadow), 0 4px 14px var(--ag), inset 0 1px 0 var(--glass-s);
       border-color: var(--ac);
     }
     .card.selected {
@@ -527,52 +519,59 @@
       box-shadow: 0 0 0 2px var(--ag), 0 6px 24px var(--shadow), inset 0 1px 0 var(--glass-s);
     }
 
-    /* Icon area */
+    /* Icon area — bigger and more impactful */
     .card-icon-area {
-      width: 100%; height: 100px;
+      width: 100%; height: 124px;
       display: flex; align-items: center; justify-content: center;
       background: linear-gradient(155deg, var(--ag) 0%, var(--glass-inner) 75%);
       position: relative; overflow: hidden;
-      padding: 10px;
+      padding: 14px;
     }
     .card-icon-area::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 32px;
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 38px;
       background: linear-gradient(to top, var(--glass) 0%, transparent 100%);
       z-index: 1; pointer-events: none;
     }
     .card-image {
-      width: 60px; height: 60px; object-fit: contain;
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+      width: 80px; height: 80px; object-fit: contain;
+      filter: drop-shadow(0 3px 10px rgba(0,0,0,0.2));
       transition: transform 0.26s cubic-bezier(0.34,1.2,0.64,1);
       position: relative; z-index: 2;
-      border-radius: 10px;
+      border-radius: 14px;
     }
-    .card:hover .card-image { transform: scale(1.08) translateY(-2px); }
+    .card:hover .card-image { transform: scale(1.1) translateY(-3px); }
 
     .card-placeholder {
-      width: 100%; height: 100px;
+      width: 100%; height: 124px;
       background: linear-gradient(155deg, var(--ag) 0%, var(--glass-inner) 75%);
       display: flex; align-items: center; justify-content: center;
     }
-    .card-placeholder img { width: 32px; height: 32px; opacity: 0.3; }
-    .card-placeholder svg { width: 28px; height: 28px; stroke: var(--tm); fill: none; stroke-width: 1.5; opacity: 0.3; }
+    .card-placeholder img { width: 42px; height: 42px; opacity: 0.3; }
+    .card-placeholder svg { width: 38px; height: 38px; stroke: var(--tm); fill: none; stroke-width: 1.5; opacity: 0.3; }
 
-    .card-hd { display: flex; align-items: center; gap: 0.45rem; margin-bottom: 0.22rem; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; position: relative; }
-    .dot.up    { background: var(--ok); box-shadow: 0 0 0 2px rgba(0,0,0,0.08), 0 0 8px var(--okg); }
-    .dot.down  { background: var(--err); box-shadow: 0 0 0 2px rgba(0,0,0,0.08), 0 0 8px var(--errg); }
+    .card-hd { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.28rem; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; position: relative; }
+    .dot.up    { background: var(--ok); box-shadow: 0 0 0 2px rgba(0,0,0,0.08), 0 0 10px var(--okg); }
+    .dot.down  { background: var(--err); box-shadow: 0 0 0 2px rgba(0,0,0,0.08), 0 0 10px var(--errg); }
     .dot.checking { background: var(--warn); box-shadow: 0 0 0 2px rgba(0,0,0,0.08); animation: pulse 1.2s infinite; }
     .dot.unknown  { background: var(--tm); opacity: 0.4; }
-    .card-body { padding: 0.7rem 0.95rem 0.85rem; position: relative; z-index: 2; }
-    .card-name { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: 0.93rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -0.01em; color: var(--tp); }
-    .card-ip { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--tm); opacity: 0.7; margin-top: 0.12rem; }
+    .card-body { padding: 0.85rem 1.1rem 1rem; position: relative; z-index: 2; }
+    .card-name {
+      font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400;
+      font-size: 1.05rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      letter-spacing: -0.01em; color: var(--tp);
+    }
+    .card-ip {
+      font-family: 'DM Mono', monospace; font-size: 0.72rem;
+      color: var(--tm); opacity: 0.75; margin-top: 0.15rem;
+    }
 
     .card-ssh-badge {
-      position: absolute; top: 7px; left: 7px; z-index: 4;
+      position: absolute; top: 8px; left: 8px; z-index: 4;
       background: var(--agr); color: white;
-      font-family: 'DM Mono', monospace; font-size: 0.52rem; font-weight: 500;
-      padding: 2px 5px; border-radius: 5px; letter-spacing: 0.06em;
-      box-shadow: 0 2px 6px var(--ag);
+      font-family: 'DM Mono', monospace; font-size: 0.55rem; font-weight: 700;
+      padding: 3px 7px; border-radius: 6px; letter-spacing: 0.07em;
+      box-shadow: 0 2px 8px var(--ag);
     }
 
     .drag-handle {
@@ -584,23 +583,22 @@
     .drag-handle span { display: block; width: 10px; height: 1.5px; background: var(--tm); border-radius: 2px; }
     .card:hover .drag-handle { opacity: 0.5; }
 
-    .card.dragging { opacity: 0.28; transform: scale(0.95); box-shadow: none !important; border-style: dashed !important; }
-    .card.drag-over { border-color: var(--ac) !important; box-shadow: -4px 0 0 0 var(--ac), 0 0 0 2px var(--ag) !important; transform: translateX(4px); }
-
-    .empty-state { text-align: center; padding: 4rem 2rem; color: var(--tm); }
-    .empty-state p { margin-bottom: 1rem; font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1rem; font-weight: 400; }
-
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-    @keyframes statusPulse { 0%,100%{box-shadow:0 0 0 0 var(--okg), 0 0 8px var(--okg)} 60%{box-shadow:0 0 0 5px transparent, 0 0 8px var(--okg)} }
-    .dot.up { animation: statusPulse 3s ease-in-out infinite; }
+    .card.dragging { opacity: 0.28; transform: scale(0.95) !important; box-shadow: none !important; border-style: dashed !important; }
+    .card.drag-over { border-color: var(--ac) !important; box-shadow: -4px 0 0 0 var(--ac), 0 0 0 2px var(--ag) !important; transform: translateX(4px) !important; }
     /* ════ PROPERTIES PANEL ════ */
     .panel {
       position: fixed; top: 0; right: 0; width: min(380px,88vw); height: 100vh;
-      backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%);
+      backdrop-filter: blur(32px) saturate(180%) brightness(1.01);
+      -webkit-backdrop-filter: blur(32px) saturate(180%) brightness(1.01);
       background: var(--glass);
       border-left: 1px solid var(--glass-b); padding: 1.4rem; overflow-y: auto;
-      transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); z-index: 50;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+      z-index: 50;
       box-shadow: -8px 0 40px var(--shadow);
+      will-change: transform;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
     }
     .panel.open { transform: translateX(0); }
     .panel-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--glass-b); }
@@ -630,13 +628,16 @@
     .ssh-panel {
       position: fixed; bottom: 0; left: 0; right: 0;
       height: 0; overflow: hidden;
-      backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%);
+      backdrop-filter: blur(20px) saturate(150%) brightness(1.01);
+      -webkit-backdrop-filter: blur(20px) saturate(150%) brightness(1.01);
       background: var(--glass);
       border-top: 1px solid var(--glass-b);
       box-shadow: 0 -8px 32px var(--shadow);
-      transition: height 0.35s cubic-bezier(0.4,0,0.2,1);
+      transition: height 0.32s cubic-bezier(0.4,0,0.2,1);
       z-index: 80;
       display: flex; flex-direction: column;
+      transform: translateZ(0);
+      will-change: height;
     }
     .ssh-panel.open { height: 50vh; }
     .ssh-panel.expanded { height: 85vh; }
@@ -731,20 +732,30 @@
     /* ════ MODALS ════ */
     .overlay {
       position: fixed; inset: 0;
-      background: rgba(0,0,0,0.25); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      background: rgba(0,0,0,0.22);
+      backdrop-filter: blur(8px) saturate(120%);
+      -webkit-backdrop-filter: blur(8px) saturate(120%);
       display: flex; align-items: center; justify-content: center;
-      z-index: 100; opacity: 0; visibility: hidden; transition: all 0.22s; padding: 1rem;
+      z-index: 100; opacity: 0; visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      padding: 1rem;
     }
     .overlay.open { opacity: 1; visibility: visible; }
 
     .modal {
-      backdrop-filter: blur(32px) saturate(180%); -webkit-backdrop-filter: blur(32px) saturate(180%);
+      backdrop-filter: blur(28px) saturate(180%) brightness(1.02);
+      -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.02);
       background: var(--glass);
       border: 1px solid var(--glass-b); border-radius: 22px;
       width: 100%; max-width: 490px; max-height: 90vh; overflow-y: auto;
-      transform: scale(0.94) translateY(18px); transition: transform 0.3s cubic-bezier(0.34,1.25,0.64,1);
+      transform: scale(0.93) translateY(20px);
+      transition: transform 0.28s cubic-bezier(0.34,1.28,0.64,1),
+                  opacity 0.2s ease;
       box-shadow: 0 32px 72px var(--shadow), 0 6px 20px rgba(0,0,0,0.08), inset 0 1px 0 var(--glass-s);
       position: relative;
+      will-change: transform;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
     }
     .modal::before {
       content: ''; position: absolute; top: 0; left: 8%; right: 8%; height: 1px;
@@ -826,31 +837,23 @@
 
     /* ════ TOAST ════ */
     .toast {
-      position: fixed; bottom: 1.6rem; left: 50%; transform: translateX(-50%) translateY(80px);
-      backdrop-filter: blur(32px) saturate(180%); -webkit-backdrop-filter: blur(32px) saturate(180%);
+      position: fixed; bottom: 1.6rem; left: 50%; transform: translateX(-50%) translateY(90px);
+      backdrop-filter: blur(28px) saturate(180%) brightness(1.02);
+      -webkit-backdrop-filter: blur(28px) saturate(180%) brightness(1.02);
       background: var(--glass); border: 1px solid var(--glass-b);
       padding: 0.55rem 1.3rem; border-radius: 100px;
       font-family: 'Outfit', sans-serif; font-size: 0.84rem; font-weight: 500; color: var(--tp);
       box-shadow: 0 8px 28px var(--shadow), inset 0 1px 0 var(--glass-s); z-index: 999;
-      transition: transform 0.32s cubic-bezier(0.34,1.2,0.64,1), opacity 0.28s ease; opacity: 0;
+      transition: transform 0.3s cubic-bezier(0.34,1.28,0.64,1), opacity 0.24s ease;
+      opacity: 0;
       display: flex; align-items: center; gap: 0.45rem;
       white-space: nowrap;
+      will-change: transform;
+      pointer-events: none;
     }
-    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; pointer-events: auto; }
     .toast.ok { border-color: var(--ok); box-shadow: 0 8px 28px var(--shadow), 0 0 0 1px var(--okg); }
     .toast.err { border-color: var(--err); box-shadow: 0 8px 28px var(--shadow), 0 0 0 1px var(--errg); }
-
-    /* ════ MOBILE ════ */
-    .sb-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 39; backdrop-filter: blur(3px); }
-    @media (max-width: 640px) {
-      .app { grid-template-columns: 0 1fr; padding: 8px; gap: 8px; }
-      .sidebar { position: fixed; top: 0; left: 0; height: 100vh; z-index: 40; border-radius: 0 18px 18px 0; width: 268px !important; transform: translateX(-100%); transition: transform 0.3s; opacity: 1 !important; pointer-events: all !important; }
-      .sidebar.mobile-open { transform: translateX(0); }
-      .sb-overlay { display: block; }
-      .grid { grid-template-columns: repeat(auto-fill,minmax(140px,1fr)); }
-    }
-    @media (max-width: 900px) { .app { --sw: 255px; } }
-    @media (min-width: 1500px) { .app { --sw: 320px; } .grid { grid-template-columns: repeat(auto-fill,minmax(195px,240px)); } }
 
     .divider { height: 1px; background: var(--glass-b); margin: 0.45rem 0; }
 
@@ -880,11 +883,29 @@
     body.perf-mode .modal,
     body.perf-mode .ssh-panel,
     body.perf-mode .overlay,
-    body.perf-mode .toast {
+    body.perf-mode .toast,
+    body.perf-mode .hbtn,
+    body.perf-mode .sb-icon-btn,
+    body.perf-mode .toggle-btn,
+    body.perf-mode .btn-s,
+    body.perf-mode .pact,
+    body.perf-mode .ssh-action-btn,
+    body.perf-mode .pin-key {
       backdrop-filter: none !important;
       -webkit-backdrop-filter: none !important;
+      /* Drop will-change in perf mode too */
+      will-change: auto !important;
     }
-    body.perf-mode .card { background: var(--glass-solid, color-mix(in srgb, var(--glass), transparent 0%)); }
+    body.perf-mode .card {
+      background: var(--glass-solid, var(--glass));
+      /* Remove all transforms in perf mode for max speed */
+      transform: none !important;
+    }
+    body.perf-mode .card:hover {
+      transform: translateY(-2px) !important;
+    }
+    /* In perf mode, disable orb animations */
+    body.perf-mode body::before { display: none; }
 
     /* ════ TOGGLE SWITCH ════ */
     .toggle-row {
@@ -996,18 +1017,18 @@
     .pinned-label { font-family:'Instrument Serif',serif; font-style:italic; font-size:0.92rem; font-weight:400; text-transform:none; letter-spacing:0; color:var(--tm); margin-bottom:0.55rem; padding-left:2px; }
 
     /* ════ COMPACT LIST VIEW ════ */
-    .grid.list-view { grid-template-columns:1fr !important; gap:0.4rem !important; }
-    .grid.list-view .card { display:flex; flex-direction:row; align-items:center; border-radius:13px; }
-    .grid.list-view .card-icon-area { width:52px; height:52px; flex-shrink:0; border-radius:0; padding:8px; }
+    .grid.list-view { grid-template-columns:1fr !important; gap:0.5rem !important; }
+    .grid.list-view .card { display:flex; flex-direction:row; align-items:center; border-radius:15px; }
+    .grid.list-view .card-icon-area { width:60px; height:60px; flex-shrink:0; border-radius:0; padding:10px; }
     .grid.list-view .card-icon-area::after { display:none; }
-    .grid.list-view .card-image { width:36px; height:36px; }
-    .grid.list-view .card-placeholder { width:52px; height:52px; flex-shrink:0; }
-    .grid.list-view .card-body { flex:1; padding:0.45rem 0.75rem; display:flex; align-items:center; gap:1rem; }
+    .grid.list-view .card-image { width:40px; height:40px; }
+    .grid.list-view .card-placeholder { width:60px; height:60px; flex-shrink:0; }
+    .grid.list-view .card-body { flex:1; padding:0.5rem 0.9rem; display:flex; align-items:center; gap:1.1rem; }
     .grid.list-view .card-hd { margin-bottom:0; flex:1; }
     .grid.list-view .card-ip { margin-top:0; }
     .grid.list-view .sparkline { margin-top:0; }
     .grid.list-view .card-rt { margin-top:0; }
-    .grid.list-view .card-ssh-badge { top:50%; transform:translateY(-50%); left:auto; right:8px; }
+    .grid.list-view .card-ssh-badge { top:50%; transform:translateY(-50%); left:auto; right:10px; }
     .grid.list-view .drag-handle { top:50%; transform:translateY(-50%); }
 
     /* ════ ANIMATED STATUS DOT ════ */
@@ -1128,15 +1149,6 @@
     /* ════ POLISH: response time label ════ */
     .card-rt { font-family:'DM Mono',monospace; font-size:0.58rem; color:var(--tm); opacity:0.6; margin-top:2px; letter-spacing:0.02em; }
 
-    /* ════ POLISH: SSH badge sharper ════ */
-    .card-ssh-badge {
-      position: absolute; top: 6px; left: 6px; z-index: 4;
-      background: var(--agr); color: white;
-      font-family: 'DM Mono', monospace; font-size: 0.5rem; font-weight: 600;
-      padding: 2px 5px; border-radius: 5px; letter-spacing: 0.08em;
-      box-shadow: 0 2px 6px var(--ag);
-    }
-
     /* ════ POLISH: note dot ════ */
     .card-note-dot {
       position:absolute; top:6px; right:20px; z-index:4;
@@ -1147,21 +1159,16 @@
     /* ════ POLISH: drag handle dots ════ */
     .drag-handle span { display: block; width: 9px; height: 1.5px; background: var(--tm); border-radius: 2px; }
 
-    /* ════ POLISH: empty state ════ */
-    .empty-state { text-align: center; padding: 3.5rem 2rem; color: var(--tm); }
-    .empty-state p { margin-bottom: 1rem; font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 400; opacity: 0.7; }
-
-    /* ════ POLISH: info-box ════ */
-    .info-box { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.8rem 0.95rem; background: var(--ag); border: 1px solid var(--ac); border-radius: 11px; margin-bottom: 0.5rem; }
-    .info-box p { font-size: 0.8rem; line-height: 1.55; color: var(--tp); font-family: 'Outfit', sans-serif; }
-
     /* ════ POLISH: pinned section label ════ */
     .pinned-label { font-family:'Outfit',sans-serif; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--tm); margin-bottom:0.5rem; padding-left:2px; }
 
     /* ════ POLISH: tree children indent line ════ */
     .tree-children { margin-left: 0.85rem; border-left: 1px solid var(--glass-b); padding-left: 0.3rem; opacity: 0.9; }
 
-    /* ════ POLISH: scrollbar throughout (scoped — never override form elements) ════ */
+    /* ════ POLISH: sb-header padding ════ */
+    .sb-header { padding: 0.65rem; border-bottom: 1px solid var(--glass-b); display: flex; gap: 0.38rem; flex-shrink: 0; }
+
+    /* ════ SCROLLBAR IMPROVEMENTS ════ */
     .tree, .grid-scroll, .modal, .panel, .snip-list, .ssh-terminals, .ssh-tabs,
     .xterm-viewport, .overlay {
       scrollbar-width: thin;
@@ -1177,14 +1184,13 @@
     .modal::-webkit-scrollbar-track, .panel::-webkit-scrollbar-track,
     .snip-list::-webkit-scrollbar-track { background: transparent; }
 
-    /* Ensure select and inputs keep correct appearance */
+    /* ════ SELECT & INPUT FIXES ════ */
     .fg select, .fg input, .fg textarea,
     .ssh-input, .snip-input, .search-box {
       appearance: auto;
       -webkit-appearance: auto;
       color-scheme: light dark;
     }
-    /* Fix select dropdown option colors in all themes */
     .fg select option {
       background: #1a1a2e;
       color: #e0e0f0;
@@ -1197,17 +1203,278 @@
       color: #1a2a38;
     }
 
-    /* ════ POLISH: grid-scroll padding ════ */
-    .grid-scroll { padding: 6px 2px 0 2px; }
+    /* ════ FOCUS-VISIBLE RING ════ */
+    button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 2px solid var(--ac);
+      outline-offset: 2px;
+    }
 
-    /* ════ POLISH: sb-header padding ════ */
-    .sb-header { padding: 0.65rem; border-bottom: 1px solid var(--glass-b); display: flex; gap: 0.38rem; flex-shrink: 0; }
+    /* ════ REDUCED MOTION ════ */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
 
-    /* ════ POLISH: content toolbar bottom gap ════ */
+    /* ════ HEADER SEARCH BAR ════ */
+    .header-search-wrap {
+      position: relative;
+      display: none;
+    }
+    @media (min-width: 900px) {
+      .header-search-wrap { display: block; }
+    }
+    .header-search {
+      padding: 0.36rem 0.85rem 0.36rem 2rem;
+      background: var(--ib); border: 1px solid var(--glass-b);
+      border-radius: 20px; color: var(--tp); font-family: inherit; font-size: 0.8rem;
+      width: 180px; transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    }
+    .header-search:focus {
+      outline: none; border-color: var(--ac);
+      box-shadow: 0 0 0 3px var(--ag);
+      width: 240px;
+    }
+    .header-search::placeholder { color: var(--tm); opacity: 0.6; }
+    .header-search-icon {
+      position: absolute; left: 0.65rem; top: 50%; transform: translateY(-50%);
+      width: 12px; height: 12px; stroke: var(--tm); fill: none; pointer-events: none; opacity: 0.55;
+    }
+
+    /* ════ SERVICE COUNT BADGE ════ */
+    .service-count {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 500;
+      color: var(--tm); background: var(--ib); border: 1px solid var(--glass-b);
+      border-radius: 12px; padding: 0.14rem 0.55rem;
+      display: inline-flex; align-items: center;
+      transition: all 0.2s;
+    }
+
+    /* ════ STATUS SUMMARY BAR ════ */
+    .status-bar {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-family: 'DM Mono', monospace; font-size: 0.7rem;
+      color: var(--tm); flex-shrink: 0;
+    }
+    .status-bar-dot {
+      width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+    }
+
+    /* ════ IMPROVED EMPTY STATE ════ */
+    .empty-state {
+      text-align: center; padding: 3.5rem 2rem; color: var(--tm);
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .empty-state p {
+      margin-bottom: 1rem; font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem; font-weight: 400; opacity: 0.7;
+    }
+    .empty-icon {
+      display: flex; justify-content: center; margin-bottom: 0.75rem;
+    }
+
+    /* ════ COMPACT TOOLBAR ════ */
     .content-toolbar { padding-bottom: 0; }
 
-    /* ════ POLISH: app padding tighter ════ */
-    .app { padding: 12px; gap: 10px; }
+    /* ════ RESPONSIVE ════ */
+    @media (max-width: 640px) {
+      .app { grid-template-columns: 0 1fr; padding: 8px; gap: 8px; }
+      .sidebar { position: fixed; top: 0; left: 0; height: 100vh; z-index: 40; border-radius: 0 18px 18px 0; width: 268px !important; transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); opacity: 1 !important; pointer-events: all !important; }
+      .sidebar.mobile-open { transform: translateX(0); }
+      .sb-overlay { display: block; }
+      .grid { grid-template-columns: repeat(auto-fill,minmax(160px,1fr)); }
+    }
+    @media (max-width: 900px) { .app { --sw: 260px; } }
+    @media (min-width: 1500px) { .app { --sw: 330px; } .grid { grid-template-columns: repeat(auto-fill,minmax(220px,270px)); } }
+    @media (min-width: 1800px) { .grid { grid-template-columns: repeat(auto-fill,minmax(230px,290px)); } }
+
+    /* ════ WIDGETS ROW ════ */
+    .widgets-row {
+      display: flex; gap: 0.85rem; flex-wrap: wrap;
+      margin-bottom: 0.75rem; flex-shrink: 0;
+    }
+    .widget-tile {
+      flex: 1; min-width: 160px; max-width: 280px;
+      background: var(--card-glass, var(--glass));
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+      border: 1px solid var(--glass-b); border-radius: 16px;
+      padding: 0.95rem 1.1rem;
+      box-shadow: 0 3px 14px var(--shadow), inset 0 1px 0 var(--glass-s);
+      position: relative; overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.18s;
+      cursor: default;
+      will-change: transform; transform: translateZ(0);
+    }
+    .widget-tile:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--shadow), 0 2px 8px var(--ag); border-color: var(--ac); }
+    .widget-tile::before {
+      content: ''; position: absolute; top: 0; left: 10%; right: 10%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--refract) 40%, var(--glass-s) 50%, var(--refract) 60%, transparent);
+      pointer-events: none;
+    }
+    .widget-label {
+      font-family: 'Outfit', sans-serif; font-size: 0.68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.09em; color: var(--tm);
+      margin-bottom: 0.42rem; display: flex; align-items: center; gap: 0.38rem;
+    }
+    .widget-label svg { width: 11px; height: 11px; stroke: currentColor; fill: none; stroke-width: 2; opacity: 0.7; }
+    .widget-value {
+      font-family: 'DM Mono', monospace; font-size: 1.45rem; font-weight: 500;
+      color: var(--tp); letter-spacing: -0.03em; line-height: 1;
+      margin-bottom: 0.38rem;
+    }
+    .widget-value.ok { color: var(--ok); }
+    .widget-value.warn { color: var(--warn); }
+    .widget-value.err { color: var(--err); }
+    .widget-sub {
+      font-family: 'Outfit', sans-serif; font-size: 0.72rem; color: var(--tm); opacity: 0.75;
+    }
+    /* Mini bar inside widget */
+    .widget-bar-track {
+      height: 5px; background: var(--ib); border-radius: 4px;
+      margin-top: 0.55rem; overflow: hidden;
+    }
+    .widget-bar-fill {
+      height: 100%; border-radius: 4px;
+      background: var(--agr);
+      transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+    .widget-bar-fill.ok { background: var(--ok); }
+    .widget-bar-fill.warn { background: var(--warn); }
+    .widget-bar-fill.err { background: var(--err); }
+    /* Sparkline inside widget */
+    .widget-spark {
+      display: flex; align-items: flex-end; gap: 2px; height: 24px;
+      margin-top: 0.5rem;
+    }
+    .widget-spark-bar {
+      flex: 1; border-radius: 3px 3px 0 0;
+      background: var(--ag); min-height: 3px;
+      transition: height 0.4s ease;
+    }
+    /* Widget add button */
+    .widget-add-btn {
+      flex: 0 0 auto; min-width: 44px; max-width: 44px; height: 44px;
+      background: var(--glass-inner); border: 1.5px dashed var(--glass-b);
+      border-radius: 14px; color: var(--tm); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; transition: all 0.18s;
+      align-self: center;
+    }
+    .widget-add-btn:hover { background: var(--ag); border-color: var(--ac); color: var(--tp); border-style: solid; }
+    /* Widget status: loading */
+    .widget-loading {
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 2px solid var(--glass-b); border-top-color: var(--ac);
+      animation: spin 0.7s linear infinite; display: inline-block;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    /* Widget error */
+    .widget-error { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--err); opacity: 0.85; }
+
+    /* ════ WIDGET MODAL ════ */
+    .widget-modal-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.6rem;
+    }
+    .widget-choice {
+      padding: 0.9rem 0.75rem; border-radius: 14px; cursor: pointer;
+      background: var(--ib); border: 1.5px solid var(--glass-b);
+      text-align: center; transition: all 0.18s;
+      display: flex; flex-direction: column; align-items: center; gap: 0.45rem;
+    }
+    .widget-choice:hover { background: var(--ag); border-color: var(--ac); transform: translateY(-2px); }
+    .widget-choice.selected { background: var(--ag); border-color: var(--ac); box-shadow: 0 0 0 2px var(--ag); }
+    .widget-choice-icon { font-size: 1.6rem; line-height: 1; }
+    .widget-choice-name { font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 600; color: var(--tp); }
+    .widget-choice-desc { font-family: 'Outfit', sans-serif; font-size: 0.7rem; color: var(--tm); line-height: 1.35; }
+
+    /* ════ FOLDER CARD ════ */
+    .folder-card {
+      background: var(--card-glass, var(--glass));
+      backdrop-filter: blur(20px) saturate(150%);
+      -webkit-backdrop-filter: blur(20px) saturate(150%);
+      border: 1px solid var(--glass-b); border-radius: 20px;
+      padding: 1.1rem 1.2rem;
+      box-shadow: 0 3px 16px var(--shadow), inset 0 1px 0 var(--glass-s);
+      cursor: pointer; position: relative; overflow: hidden;
+      transition: transform 0.22s cubic-bezier(0.34,1.15,0.64,1), box-shadow 0.22s, border-color 0.18s;
+      will-change: transform; transform: translateZ(0);
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .folder-card:hover { transform: translateY(-3px) scale(1.01); border-color: var(--ac); box-shadow: 0 10px 32px var(--shadow), 0 3px 10px var(--ag); }
+    .folder-card-icon {
+      width: 48px; height: 48px; flex-shrink: 0; border-radius: 13px;
+      background: var(--ag); display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .folder-card-info { flex: 1; min-width: 0; }
+    .folder-card-name {
+      font-family: 'Instrument Serif', serif; font-style: italic;
+      font-size: 1.05rem; font-weight: 400; color: var(--tp);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .folder-card-stats {
+      font-family: 'DM Mono', monospace; font-size: 0.68rem;
+      color: var(--tm); margin-top: 0.22rem; display: flex; gap: 0.65rem;
+    }
+    .folder-card-stat { display: flex; align-items: center; gap: 0.3rem; }
+    .folder-card-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ════ ADHD-FRIENDLY IMPROVEMENTS ════ */
+    /* Larger touch targets on tree items */
+    .tree-item {
+      display: flex; align-items: center; gap: 0.4rem;
+      padding: 0.52rem 0.7rem; border-radius: 11px; cursor: pointer;
+      transition: background 0.14s ease, border-color 0.14s ease, padding-left 0.14s ease;
+      color: var(--tp); user-select: none;
+      font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.9rem; font-weight: 400;
+      border: 1px solid transparent; min-height: 38px;
+    }
+    .tree-item.selected {
+      background: var(--ag); border-color: var(--ac); padding-left: 0.75rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 2px 8px var(--ag);
+    }
+    /* Bigger sidebar */
+    [data-theme] { --sw: 298px; }
+
+    /* More comfortable breadcrumb */
+    .breadcrumb {
+      font-family: 'Outfit', sans-serif; font-style: normal;
+      font-size: 1.12rem; font-weight: 700; letter-spacing: -0.02em;
+      color: var(--tp); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    /* Larger add button */
+    .add-btn {
+      display: flex; align-items: center; gap: 0.45rem;
+      padding: 0.62rem 1.25rem;
+      background: var(--agr); color: white; border: none; border-radius: 14px;
+      font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem;
+      cursor: pointer; transition: all 0.22s cubic-bezier(0.34,1.2,0.64,1);
+      box-shadow: 0 3px 14px var(--ag), inset 0 1px 0 rgba(255,255,255,0.22);
+      white-space: nowrap; letter-spacing: 0.005em;
+    }
+    .add-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px var(--ag); }
+    .add-btn img, .add-btn svg { width: 15px; height: 15px; object-fit: contain; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; filter: var(--icon-white) !important; }
+
+    /* ════ CARD POWER BADGE ════ */
+    .card-power-badge {
+      position: absolute; bottom: 8px; right: 9px; z-index: 4;
+      font-family: 'DM Mono', monospace; font-size: 0.58rem; font-weight: 600;
+      color: var(--warn); opacity: 0.9; display: flex; align-items: center; gap: 2px;
+    }
+
+    /* ════ CARD UPTIME BADGE ════ */
+    .card-uptime {
+      font-family: 'DM Mono', monospace; font-size: 0.62rem;
+      color: var(--tm); opacity: 0.65; margin-top: 0.18rem;
+      letter-spacing: 0.01em;
+    }
 
   </style>
 </head>
@@ -1253,9 +1520,10 @@
         <img id="headerAvatar" src="icons/rei.png" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.65);box-shadow:0 2px 12px rgba(0,0,0,0.15),0 0 0 3px var(--ag);transition:box-shadow 0.3s;flex-shrink:0" alt="avatar" onerror="this.onerror=null;this.style.display='none'">
         <span class="logo-text">KuruDash</span>
       </div>
-      <span class="header-hint">Click to select · Double-click to open · Right-click to edit</span>
+      <span class="header-hint">Click to select · Double-click to open · Right-click to edit · <kbd style="font-family:'DM Mono',monospace;font-size:0.72em;padding:1px 4px;background:var(--ib);border:1px solid var(--glass-b);border-radius:4px">W</kbd> Widgets</span>
       <div class="header-right">
         <span id="headerClock" style="display:none">00:00</span>
+        <button class="hbtn" id="widgetsBtn" title="Widgets"><img src="icons/bar-chart.png" style="width:16px;height:16px;opacity:0.85" alt="widgets" onerror="this.onerror=null;this.style.display='none'"></button>
         <button class="hbtn" id="viewToggleBtn" title="Toggle list/grid view"><img src="icons/grid.png" style="width:15px;height:15px;opacity:0.85" alt="grid" onerror="this.onerror=null;this.style.display='none'"></button>
         <button class="hbtn" id="infoBtn" title="Privacy info"><img src="icons/shield-check.png" style="width:17px;height:17px;opacity:0.85" alt="shield-check" onerror="this.onerror=null;this.style.display='none'"></button>
         <button class="hbtn" id="sshPanelToggle" title="SSH Terminal" style="position:relative"><img src="icons/terminal.png" style="width:17px;height:17px;opacity:0.85" alt="terminal" onerror="this.onerror=null;this.style.display='none'">
@@ -1284,16 +1552,28 @@
         <div class="toolbar-left">
           <button class="toggle-btn" id="sidebarToggle" title="Toggle sidebar"><img src="icons/panel-left.png" style="width:15px;height:15px;opacity:0.85" alt="panel-left" onerror="this.onerror=null;this.style.display='none'"></button>
           <span class="breadcrumb" id="breadcrumb">All Services</span>
+          <span class="service-count" id="serviceCount" style="display:none"></span>
         </div>
-        <button class="add-btn" id="addBtn">
+        <div style="display:flex;align-items:center;gap:0.5rem">
+          <div class="status-bar" id="statusSummary" style="display:none">
+            <span class="status-bar-dot" style="background:var(--ok)"></span><span id="statusUpCount">0</span>
+            <span class="status-bar-dot" style="background:var(--err)"></span><span id="statusDownCount">0</span>
+          </div>
+          <button class="add-btn" id="addBtn">
 <img src="icons/plus.png" style="width:16px;height:16px;opacity:0.85" alt="plus" onerror="this.onerror=null;this.style.display='none'">
-          Add Service
-        </button>
+            Add Service
+          </button>
+        </div>
       </div>
+      <!-- WIDGETS ROW -->
+      <div class="widgets-row" id="widgetsRow"></div>
       <div class="grid-scroll">
         <div class="grid" id="grid"></div>
         <div class="empty-state" id="empty" style="display:none">
-          <p>No services yet.</p>
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:40px;height:40px;opacity:0.3"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <p>No services yet. Add your first one!</p>
           <button class="add-btn" onclick="document.getElementById('addBtn').click()">
 <img src="icons/plus.png" style="width:16px;height:16px;opacity:0.85" alt="plus" onerror="this.onerror=null;this.style.display='none'">
             Add Service
@@ -1324,7 +1604,7 @@
         <span class="ssh-font-size" id="sshFontSizeLabel">13</span>
         <button class="ssh-font-btn" id="sshFontInc" title="Increase font size">+</button>
       </div>
-      <button class="ssh-action-btn" id="sshSnippetsBtn" title="Command snippets" style="font-size:0.65rem;font-weight:700;letter-spacing:0.05em;font-family:'DM Mono',monospace">⌘</button>
+      <button class="ssh-action-btn" id="sshSnippetsBtn" title="Command snippets"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="14" y2="12"/><line x1="4" y1="18" x2="18" y2="18"/></svg></button>
       <button class="ssh-action-btn" id="sshSplitBtn" title="Split pane">
         <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
       </button>
@@ -1343,7 +1623,7 @@
       <div class="ssh-snippets-panel hidden" id="sshSnippetsPanel">
         <div class="snip-hd">
           <span>Snippets</span>
-          <button onclick="document.getElementById('sshSnippetsPanel').classList.add('hidden')" style="background:none;border:none;color:var(--tm);cursor:pointer;font-size:0.8rem;line-height:1">✕</button>
+          <button onclick="document.getElementById('sshSnippetsPanel').classList.add('hidden')" style="background:none;border:none;color:var(--tm);cursor:pointer;line-height:1;display:flex;align-items:center;padding:2px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
         </div>
         <div class="snip-list" id="snippetList"></div>
         <div class="snip-add-row">
@@ -1717,7 +1997,7 @@
   <div class="overlay" id="creditsOverlay">
     <div class="modal" style="max-width:400px;text-align:center">
       <div class="modal-hd" style="justify-content:center;position:relative">
-        <h2>✦ Credits</h2>
+        <h2>Credits</h2>
         <button class="modal-close" id="creditsClose" style="position:absolute;right:1.1rem"><img src="icons/x.png" style="width:18px;height:18px;opacity:0.85" alt="x" onerror="this.onerror=null;this.style.display='none'"></button>
       </div>
       <div class="modal-body" style="padding:1.5rem">
@@ -1739,11 +2019,37 @@
     </div>
   </div>
 
+  <!-- ════════════ WIDGET CONFIG MODAL ════════════ -->
+  <div class="overlay" id="widgetOverlay">
+    <div class="modal" style="max-width:520px">
+      <div class="modal-hd">
+        <h2>Widgets</h2>
+        <button class="modal-close" id="widgetModalClose"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.82rem;color:var(--tm);margin-bottom:1rem;line-height:1.55">Add stat tiles above your dashboard. Widgets fetch data from a URL you configure (e.g. a <strong style="color:var(--ac)">Netdata</strong>, <strong style="color:var(--ac)">Prometheus</strong>, or custom JSON endpoint).</p>
+        <div class="widget-modal-grid" id="widgetChoiceGrid"></div>
+        <div id="widgetConfigArea" style="display:none;margin-top:1rem">
+          <div class="fg"><label>Widget Label</label><input type="text" id="wLabel" placeholder="CPU Load"></div>
+          <div class="fg"><label>Data URL (JSON endpoint)</label><input type="text" id="wUrl" placeholder="http://server:19999/api/v1/data?chart=system.cpu"></div>
+          <div class="fg"><label>JSON Path (e.g. <code style="font-family:DM Mono,monospace;font-size:0.78em">data.0.0</code>)</label><input type="text" id="wPath" placeholder="data.0.0"></div>
+          <div class="fg"><label>Unit</label><input type="text" id="wUnit" placeholder="%" style="max-width:90px"></div>
+          <div class="fg"><label>Warn above</label><input type="number" id="wWarn" placeholder="70" style="max-width:90px"></div>
+          <div class="fg"><label>Alert above</label><input type="number" id="wAlert" placeholder="90" style="max-width:90px"></div>
+        </div>
+        <div id="widgetPresetInfo" style="margin-top:0.75rem;font-size:0.78rem;color:var(--tm);line-height:1.6;display:none"></div>
+      </div>
+      <div class="modal-ft" style="justify-content:space-between">
+        <button class="btn btn-d" id="widgetClearAllBtn" style="margin-right:auto">Clear All</button>
+        <button class="btn btn-s" id="widgetCancelBtn">Cancel</button>
+        <button class="btn btn-p" id="widgetSaveBtn">Add Widget</button>
+      </div>
+    </div>
+  </div>
+
   <script>
   // ═══════════════════════════════════
   // ICON FLAG — set to true to use built-in SVG icons instead of icons/*.png
-  // Flip this to true while waiting for custom icons to be ready.
-  // Works for ALL icons including ones created dynamically by JS.
   // ═══════════════════════════════════
   const USE_SVG_ICONS = true;
 
@@ -1762,6 +2068,9 @@
     'server':       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>',
     'folder':       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
     'grid':         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
+    'list':         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>',
+    'bar-chart':    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg>',
+    'activity':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>',
     'chevron-down': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>',
     'globe':        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
     'copy':         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
@@ -1769,6 +2078,15 @@
     'trash':        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
     'download':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
     'upload':       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>',
+    'cpu':          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>',
+    'memory':       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><line x1="6" y1="10" x2="6" y2="14"/><line x1="10" y1="10" x2="10" y2="14"/><line x1="14" y1="10" x2="14" y2="14"/><line x1="18" y1="10" x2="18" y2="14"/></svg>',
+    'hard-drive':   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="12" x2="2" y2="12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" y1="16" x2="6.01" y2="16"/><line x1="10" y1="16" x2="10.01" y2="16"/></svg>',
+    'wifi':         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M10.54 16a6 6 0 0 1 2.92 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>',
+    'zap':          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+    'thermometer':  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>',
+    'clock':        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+    'layers':       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
+    'box':          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>',
   };
 
   // icon(name, size, extraStyle, id) — call from anywhere, static HTML or JS template literals.
@@ -1824,9 +2142,11 @@
   const SNIPPETS_KEY= 'kurudash-snippets';
   const PINS_KEY    = 'kurudash-pinned';
   const LOCK_KEY    = 'kurudash-lock-pin';
+  const LOCK_PIN_KEY= 'kurudash-lock-pin';
   const UI_KEY      = 'kurudash-ui';
   const CSS_KEY     = 'kurudash-custom-css';
   const SSH_FONT_KEY= 'kurudash-ssh-font';
+  const WIDGET_KEY  = 'kurudash-widgets';
 
   // migrate legacy
   (function(){
@@ -1850,7 +2170,8 @@
   let viewMode = 'grid'; // 'grid' or 'list'
   let pinnedIds = new Set(JSON.parse(localStorage.getItem(PINS_KEY)||'[]'));
   let notesMap = JSON.parse(localStorage.getItem(NOTES_KEY)||'{}');
-  let statusHistory = {}; // id -> [{status,rt,ts}] last 10
+  let statusHistory = {}; // id -> [{status,rt,ts}] last 12
+  let widgets = JSON.parse(localStorage.getItem(WIDGET_KEY)||'[]');
 
   // ═══════════════════════════════════
   // THEMES
@@ -1867,7 +2188,7 @@
     {id:'terminal',   name:'Terminal',      c:['#000800','#00ff41','#003300']},
     {id:'flat',       name:'Flat Dark',     c:['#2c3e50','#3498db','#ecf0f1']},
     {id:'flat-light', name:'Flat Light',    c:['#ecf0f1','#3498db','#2c3e50']},
-    {id:'custom',     name:'Custom ✦',      c:['#1e1e2e','#cba6f7','#cdd6f4']},
+    {id:'custom',     name:'Custom',        c:['#1e1e2e','#cba6f7','#cdd6f4']},
   ];
 
   const CCOLORS = [
@@ -2031,7 +2352,7 @@
     const d={};
     document.getElementById('colorGrid').querySelectorAll('input[type="color"]').forEach(i=>{d[i.dataset.prop]=i.value;});
     localStorage.setItem(CUSTOM_KEY,JSON.stringify(d));
-    applyTheme('custom',d); toast('✦ Custom theme applied','ok');
+    applyTheme('custom',d); toast('Custom theme applied','ok');
   });
   document.getElementById('resetCustomTheme').addEventListener('click',()=>{localStorage.removeItem(CUSTOM_KEY);buildColorPicker();toast('Custom theme reset');});
 
@@ -2046,13 +2367,23 @@
   // BACKUP / RESTORE
   // ═══════════════════════════════════
   function buildExport(){
-    return JSON.stringify({version:1,exported:new Date().toISOString(),theme:localStorage.getItem(THEME_KEY)||'aero',customTheme:JSON.parse(localStorage.getItem(CUSTOM_KEY)||'{}'),collapsed:[...collapsedIds],tree},null,2);
+    return JSON.stringify({
+      version:2,
+      exported:new Date().toISOString(),
+      theme:localStorage.getItem(THEME_KEY)||'aero',
+      customTheme:JSON.parse(localStorage.getItem(CUSTOM_KEY)||'{}'),
+      collapsed:[...collapsedIds],
+      tree,
+      widgets: JSON.parse(localStorage.getItem(WIDGET_KEY)||'[]'),
+      notes: JSON.parse(localStorage.getItem(NOTES_KEY)||'{}'),
+      pinned: [...pinnedIds],
+    },null,2);
   }
   document.getElementById('exportBtn').addEventListener('click',()=>{
     const b=new Blob([buildExport()],{type:'application/json'});
     const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='kurudash-backup.json'; a.click();
   });
-  document.getElementById('copyJsonBtn').addEventListener('click',()=>{navigator.clipboard.writeText(buildExport()).then(()=>toast('📋 Copied to clipboard','ok'));});
+  document.getElementById('copyJsonBtn').addEventListener('click',()=>{navigator.clipboard.writeText(buildExport()).then(()=>toast('Copied to clipboard','ok'));});
   document.getElementById('clearSyncBtn').addEventListener('click',()=>{document.getElementById('syncTextarea').value='';});
   document.getElementById('importBtn').addEventListener('click',()=>{
     try {
@@ -2060,17 +2391,20 @@
       if(!payload.tree)throw new Error('bad');
       tree=payload.tree; collapsedIds=new Set(payload.collapsed||[]); saveTree();
       if(payload.theme){const cd=payload.customTheme||{};if(Object.keys(cd).length)localStorage.setItem(CUSTOM_KEY,JSON.stringify(cd));applyTheme(payload.theme,cd);}
+      if(payload.widgets){widgets=payload.widgets;saveWidgets();renderWidgets();}
+      if(payload.notes){notesMap=payload.notes;localStorage.setItem(NOTES_KEY,JSON.stringify(notesMap));}
+      if(payload.pinned){pinnedIds=new Set(payload.pinned);localStorage.setItem(PINS_KEY,JSON.stringify([...pinnedIds]));}
       renderThemeGrid(); renderTree(); render();
       document.getElementById('syncTextarea').value='';
-      toast('✅ Import successful','ok');
-    } catch(e){toast('❌ Invalid JSON','err');}
+      toast('Import successful','ok');
+    } catch(e){toast('Invalid JSON — check format','err');}
   });
   document.getElementById('clearAllBtn').addEventListener('click',()=>{
-    if(!confirm('Delete ALL services, folders, and settings?'))return;
-    tree=[];collapsedIds=new Set();
-    localStorage.removeItem(TREE_KEY);localStorage.removeItem(COL_KEY);localStorage.removeItem(CUSTOM_KEY);
+    if(!confirm('Delete ALL services, folders, widgets and settings?'))return;
+    tree=[];collapsedIds=new Set();widgets=[];notesMap={};pinnedIds=new Set();
+    [TREE_KEY,COL_KEY,CUSTOM_KEY,WIDGET_KEY,NOTES_KEY,PINS_KEY].forEach(k=>localStorage.removeItem(k));
     localStorage.setItem(THEME_KEY,'aero');applyTheme('aero');
-    renderTree();render();toast('🗑 All data cleared');
+    renderWidgets();renderTree();render();toast('All data cleared');
   });
 
   // ═══════════════════════════════════
@@ -2200,35 +2534,42 @@
   }
   function closeServiceModal(){document.getElementById('serviceOverlay').classList.remove('open');}
 
-  // ═══════════════════════════════════
-  // SEARCH
-  // ═══════════════════════════════════
-  document.getElementById('searchBox').addEventListener('input',e=>{searchQ=e.target.value.trim().toLowerCase();renderTree();render();});
+  // Search is wired in INIT section with debounce
 
   // ═══════════════════════════════════
   // STATUS CHECK
   // ═══════════════════════════════════
+  // Debounced render for status updates — batch multiple concurrent checks
+  let _renderPending=false;
+  function scheduleRender(){
+    if(_renderPending)return;
+    _renderPending=true;
+    requestAnimationFrame(()=>{_renderPending=false;render();});
+  }
+
   async function checkStatus(svc){
+    if(svc.manualOverride){render();return;}
     const url=normalizeUrl(svc.statusUrl||svc.controlUrl||svc.ip);
     const prevStatus = svc.status;
-    svc.status='checking';render();
-    if(!url){svc.status='unknown';render();return;}
-    const t0=Date.now();
+    svc.status='checking';scheduleRender();
+    if(!url){svc.status='unknown';scheduleRender();return;}
+    const t0=performance.now();
     try{
       const ctrl=new AbortController();
-      const tid=setTimeout(()=>ctrl.abort(),5000);
-      await fetch(url,{mode:'no-cors',signal:ctrl.signal});
+      const tid=setTimeout(()=>ctrl.abort(),6000);
+      await fetch(url,{mode:'no-cors',cache:'no-store',signal:ctrl.signal});
       clearTimeout(tid);
       svc.status='up';
-      svc.responseTime=Date.now()-t0;
-    }catch{
+      svc.responseTime=Math.round(performance.now()-t0);
+    }catch(e){
+      // If aborted = timeout, else network error
       svc.status='down';
       svc.responseTime=null;
     }
     // Record history
     if(!statusHistory[svc.id])statusHistory[svc.id]=[];
     statusHistory[svc.id].push({s:svc.status,rt:svc.responseTime,ts:Date.now()});
-    if(statusHistory[svc.id].length>10)statusHistory[svc.id].shift();
+    if(statusHistory[svc.id].length>12)statusHistory[svc.id].shift();
     // Desktop notification on down
     if(svc.status==='down'&&prevStatus==='up'){
       const uiOpts=JSON.parse(localStorage.getItem(UI_KEY)||'{}');
@@ -2236,7 +2577,7 @@
         new Notification('KuruDash — Service Down',{body:`${svc.name} (${svc.ip}) is not responding.`,icon:'icons/rei.png'});
       }
     }
-    render();
+    scheduleRender();
   }
 
   // ═══════════════════════════════════
@@ -2323,58 +2664,132 @@
     const filtered=searchQ?svcs.filter(s=>(s.name||'').toLowerCase().includes(searchQ)||(s.ip||'').toLowerCase().includes(searchQ)):svcs;
     document.getElementById('breadcrumb').textContent=selectedFolderId?((getFolder(tree,selectedFolderId)&&getFolder(tree,selectedFolderId).name)||'Folder'):'All Services';
 
+    // Update service count badge
+    const countEl=document.getElementById('serviceCount');
+    if(countEl){
+      if(filtered.length>0){countEl.textContent=filtered.length+' service'+(filtered.length!==1?'s':'');countEl.style.display='';}
+      else{countEl.style.display='none';}
+    }
+
+    // Update status summary bar
+    const up=filtered.filter(s=>s.status==='up').length;
+    const down=filtered.filter(s=>s.status==='down').length;
+    const summaryEl=document.getElementById('statusSummary');
+    const upEl=document.getElementById('statusUpCount');
+    const downEl=document.getElementById('statusDownCount');
+    if(summaryEl&&filtered.length>0){
+      summaryEl.style.display='';
+      if(upEl)upEl.textContent=up;
+      if(downEl)downEl.textContent=down;
+    } else if(summaryEl){summaryEl.style.display='none';}
+
     const grid=document.getElementById('grid');
     const empty=document.getElementById('empty');
-    if(!filtered.length){grid.innerHTML='';empty.style.display='block';return;}
+
+    // Build folder cards section (only at root, only in grid mode, only when folders exist)
+    const folders = tree.filter(n=>n.type==='folder');
+    let folderCardsHtml = '';
+    if(!selectedFolderId && !searchQ && folders.length && viewMode==='grid'){
+      folderCardsHtml = `<div style="margin-bottom:1rem">
+        <div style="font-family:'Outfit',sans-serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--tm);margin-bottom:0.55rem;padding-left:2px;display:flex;align-items:center;gap:0.4rem">${icon('folder','13px')} Folders</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,250px));gap:0.8rem">
+          ${folders.map(f=>{
+            const fsvcs=allServices(f.children||[]);
+            const fup=fsvcs.filter(s=>s.status==='up').length;
+            const fdown=fsvcs.filter(s=>s.status==='down').length;
+            const total=fsvcs.length;
+            return`<div class="folder-card" data-folder-id="${f.id}">
+              <div class="folder-card-icon">${icon('folder','22px')}</div>
+              <div class="folder-card-info">
+                <div class="folder-card-name">${eH(f.name)}</div>
+                <div class="folder-card-stats">
+                  <span class="folder-card-stat"><span class="folder-card-dot" style="background:var(--ok)"></span>${fup} up</span>
+                  ${fdown?`<span class="folder-card-stat"><span class="folder-card-dot" style="background:var(--err)"></span>${fdown} down</span>`:''}
+                  <span class="folder-card-stat">${total} total</span>
+                </div>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>`;
+    }
+
+    if(!filtered.length && !folderCardsHtml){grid.innerHTML='';empty.style.display='block';return;}
     empty.style.display='none';
 
     // Split pinned vs rest
     const pinnedSvcs = filtered.filter(s=>pinnedIds.has(s.id));
     const normalSvcs = filtered.filter(s=>!pinnedIds.has(s.id));
 
+    // Highlight search term in text
+    function hl(str){
+      if(!searchQ)return eH(str);
+      const idx=(str||'').toLowerCase().indexOf(searchQ);
+      if(idx===-1)return eH(str);
+      return eH(str.slice(0,idx))+'<mark class="search-highlight">'+eH(str.slice(idx,idx+searchQ.length))+'</mark>'+eH(str.slice(idx+searchQ.length));
+    }
+
     function buildCard(s){
       const imgSrc=resolveIcon(s.image);
       const img=imgSrc
-        ?`<div class="card-icon-area"><img class="card-image" src="${eA(imgSrc)}" alt="" onerror="this.parentElement.outerHTML='<div class=\\'card-placeholder\\'><svg viewBox=\\'0 0 24 24\\' style=\\'width:28px;height:28px;stroke:var(--tm);fill:none;stroke-width:1.5;opacity:0.45\\'><rect x=\\'2\\' y=\\'2\\' width=\\'20\\' height=\\'8\\' rx=\\'2\\'/><rect x=\\'2\\' y=\\'14\\' width=\\'20\\' height=\\'8\\' rx=\\'2\\'/></svg></div>'"></div>`
-        :`<div class="card-placeholder">${icon('server','28px','opacity:0.4')}</div>`;
+        ?`<div class="card-icon-area"><img class="card-image" src="${eA(imgSrc)}" alt="" loading="lazy" onerror="this.parentElement.outerHTML='<div class=\\'card-placeholder\\'><svg viewBox=\\'0 0 24 24\\' style=\\'width:38px;height:38px;stroke:var(--tm);fill:none;stroke-width:1.5;opacity:0.35\\'><rect x=\\'2\\' y=\\'2\\' width=\\'20\\' height=\\'8\\' rx=\\'2\\'/><rect x=\\'2\\' y=\\'14\\' width=\\'20\\' height=\\'8\\' rx=\\'2\\'/></svg></div>'"></div>`
+        :`<div class="card-placeholder"><svg viewBox="0 0 24 24" style="width:38px;height:38px;stroke:var(--tm);fill:none;stroke-width:1.5;opacity:0.35"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/></svg></div>`;
       const sshBadge=s.connectionType==='ssh'?`<span class="card-ssh-badge">SSH</span>`:'';
       const isPinned=pinnedIds.has(s.id);
       const hasNote=!!(notesMap[s.id]&&notesMap[s.id].trim());
       // Sparkline
       const hist=statusHistory[s.id]||[];
-      const sparkHtml=hist.length?`<div class="sparkline">${hist.map(h=>{
+      const sparkHtml=hist.length?`<div class="sparkline" title="Status history (${hist.length} checks)">${hist.map(h=>{
         const col=h.s==='up'?'var(--ok)':h.s==='down'?'var(--err)':'var(--warn)';
         const maxRt=Math.max(...hist.filter(x=>x.rt).map(x=>x.rt),1);
         const ht=h.rt?Math.max(3,Math.round((h.rt/maxRt)*14)):4;
         return`<div class="spark-dot" style="height:${ht}px;background:${col}"></div>`;
       }).join('')}</div>`:'';
-      // Response time
-      const rtHtml=s.responseTime?`<div class="card-rt">${s.responseTime}ms</div>`:'';
-      return`<div class="card${selectedId===s.id?' selected':''}" data-id="${s.id}" draggable="true">
+      // Response time with color coding
+      let rtColor='var(--tm)';
+      if(s.responseTime){
+        if(s.responseTime<200)rtColor='var(--ok)';
+        else if(s.responseTime<600)rtColor='var(--warn)';
+        else rtColor='var(--err)';
+      }
+      const rtHtml=s.responseTime?`<div class="card-rt" style="color:${rtColor};opacity:0.75" title="Response time">${s.responseTime}ms</div>`:'';
+      // Status label
+      const statusLabel=s.status==='up'?'Online':s.status==='down'?'Offline':s.status==='checking'?'Checking…':'Unknown';
+      return`<div class="card${selectedId===s.id?' selected':''}" data-id="${s.id}" draggable="true" title="${eA(s.name)} — ${statusLabel}">
         <div class="drag-handle"><span></span><span></span><span></span></div>
         ${sshBadge}
-        ${hasNote?'<span class="card-note-dot"></span>':''}
-        <button class="card-pin${isPinned?' pinned':''}" data-pin="${s.id}" title="${isPinned?'Unpin':'Pin'}">★</button>
+        ${hasNote?'<span class="card-note-dot" title="Has notes"></span>':''}
+        <button class="card-pin${isPinned?' pinned':''}" data-pin="${s.id}" title="${isPinned?'Unpin':'Pin'}"><svg viewBox="0 0 24 24" style="width:11px;height:11px;fill:${isPinned?'currentColor':'none'};stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
         ${img}
         <div class="card-body">
-          <div class="card-hd"><span class="dot ${s.status}"></span><span class="card-name">${eH(s.name)}</span></div>
-          <div class="card-ip">${eH(s.ip)}</div>
+          <div class="card-hd"><span class="dot ${s.status}" title="${statusLabel}"></span><span class="card-name">${hl(s.name)}</span></div>
+          <div class="card-ip">${hl(s.ip)}</div>
           ${sparkHtml}${rtHtml}
         </div>
       </div>`;
     }
 
-    let gridHtml='';
+    let gridHtml=folderCardsHtml;
     if(pinnedSvcs.length){
       gridHtml+=`<div class="pinned-section"><div class="pinned-label">Pinned</div><div class="grid${viewMode==='list'?' list-view':''}" style="margin-bottom:0.85rem">${pinnedSvcs.map(buildCard).join('')}</div></div>`;
     }
-    if(normalSvcs.length||!pinnedSvcs.length){
-      grid.innerHTML=gridHtml+`${normalSvcs.map(buildCard).join('')}`;
+    if(normalSvcs.length){
+      const sectionLabel=pinnedSvcs.length?`<div class="pinned-label" style="margin-top:0.2rem">All Services</div>`:'';
+      grid.innerHTML=gridHtml+sectionLabel+`${normalSvcs.map(buildCard).join('')}`;
     } else {
       grid.innerHTML=gridHtml;
     }
     // Apply list view class
     document.getElementById('grid').className='grid'+(viewMode==='list'?' list-view':'');
+
+    // Folder card click
+    document.querySelectorAll('.folder-card[data-folder-id]').forEach(fc=>{
+      fc.addEventListener('click',()=>{
+        selectedFolderId=fc.dataset.folderId;
+        selectedId=null;panel.classList.remove('open');
+        render();renderTree();
+      });
+    });
 
     initDnD();
 
@@ -2423,7 +2838,7 @@
     const r=find(tree);if(!r)return;
     const{arr,si}=r;const[item]=arr.splice(si,1);
     const ni=arr.findIndex(n=>n.id===tgtId);arr.splice(ni,0,item);
-    saveTree();renderTree();render();toast('✦ Reordered','ok');
+    saveTree();renderTree();render();toast('Reordered','ok');
   }
 
   function selectService(id){selectedId=id;render();showProperties(id);}
@@ -2468,7 +2883,7 @@
         switch(btn.dataset.action){
           case 'open': openConn(s); break;
           case 'open-ssh-term': openSshSession(s); break;
-          case 'copy-ssh': navigator.clipboard.writeText(`ssh ${s.sshUser||'root'}@${s.ip} -p ${s.sshPort||22}`).then(()=>toast('📋 SSH command copied','ok')); break;
+          case 'copy-ssh': navigator.clipboard.writeText(`ssh ${s.sshUser||'root'}@${s.ip} -p ${s.sshPort||22}`).then(()=>toast('SSH command copied','ok')); break;
           case 'refresh': checkStatus(s); break;
           case 'notes':   openNotesModal(s.id); break;
           case 'override-up':   s.status='up';   s.manualOverride=true; render(); break;
@@ -2689,7 +3104,7 @@
 
     wrap.innerHTML = `
       <div class="ssh-connect-form">
-        <h3>⟫ SSH Terminal</h3>
+        <h3>SSH Terminal</h3>
         <p class="ssh-connect-desc">
           KuruDash's SSH terminal connects to a <strong>WebSocket relay</strong> running on your server.
           Provide the relay URL below, or use the copy mode to launch in your system terminal.
@@ -2708,8 +3123,8 @@
           <button class="ssh-connect-btn" onclick="connectSshFromForm('${sid}')">Connect</button>
         </div>
         <div class="ssh-form-row" style="gap:0.5rem;margin-top:0.25rem">
-          <button class="ssh-connect-btn" style="background:var(--ib);color:var(--tp);border:1px solid var(--glass-b);box-shadow:none" onclick="copySshFromForm('${sid}')">📋 Copy SSH Command</button>
-          ${svcId?`<button class="ssh-connect-btn" style="background:var(--ib);color:var(--tp);border:1px solid var(--glass-b);box-shadow:none" onclick="launchSshProtocol('${sid}')">🔗 Launch ssh://</button>`:''}
+          <button class="ssh-connect-btn" style="background:var(--ib);color:var(--tp);border:1px solid var(--glass-b);box-shadow:none" onclick="copySshFromForm('${sid}')">Copy SSH Command</button>
+          ${svcId?`<button class="ssh-connect-btn" style="background:var(--ib);color:var(--tp);border:1px solid var(--glass-b);box-shadow:none" onclick="launchSshProtocol('${sid}')">Launch ssh://</button>`:''}
         </div>
       </div>`;
 
@@ -2771,7 +3186,7 @@
     const u=(document.getElementById('sf_user_'+sid)?document.getElementById('sf_user_'+sid).value.trim():'root')||'root';
     const p=parseInt((document.getElementById('sf_port_'+sid)?document.getElementById('sf_port_'+sid).value:22))||22;
     if(!h){toast('Enter a host first','err');return;}
-    navigator.clipboard.writeText(`ssh ${u}@${h} -p ${p}`).then(()=>toast('📋 Copied','ok'));
+    navigator.clipboard.writeText(`ssh ${u}@${h} -p ${p}`).then(()=>toast('Copied','ok'));
   };
 
   window.launchSshProtocol = function(sid){
@@ -2896,7 +3311,7 @@
     if(found){
       document.getElementById('serviceImage').value=found;
       setIconPreview(found);
-      status.textContent='✓ Found';
+      status.textContent='Found';
       setTimeout(()=>status.textContent='',2000);
     } else {
       status.textContent='Not found';
@@ -2964,7 +3379,7 @@
     const blur = opts.blur !== undefined ? opts.blur : 28;
     const cardOp = opts.cardOpacity !== undefined ? opts.cardOpacity : 22;
     const bgBlur = opts.bgBlur !== undefined ? opts.bgBlur : 0;
-    document.documentElement.style.setProperty('--card-blur', `blur(${blur}px) saturate(160%)`);
+    document.documentElement.style.setProperty('--card-blur', `blur(${blur}px) saturate(160%) brightness(1.01)`);
     // Use theme glass color tinted to the right opacity rather than flat white
     const style = getComputedStyle(document.documentElement);
     const themeGlass = style.getPropertyValue('--glass').trim() || 'rgba(255,255,255,0.15)';
@@ -2977,9 +3392,9 @@
       : `rgba(255,255,255,${glassAlpha})`;
     document.documentElement.style.setProperty('--card-glass', cardGlass);
     document.documentElement.style.setProperty('--panel-glass', cardGlass);
-    // Background image blur
+    // Background image blur — scale(1.06) prevents edge artifacts at higher blur values
     layer.style.filter = bgBlur > 0 ? `blur(${bgBlur}px)` : '';
-    layer.style.transform = bgBlur > 0 ? 'scale(1.05)' : ''; // prevent blur edge artifacts
+    layer.style.transform = bgBlur > 0 ? `translateZ(0) scale(${1 + bgBlur*0.004})` : 'translateZ(0)';
     updateIconFilterForBg();
   }
 
@@ -3265,6 +3680,13 @@
     viewMode = viewMode==='grid'?'list':'grid';
     const btn = document.getElementById('viewToggleBtn');
     btn.classList.toggle('active', viewMode==='list');
+    // Swap icon: list icon when in list mode, grid icon when in grid mode
+    const imgEl = btn.querySelector('img,span');
+    if(imgEl && imgEl.tagName==='IMG') imgEl.src = viewMode==='list'?'icons/list.png':'icons/grid.png';
+    else if(imgEl) {
+      const newSvg = viewMode==='list' ? _SVGS['list'] : _SVGS['grid'];
+      if(newSvg) imgEl.innerHTML = newSvg.replace('<svg ','<svg style="width:15px;height:15px" ');
+    }
     render();
   });
 
@@ -3281,6 +3703,7 @@
       case 's': case 'S': document.getElementById('settingsBtn').click(); break;
       case 't': case 'T': document.getElementById('sshPanelToggle').click(); break;
       case 'v': case 'V': document.getElementById('viewToggleBtn').click(); break;
+      case 'w': case 'W': document.getElementById('widgetsBtn').click(); break;
       case 'Escape':
         document.getElementById('panel').classList.remove('open');
         document.querySelectorAll('.overlay.open').forEach(o=>o.classList.remove('open'));
@@ -3376,7 +3799,6 @@
   // ═══════════════════════════════════
   // LOCK SCREEN
   // ═══════════════════════════════════
-  const LOCK_PIN_KEY = 'kurudash-lock-pin';
   let pinBuffer='';
 
   function toggleLock(){
@@ -3478,7 +3900,7 @@
   function renderSnippets(){
     const list=document.getElementById('snippetList');
     if(!list)return;
-    list.innerHTML=snippets.map((s,i)=>`<div class="snip-item" data-snip="${i}" title="${eH(s)}">${eH(s)}<span onclick="deleteSnippet(${i});event.stopPropagation()" style="float:right;color:var(--err);margin-left:4px;cursor:pointer;opacity:0.6">✕</span></div>`).join('');
+    list.innerHTML=snippets.map((s,i)=>`<div class="snip-item" data-snip="${i}" title="${eH(s)}">${eH(s)}<span onclick="deleteSnippet(${i});event.stopPropagation()" style="float:right;color:var(--err);margin-left:4px;cursor:pointer;opacity:0.55;display:inline-flex;align-items:center"><svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></div>`).join('');
     list.querySelectorAll('[data-snip]').forEach(el=>{
       el.addEventListener('click',e=>{
         if(e.target.tagName==='SPAN')return;
@@ -3613,16 +4035,255 @@
 
 
   // ═══════════════════════════════════
+  // WIDGET ENGINE
+  // ═══════════════════════════════════
+  // (WIDGET_KEY and widgets declared in global state above)
+  let _selectedWidgetPreset = null;
+  let _widgetIntervals = [];
+
+  const WIDGET_PRESETS = [
+    { id:'cpu',    icon:'cpu',        name:'CPU Load',    desc:'Total CPU %',              unit:'%',   warn:70,  alert:90,  path:'data.0.0',          urlHint:'Netdata: /api/v1/data?chart=system.cpu&points=1&after=-1' },
+    { id:'ram',    icon:'memory',     name:'RAM Usage',   desc:'Memory used %',            unit:'%',   warn:75,  alert:90,  path:'data.0.0',          urlHint:'Netdata: /api/v1/data?chart=system.ram&points=1&after=-1' },
+    { id:'disk',   icon:'hard-drive', name:'Disk Usage',  desc:'Disk used %',              unit:'%',   warn:80,  alert:95,  path:'data.0.0',          urlHint:'Netdata: /api/v1/data?chart=disk_space._&points=1&after=-1' },
+    { id:'net',    icon:'wifi',       name:'Network In',  desc:'Inbound KB/s',             unit:'KB/s',warn:0,   alert:0,   path:'data.0.0',          urlHint:'Netdata: /api/v1/data?chart=system.net&points=1&after=-1' },
+    { id:'power',  icon:'zap',        name:'Power Draw',  desc:'Watts consumed',           unit:'W',   warn:150, alert:250, path:'data.0.0',          urlHint:'Custom JSON: {"data":[[42]]}' },
+    { id:'temp',   icon:'thermometer',name:'Temperature', desc:'CPU / system temp',        unit:'°C',  warn:65,  alert:80,  path:'data.0.0',          urlHint:'Netdata: /api/v1/data?chart=sensors.coretemp&points=1' },
+    { id:'uptime', icon:'clock',      name:'Uptime',      desc:'System uptime',            unit:'',    warn:0,   alert:0,   path:'data',              urlHint:'Custom endpoint returning uptime string' },
+    { id:'load',   icon:'activity',   name:'Load Avg',    desc:'1-min load average',       unit:'',    warn:2,   alert:4,   path:'data.0.0',          urlHint:'Netdata: /api/v1/data?chart=system.load&points=1' },
+    { id:'docker', icon:'box',        name:'Containers',  desc:'Running Docker containers',unit:'',    warn:0,   alert:0,   path:'ContainersRunning', urlHint:'Docker API: /v1/info' },
+    { id:'custom', icon:'bar-chart',  name:'Custom',      desc:'Any JSON endpoint',        unit:'',    warn:0,   alert:0,   path:'value',             urlHint:'Any URL returning JSON' },
+  ];
+
+  function saveWidgets() { localStorage.setItem(WIDGET_KEY, JSON.stringify(widgets)); }
+
+  function getNestedVal(obj, path) {
+    try {
+      return path.split('.').reduce((o, k) => (o != null && o[k] !== undefined ? o[k] : null), obj);
+    } catch { return null; }
+  }
+
+  function formatWidgetVal(raw, unit, preset) {
+    if (raw === null || raw === undefined) return { val: '—', cls: '' };
+    let n = parseFloat(raw);
+    if (isNaN(n)) return { val: String(raw).slice(0, 12), cls: '' };
+    // Round nicely
+    const disp = n >= 100 ? Math.round(n) : n >= 10 ? n.toFixed(1) : n.toFixed(2);
+    let cls = '';
+    if (preset && preset.alert && n >= preset.alert) cls = 'err';
+    else if (preset && preset.warn && n >= preset.warn) cls = 'warn';
+    else if (preset && (preset.warn || preset.alert)) cls = 'ok';
+    return { val: disp + (unit ? ' ' + unit : ''), cls, pct: preset && preset.alert ? Math.min(100, (n / preset.alert) * 100) : null, raw: n };
+  }
+
+  async function fetchWidget(w) {
+    if (!w.url) return { val: 'No URL', cls: 'err' };
+    try {
+      const ctrl = new AbortController();
+      const tid = setTimeout(() => ctrl.abort(), 7000);
+      const res = await fetch(w.url, { signal: ctrl.signal, cache: 'no-store' });
+      clearTimeout(tid);
+      if (!res.ok) return { val: `HTTP ${res.status}`, cls: 'err' };
+      const json = await res.json();
+      const raw = getNestedVal(json, w.path || 'data.0.0');
+      const preset = WIDGET_PRESETS.find(p => p.id === w.presetId);
+      return formatWidgetVal(raw, w.unit, preset || { warn: w.warn, alert: w.alert });
+    } catch (e) {
+      return { val: e.name === 'AbortError' ? 'Timeout' : 'Error', cls: 'err' };
+    }
+  }
+
+  function buildWidgetEl(w, result) {
+    const pct = result.pct;
+    const barColor = result.cls === 'err' ? 'err' : result.cls === 'warn' ? 'warn' : result.cls === 'ok' ? 'ok' : '';
+    return `
+    <div class="widget-tile" id="wtile_${w.id}" data-wid="${w.id}">
+      <div class="widget-label">
+        ${icon(w.icon||'bar-chart','11px','opacity:0.7')} ${eH(w.label)}
+        <button onclick="removeWidget('${w.id}')" style="margin-left:auto;background:none;border:none;color:var(--tm);cursor:pointer;opacity:0.35;transition:opacity 0.15s;padding:0;display:inline-flex;align-items:center" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.35" title="Remove widget"><svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="widget-value ${result.cls}" id="wval_${w.id}">${eH(result.val)}</div>
+      ${w.sub ? `<div class="widget-sub">${eH(w.sub)}</div>` : ''}
+      ${pct !== null && pct !== undefined ? `<div class="widget-bar-track"><div class="widget-bar-fill ${barColor}" id="wbar_${w.id}" style="width:${Math.round(pct)}%"></div></div>` : ''}
+    </div>`;
+  }
+
+  async function refreshWidget(w) {
+    const result = await fetchWidget(w);
+    const valEl = document.getElementById('wval_' + w.id);
+    const barEl = document.getElementById('wbar_' + w.id);
+    if (valEl) {
+      valEl.textContent = result.val;
+      valEl.className = 'widget-value ' + (result.cls || '');
+    }
+    if (barEl && result.pct !== null && result.pct !== undefined) {
+      barEl.style.width = Math.round(result.pct) + '%';
+      barEl.className = 'widget-bar-fill ' + (result.cls === 'err' ? 'err' : result.cls === 'warn' ? 'warn' : result.cls === 'ok' ? 'ok' : '');
+    }
+  }
+
+  async function renderWidgets() {
+    const row = document.getElementById('widgetsRow');
+    if (!row) return;
+    // Clear intervals
+    _widgetIntervals.forEach(clearInterval);
+    _widgetIntervals = [];
+
+    if (!widgets.length) {
+      // Show a subtle "add widgets" prompt instead of hiding entirely
+      row.style.display = 'flex';
+      row.innerHTML = `<button class="widget-add-btn" id="widgetAddTileBtn" title="Add a widget" onclick="document.getElementById('widgetsBtn').click()" style="min-width:120px;max-width:none;padding:0 1rem;gap:0.5rem;font-size:0.8rem;font-family:'Outfit',sans-serif;font-weight:600;height:40px;border-radius:12px;display:flex;align-items:center">
+        <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Add widget
+      </button>`;
+      return;
+    }
+    row.style.display = 'flex';
+
+    // Build initial HTML with loading state
+    row.innerHTML = widgets.map(w => `
+    <div class="widget-tile" id="wtile_${w.id}" data-wid="${w.id}">
+      <div class="widget-label">${icon(w.icon||'bar-chart','11px','opacity:0.7')} ${eH(w.label)}<button onclick="removeWidget('${w.id}')" style="margin-left:auto;background:none;border:none;color:var(--tm);cursor:pointer;opacity:0.35;transition:opacity 0.15s;padding:0;line-height:1;display:inline-flex;align-items:center" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.35" title="Remove widget"><svg viewBox="0 0 24 24" style="width:10px;height:10px;stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div>
+      <div class="widget-value" id="wval_${w.id}"><span class="widget-loading"></span></div>
+      ${w.sub ? `<div class="widget-sub">${eH(w.sub)}</div>` : ''}
+    </div>`).join('') + `<button class="widget-add-btn" id="widgetAddTileBtn" title="Add widget" onclick="document.getElementById('widgetsBtn').click()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>`;
+
+    // Fetch all widgets in parallel
+    await Promise.all(widgets.map(w => refreshWidget(w)));
+
+    // Poll every 8s
+    for (const w of widgets) {
+      const iv = setInterval(() => { if (!document.hidden) refreshWidget(w); }, 8000);
+      _widgetIntervals.push(iv);
+    }
+  }
+
+  function removeWidget(wid) {
+    widgets = widgets.filter(w => w.id !== wid);
+    saveWidgets();
+    renderWidgets();
+    toast('Widget removed');
+  }
+  window.removeWidget = removeWidget;
+
+  // Widget modal logic
+  document.getElementById('widgetsBtn').addEventListener('click', () => {
+    _selectedWidgetPreset = null;
+    document.getElementById('widgetConfigArea').style.display = 'none';
+    document.getElementById('widgetPresetInfo').style.display = 'none';
+    // Build preset grid
+    const grid = document.getElementById('widgetChoiceGrid');
+    grid.innerHTML = WIDGET_PRESETS.map(p => `
+      <div class="widget-choice" data-pid="${p.id}">
+        <span class="widget-choice-icon">${icon(p.icon,'22px','opacity:0.75')}</span>
+        <span class="widget-choice-name">${p.name}</span>
+        <span class="widget-choice-desc">${p.desc}</span>
+      </div>`).join('');
+    grid.querySelectorAll('.widget-choice').forEach(el => {
+      el.addEventListener('click', () => {
+        grid.querySelectorAll('.widget-choice').forEach(x => x.classList.remove('selected'));
+        el.classList.add('selected');
+        _selectedWidgetPreset = WIDGET_PRESETS.find(p => p.id === el.dataset.pid);
+        const cfg = document.getElementById('widgetConfigArea');
+        const info = document.getElementById('widgetPresetInfo');
+        cfg.style.display = 'block';
+        info.style.display = 'block';
+        // Pre-fill
+        document.getElementById('wLabel').value = _selectedWidgetPreset.name;
+        document.getElementById('wPath').value = _selectedWidgetPreset.path;
+        document.getElementById('wUnit').value = _selectedWidgetPreset.unit;
+        document.getElementById('wWarn').value = _selectedWidgetPreset.warn || '';
+        document.getElementById('wAlert').value = _selectedWidgetPreset.alert || '';
+        document.getElementById('wUrl').value = '';
+        document.getElementById('wUrl').placeholder = _selectedWidgetPreset.urlHint;
+        info.innerHTML = `<strong style="color:var(--ac)">Hint:</strong> ${eH(_selectedWidgetPreset.urlHint)}`;
+      });
+    });
+    document.getElementById('widgetOverlay').classList.add('open');
+  });
+
+  document.getElementById('widgetModalClose').addEventListener('click', () => document.getElementById('widgetOverlay').classList.remove('open'));
+  document.getElementById('widgetCancelBtn').addEventListener('click', () => document.getElementById('widgetOverlay').classList.remove('open'));
+  document.getElementById('widgetOverlay').addEventListener('click', e => { if (e.target.id === 'widgetOverlay') document.getElementById('widgetOverlay').classList.remove('open'); });
+
+  document.getElementById('widgetClearAllBtn').addEventListener('click', () => {
+    if (!confirm('Remove all widgets?')) return;
+    widgets = []; saveWidgets(); renderWidgets();
+    document.getElementById('widgetOverlay').classList.remove('open');
+    toast('All widgets removed');
+  });
+
+  document.getElementById('widgetSaveBtn').addEventListener('click', () => {
+    const label = document.getElementById('wLabel').value.trim();
+    const url = document.getElementById('wUrl').value.trim();
+    const path = document.getElementById('wPath').value.trim() || 'data.0.0';
+    const unit = document.getElementById('wUnit').value.trim();
+    const warn = parseFloat(document.getElementById('wWarn').value) || 0;
+    const alert_ = parseFloat(document.getElementById('wAlert').value) || 0;
+    if (!label) { toast('Enter a widget label', 'err'); return; }
+    const preset = _selectedWidgetPreset;
+    const w = {
+      id: 'w_' + Date.now(),
+      presetId: preset ? preset.id : 'custom',
+      icon: preset ? preset.icon : 'bar-chart',
+      label, url, path, unit, warn, alert: alert_,
+      sub: preset ? preset.desc : '',
+    };
+    widgets.push(w);
+    saveWidgets();
+    renderWidgets();
+    document.getElementById('widgetOverlay').classList.remove('open');
+    toast('Widget added', 'ok');
+  });
+
+  // ═══════════════════════════════════
   // INIT
   // ═══════════════════════════════════
+
+  // Wire up search box with debounce
+  let _searchDebounce;
+  document.getElementById('searchBox').addEventListener('input',e=>{
+    clearTimeout(_searchDebounce);
+    _searchDebounce=setTimeout(()=>{
+      searchQ=e.target.value.trim().toLowerCase();
+      renderTree();render();
+    },120);
+  });
+  document.getElementById('searchBox').addEventListener('keydown',e=>{
+    if(e.key==='Escape'){e.target.value='';searchQ='';renderTree();render();}
+  });
+
   initTheme();
   applyBackground();
   initPerfMode();
   initUIPrefs();
+  renderWidgets();
   renderTree();
   render();
-  allNodes().filter(s=>s.type==='service').forEach(s=>{if(s.status==='unknown'||s.status==='checking')checkStatus(s);});
-  setInterval(()=>allNodes().filter(s=>s.type==='service').forEach(checkStatus),60000);
+
+  // Stagger initial status checks to avoid hammering network all at once
+  allNodes().filter(s=>s.type==='service').forEach((s,i)=>{
+    if(s.status==='unknown'||s.status==='checking'){
+      setTimeout(()=>checkStatus(s), i*150);
+    }
+  });
+
+  // Poll every 60s, but skip if tab is hidden (save resources)
+  setInterval(()=>{
+    if(document.hidden)return;
+    allNodes().filter(s=>s.type==='service').forEach(checkStatus);
+  },60000);
+
+  // Re-check all when tab becomes visible after being hidden
+  document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden){
+      const now=Date.now();
+      allNodes().filter(s=>s.type==='service').forEach(s=>{
+        const hist=statusHistory[s.id];
+        const lastCheck=hist&&hist.length?hist[hist.length-1].ts:0;
+        // Re-check if last check was >60s ago
+        if(now-lastCheck>60000)checkStatus(s);
+      });
+    }
+  });
   </script>
 </body>
 </html>
