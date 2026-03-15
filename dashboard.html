@@ -2556,6 +2556,27 @@
     requestAnimationFrame(()=>{_renderPending=false;render();});
   }
 
+  function probeAlive(url, timeoutMs){
+    // Load a tiny image from the host — CORS-immune, works on any live server.
+    // Resolves true (alive) or false (dead) within timeoutMs.
+    return new Promise(resolve=>{
+      const img=new Image();
+      const origin=new URL(url).origin;
+      let done=false;
+      const finish=v=>{if(done)return;done=true;clearTimeout(tid);img.onload=img.onerror=null;img.src='';resolve(v);};
+      const tid=setTimeout(()=>finish(false),timeoutMs);
+      // Any response at all (200, 404, 403, redirect) fires onerror with a fast
+      // timing because the TCP connection succeeded. A truly offline host either
+      // times out or fires onerror almost immediately with no round-trip.
+      // We use a second timer to tell them apart.
+      const MIN_RTT=50; // below this = OS rejected instantly = offline
+      const t0=performance.now();
+      img.onerror=()=>finish(performance.now()-t0 > MIN_RTT);
+      img.onload=()=>finish(true);
+      img.src=origin+'/favicon.ico?_='+Date.now();
+    });
+  }
+
   async function checkStatus(svc){
     if(svc.manualOverride){render();return;}
     const url=normalizeUrl(svc.statusUrl||svc.controlUrl||svc.ip);
@@ -2563,26 +2584,30 @@
     svc.status='checking';scheduleRender();
     if(!url){svc.status='unknown';scheduleRender();return;}
     const t0=performance.now();
+    let alive=false;
     try{
       const ctrl=new AbortController();
       const tid=setTimeout(()=>ctrl.abort(),6000);
       await fetch(url,{mode:'no-cors',cache:'no-store',signal:ctrl.signal});
       clearTimeout(tid);
-      svc.status='up';
-      svc.responseTime=Math.round(performance.now()-t0);
+      // Fetch succeeded with opaque response — definitely up
+      alive=true;
     }catch(e){
       if(e.name==='AbortError'){
-        // Genuine timeout — host not responding
-        svc.status='down';
-        svc.responseTime=null;
+        // Timed out completely — down
+        alive=false;
       } else {
-        // TypeError / network error: the browser got *something* back (CORS
-        // block, SSL mismatch, redirect) — the host IS reachable, just not
-        // cross-origin accessible. Mark as up with measured response time.
-        svc.status='up';
-        svc.responseTime=Math.round(performance.now()-t0);
+        // Fetch threw (CORS error, SSL issue, etc.) — use image probe to confirm
+        // whether the host is actually alive, with a tighter 4s window
+        try{
+          alive=await probeAlive(url, 4000);
+        }catch(_){
+          alive=false;
+        }
       }
     }
+    svc.status=alive?'up':'down';
+    svc.responseTime=alive?Math.round(performance.now()-t0):null;
     // Record history
     if(!statusHistory[svc.id])statusHistory[svc.id]=[];
     statusHistory[svc.id].push({s:svc.status,rt:svc.responseTime,ts:Date.now()});
