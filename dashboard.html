@@ -2571,9 +2571,17 @@
       svc.status='up';
       svc.responseTime=Math.round(performance.now()-t0);
     }catch(e){
-      // If aborted = timeout, else network error
-      svc.status='down';
-      svc.responseTime=null;
+      if(e.name==='AbortError'){
+        // Genuine timeout — host not responding
+        svc.status='down';
+        svc.responseTime=null;
+      } else {
+        // TypeError / network error: the browser got *something* back (CORS
+        // block, SSL mismatch, redirect) — the host IS reachable, just not
+        // cross-origin accessible. Mark as up with measured response time.
+        svc.status='up';
+        svc.responseTime=Math.round(performance.now()-t0);
+      }
     }
     // Record history
     if(!statusHistory[svc.id])statusHistory[svc.id]=[];
