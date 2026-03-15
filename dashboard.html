@@ -19,6 +19,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xterm/5.3.0/addon-fit.min.js"></script>
   <style>
     /* ═══════════ GOOGLE FONTS ═══════════ */
+    html { scroll-behavior: smooth; }
+
     @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap');
 
     /* ═══════════ THEMES ═══════════ */
@@ -34,7 +36,7 @@
       --warn: #e8960a;
       --ib: rgba(255,255,255,0.35); --ibr: rgba(255,255,255,0.6);
       --sw: 290px;
-      --icon-filter: brightness(0) saturate(100%) invert(38%) sepia(25%) saturate(600%) hue-rotate(165deg);
+      --icon-filter: brightness(0) saturate(100%) invert(30%) sepia(60%) saturate(500%) hue-rotate(161deg);
       --icon-white: brightness(0) invert(1);
       --refract: rgba(255,255,255,0.4);
       --shadow: rgba(0,60,120,0.18);
@@ -51,7 +53,7 @@
       --warn: #e8b040;
       --ib: rgba(255,255,255,0.06); --ibr: rgba(255,255,255,0.12);
       --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(62%) sepia(18%) saturate(350%) hue-rotate(182deg);
+      --icon-filter: brightness(0) saturate(100%) invert(60%) sepia(36%) saturate(152%) hue-rotate(173deg);
       --icon-white: brightness(0) invert(1);
       --refract: rgba(255,255,255,0.08);
       --shadow: rgba(0,0,0,0.5);
@@ -68,7 +70,7 @@
       --warn: #f0c090;
       --ib: rgba(255,255,255,0.05); --ibr: rgba(180,140,255,0.15);
       --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(63%) sepia(12%) saturate(250%) hue-rotate(218deg);
+      --icon-filter: brightness(0) saturate(100%) invert(67%) sepia(29%) saturate(120%) hue-rotate(204deg);
       --icon-white: brightness(0) invert(1);
       --refract: rgba(200,170,255,0.08);
       --shadow: rgba(0,0,0,0.55);
@@ -85,7 +87,7 @@
       --warn: #ebcb8b;
       --ib: rgba(255,255,255,0.06); --ibr: rgba(136,192,208,0.2);
       --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(70%) sepia(14%) saturate(280%) hue-rotate(178deg);
+      --icon-filter: brightness(0) saturate(100%) invert(71%) sepia(32%) saturate(133%) hue-rotate(168deg);
       --icon-white: brightness(0) invert(1);
       --refract: rgba(136,192,208,0.1);
       --shadow: rgba(0,0,0,0.45);
@@ -102,7 +104,7 @@
       --warn: #a07000;
       --ib: rgba(255,255,255,0.5); --ibr: rgba(200,190,160,0.7);
       --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(44%) sepia(22%) saturate(420%) hue-rotate(152deg);
+      --icon-filter: brightness(0) saturate(100%) invert(30%) sepia(40%) saturate(300%) hue-rotate(164deg);
       --icon-white: brightness(0) invert(1);
       --refract: rgba(255,255,255,0.45);
       --shadow: rgba(0,60,80,0.15);
@@ -119,7 +121,7 @@
       --warn: #d07000;
       --ib: rgba(255,255,255,0.42); --ibr: rgba(255,220,240,0.7);
       --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(38%) sepia(28%) saturate(520%) hue-rotate(288deg);
+      --icon-filter: brightness(0) saturate(100%) invert(30%) sepia(50%) saturate(400%) hue-rotate(300deg);
       --icon-white: brightness(0) invert(1);
       --refract: rgba(255,200,230,0.45);
       --shadow: rgba(80,0,40,0.15);
@@ -136,7 +138,7 @@
       --warn: #e8b040;
       --ib: rgba(255,255,255,0.06); --ibr: rgba(0,160,230,0.18);
       --sw: 290px;
-      --icon-filter: brightness(0) saturate(100%) invert(60%) sepia(20%) saturate(400%) hue-rotate(185deg);
+      --icon-filter: brightness(0) saturate(100%) invert(61%) sepia(59%) saturate(245%) hue-rotate(166deg);
       --icon-white: brightness(0) invert(1);
       --refract: rgba(0,200,255,0.1);
       --shadow: rgba(0,0,0,0.55);
@@ -154,7 +156,7 @@
       --warn: #f0c080;
       --ib: rgba(255,255,255,0.05); --ibr: rgba(255,140,200,0.18);
       --sw: 290px;
-      --icon-filter: brightness(0) saturate(100%) invert(60%) sepia(20%) saturate(400%) hue-rotate(285deg);
+      --icon-filter: brightness(0) saturate(100%) invert(63%) sepia(40%) saturate(168%) hue-rotate(286deg);
       --icon-white: brightness(0) invert(1);
       --refract: rgba(255,180,220,0.12);
       --shadow: rgba(80,0,60,0.55);
@@ -172,7 +174,7 @@
       --warn: #ffcc00;
       --ib: rgba(0,255,65,0.05); --ibr: rgba(0,255,65,0.15);
       --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(52%) sepia(65%) saturate(650%) hue-rotate(88deg);
+      --icon-filter: brightness(0) saturate(100%) invert(31%) sepia(100%) saturate(500%) hue-rotate(99deg);
       --icon-white: brightness(0) invert(1);
       --refract: rgba(0,255,65,0.08);
       --shadow: rgba(0,0,0,0.7);
@@ -189,7 +191,7 @@
       --warn: #f39c12;
       --ib: rgba(255,255,255,0.07); --ibr: rgba(255,255,255,0.12);
       --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(65%) sepia(12%) saturate(220%) hue-rotate(178deg);
+      --icon-filter: brightness(0) saturate(100%) invert(66%) sepia(21%) saturate(100%) hue-rotate(172deg);
       --icon-white: brightness(0) invert(1);
       --refract: rgba(255,255,255,0.06);
       --shadow: rgba(0,0,0,0.4);
@@ -206,7 +208,7 @@
       --warn: #d68910;
       --ib: rgba(255,255,255,0.6); --ibr: rgba(200,215,225,0.8);
       --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(42%) sepia(16%) saturate(320%) hue-rotate(168deg);
+      --icon-filter: brightness(0) saturate(100%) invert(32%) sepia(20%) saturate(200%) hue-rotate(174deg);
       --icon-white: brightness(0) invert(1);
       --refract: rgba(255,255,255,0.5);
       --shadow: rgba(0,30,60,0.12);
@@ -223,7 +225,7 @@
       --warn: #f0c090;
       --ib: rgba(255,255,255,0.05); --ibr: rgba(180,140,255,0.15);
       --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(63%) sepia(12%) saturate(250%) hue-rotate(218deg);
+      --icon-filter: brightness(0) saturate(100%) invert(67%) sepia(29%) saturate(120%) hue-rotate(204deg);
       --icon-white: brightness(0) invert(1);
       --refract: rgba(200,170,255,0.08);
       --shadow: rgba(0,0,0,0.55);
@@ -367,11 +369,18 @@
     }
 
     .search-wrap { position: relative; flex: 1; }
-    .search-wrap img,
-    .search-wrap svg {
-      position: absolute; left: 0.6rem; top: 50%; transform: translateY(-50%);
-      width: 13px; height: 13px; pointer-events: none;
-      stroke: var(--tm); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.7;
+    .search-icon {
+      position: absolute;
+      left: 0.6rem;
+      top: calc(50% - 1px);
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      pointer-events: none;
+      opacity: 0.65;
+      stroke: var(--tm);
+      fill: none;
+      overflow: visible;
     }
     .search-box {
       width: 100%; padding: 0.44rem 0.75rem 0.44rem 2rem;
@@ -927,7 +936,7 @@
     .hbtn img, .sb-icon-btn img, .toggle-btn img,
     .pact img, .panel-close img, .modal-close img,
     .tree-item .ti-icon img, .btn-s img, .btn-d img,
-    .btn-ok img, .search-wrap img {
+    .btn-ok img, .search-wrap img, .search-icon {
       filter: var(--icon-filter);
       transition: filter 0.25s ease;
     }
@@ -950,11 +959,177 @@
     .sb-icon-btn:hover img { filter: var(--icon-filter) brightness(1.3); }
     .pact:hover:not(.ssh-act) img { filter: var(--icon-filter) brightness(1.3); }
 
+
+    /* ════ SPARKLINE ════ */
+    .sparkline { display:flex; align-items:flex-end; gap:1.5px; height:16px; margin-top:3px; }
+    .spark-dot {
+      width:5px; border-radius:2px; flex-shrink:0;
+      transition: height 0.3s, background 0.3s;
+    }
+
+    /* ════ RESPONSE TIME ════ */
+    .card-rt { font-family:'DM Mono',monospace; font-size:0.6rem; color:var(--tm); opacity:0.7; margin-top:1px; }
+
+    /* ════ NOTES BADGE ════ */
+    .card-note-dot {
+      position:absolute; top:7px; right:22px; z-index:4;
+      width:7px; height:7px; border-radius:50%;
+      background:var(--warn); box-shadow:0 0 5px var(--warn);
+    }
+
+    /* ════ PIN STAR ════ */
+    .card-pin {
+      position:absolute; top:6px; right:6px; z-index:4;
+      font-size:0.75rem; line-height:1; cursor:pointer;
+      opacity:0.55; transition:opacity 0.15s, transform 0.15s;
+      background:none; border:none; color:var(--warn); padding:0;
+    }
+    .card-pin:hover { opacity:1; transform:scale(1.2); }
+    .card-pin.pinned { opacity:1; }
+    .pinned-section { margin-bottom:0.85rem; }
+    .pinned-label { font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--tm); margin-bottom:0.55rem; padding-left:2px; }
+
+    /* ════ COMPACT LIST VIEW ════ */
+    .grid.list-view { grid-template-columns:1fr !important; gap:0.4rem !important; }
+    .grid.list-view .card { display:flex; flex-direction:row; align-items:center; border-radius:13px; }
+    .grid.list-view .card-icon-area { width:52px; height:52px; flex-shrink:0; border-radius:0; padding:8px; }
+    .grid.list-view .card-icon-area::after { display:none; }
+    .grid.list-view .card-image { width:36px; height:36px; }
+    .grid.list-view .card-placeholder { width:52px; height:52px; flex-shrink:0; }
+    .grid.list-view .card-body { flex:1; padding:0.45rem 0.75rem; display:flex; align-items:center; gap:1rem; }
+    .grid.list-view .card-hd { margin-bottom:0; flex:1; }
+    .grid.list-view .card-ip { margin-top:0; }
+    .grid.list-view .sparkline { margin-top:0; }
+    .grid.list-view .card-rt { margin-top:0; }
+    .grid.list-view .card-ssh-badge { top:50%; transform:translateY(-50%); left:auto; right:8px; }
+    .grid.list-view .drag-handle { top:50%; transform:translateY(-50%); }
+
+    /* ════ ANIMATED STATUS DOT ════ */
+    @keyframes statusPulse { 0%,100%{box-shadow:0 0 0 0 var(--okg)} 50%{box-shadow:0 0 0 4px transparent} }
+    .dot.up { animation: statusPulse 3s ease-in-out infinite; }
+
+    /* ════ LOCKSCREEN ════ */
+    #lockscreen {
+      position:fixed; inset:0; z-index:9999;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      gap:1.5rem;
+      backdrop-filter:blur(40px) saturate(160%); -webkit-backdrop-filter:blur(40px) saturate(160%);
+      background: var(--glass);
+    }
+    #lockscreen.hidden { display:none; }
+    .lock-title { font-family:'Instrument Serif',serif; font-style:italic; font-size:1.6rem; color:var(--tp); letter-spacing:-0.02em; }
+    .lock-subtitle { font-size:0.82rem; color:var(--tm); margin-top:-0.75rem; }
+    .pin-dots { display:flex; gap:0.7rem; }
+    .pin-dot {
+      width:14px; height:14px; border-radius:50%;
+      border:2px solid var(--glass-b); background:transparent;
+      transition:background 0.15s, border-color 0.15s;
+    }
+    .pin-dot.filled { background:var(--ac); border-color:var(--ac); }
+    .pin-dot.err { background:var(--err); border-color:var(--err); }
+    .pin-pad {
+      display:grid; grid-template-columns:repeat(3,1fr); gap:0.55rem;
+      max-width:220px; width:100%;
+    }
+    .pin-key {
+      padding:0.85rem; border-radius:14px;
+      border:1px solid var(--glass-b); background:var(--glass);
+      backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
+      font-family:inherit; font-size:1.1rem; font-weight:600;
+      color:var(--tp); cursor:pointer; transition:all 0.15s;
+      text-align:center;
+    }
+    .pin-key:hover { background:var(--ag); border-color:var(--ac); transform:scale(1.05); }
+    .pin-key:active { transform:scale(0.95); }
+    .pin-key.wide { grid-column:span 2; }
+    .lock-err { font-size:0.8rem; color:var(--err); min-height:1.2em; }
+
+    /* ════ SNIPPETS SIDEBAR in SSH ════ */
+    .ssh-snippets-panel {
+      width:200px; flex-shrink:0; border-left:1px solid var(--glass-b);
+      display:flex; flex-direction:column; overflow:hidden;
+      background:var(--glass-inner);
+    }
+    .ssh-snippets-panel.hidden { display:none; }
+    .snip-hd { padding:0.45rem 0.65rem; border-bottom:1px solid var(--glass-b); font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--tm); display:flex; align-items:center; justify-content:space-between; }
+    .snip-list { flex:1; overflow-y:auto; padding:0.35rem; scrollbar-width:thin; scrollbar-color:var(--ag) transparent; }
+    .snip-item { padding:0.4rem 0.55rem; border-radius:8px; cursor:pointer; font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--tp); transition:background 0.15s; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border:1px solid transparent; }
+    .snip-item:hover { background:var(--ag); border-color:var(--ac); }
+    .snip-add-row { padding:0.35rem; border-top:1px solid var(--glass-b); display:flex; gap:0.3rem; }
+    .snip-input { flex:1; padding:0.3rem 0.45rem; background:var(--ib); border:1px solid var(--ibr); border-radius:7px; color:var(--tp); font-family:'DM Mono',monospace; font-size:0.7rem; }
+
+    /* ════ SSH FONT SIZE CONTROL ════ */
+    .ssh-font-ctrl { display:flex; align-items:center; gap:0.3rem; }
+    .ssh-font-btn { width:22px; height:22px; border-radius:6px; border:1px solid var(--glass-b); background:var(--glass-inner); color:var(--tm); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; transition:all 0.15s; }
+    .ssh-font-btn:hover { background:var(--ag); border-color:var(--ac); color:var(--tp); }
+    .ssh-font-size { font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--tm); min-width:24px; text-align:center; }
+
+    /* ════ SPLIT PANE ════ */
+    .ssh-terminals.split { display:flex; }
+    .ssh-terminals.split .ssh-terminal-wrap.active { display:flex; flex:1; }
+    .ssh-terminals.split .ssh-terminal-wrap.active + .ssh-terminal-wrap.split-secondary { display:flex; flex:1; border-left:1px solid var(--glass-b); }
+    .ssh-split-divider { width:4px; background:var(--glass-b); cursor:col-resize; flex-shrink:0; transition:background 0.15s; }
+    .ssh-split-divider:hover { background:var(--ac); }
+
+    /* ════ NOTIFICATION BADGE ════ */
+    .notif-badge {
+      position:absolute; top:-3px; right:-3px;
+      width:8px; height:8px; border-radius:50%;
+      background:var(--err); border:1.5px solid var(--glass);
+    }
+
+    /* ════ COMPACT HEADER ════ */
+    body.compact-header header { padding:0.38rem 1.1rem; }
+    body.compact-header header .header-hint { display:none !important; }
+    body.compact-header .logo-text { font-size:1.1rem; }
+
+    /* ════ CLOCK ════ */
+    #headerClock {
+      font-family:'DM Mono',monospace; font-size:0.78rem;
+      color:var(--tm); padding:0.26rem 0.75rem;
+      background:var(--ib); border:1px solid var(--glass-b); border-radius:20px;
+      white-space:nowrap; letter-spacing:0.02em;
+    }
+
+    /* ════ NOTES MODAL ════ */
+    .notes-ta { width:100%; min-height:140px; resize:vertical; font-family:'DM Mono',monospace; font-size:0.82rem; }
+
+    /* ════ SETTINGS — APPEARANCE SECTION ════ */
+    .custom-css-ta { font-family:'DM Mono',monospace; font-size:0.72rem; min-height:120px; }
+
   </style>
 </head>
 <body data-theme="aero">
   <div id="bgLayer"></div>
   <div id="bgOverlay"></div>
+
+  <!-- ════════════ LOCKSCREEN ════════════ -->
+  <div id="lockscreen" class="hidden">
+    <div class="lock-title">KuruDash</div>
+    <div class="lock-subtitle" id="lockSubtitle">Enter PIN to unlock</div>
+    <div class="pin-dots" id="pinDots">
+      <div class="pin-dot" id="pd0"></div>
+      <div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div>
+      <div class="pin-dot" id="pd3"></div>
+    </div>
+    <div class="pin-pad">
+      <button class="pin-key" onclick="pinPress('1')">1</button>
+      <button class="pin-key" onclick="pinPress('2')">2</button>
+      <button class="pin-key" onclick="pinPress('3')">3</button>
+      <button class="pin-key" onclick="pinPress('4')">4</button>
+      <button class="pin-key" onclick="pinPress('5')">5</button>
+      <button class="pin-key" onclick="pinPress('6')">6</button>
+      <button class="pin-key" onclick="pinPress('7')">7</button>
+      <button class="pin-key" onclick="pinPress('8')">8</button>
+      <button class="pin-key" onclick="pinPress('9')">9</button>
+      <button class="pin-key" onclick="pinPress('back')" style="font-size:0.85rem">⌫</button>
+      <button class="pin-key" onclick="pinPress('0')">0</button>
+      <button class="pin-key" onclick="pinPress('clear')" style="font-size:0.78rem">Clear</button>
+    </div>
+    <div class="lock-err" id="lockErr"></div>
+  </div>
+
   <div class="sb-overlay" id="sbOverlay"></div>
   <div class="toast" id="toast"></div>
 
@@ -968,6 +1143,8 @@
       </div>
       <span class="header-hint">Click to select · Double-click to open · Right-click to edit</span>
       <div class="header-right">
+        <span id="headerClock" style="display:none">00:00</span>
+        <button class="hbtn" id="viewToggleBtn" title="Toggle list/grid view"><img src="icons/grid.png" style="width:15px;height:15px;opacity:0.85" alt="grid" onerror="this.onerror=null;this.style.display='none'"></button>
         <button class="hbtn" id="infoBtn" title="Privacy info"><img src="icons/shield-check.png" style="width:17px;height:17px;opacity:0.85" alt="shield-check" onerror="this.onerror=null;this.style.display='none'"></button>
         <button class="hbtn" id="sshPanelToggle" title="SSH Terminal" style="position:relative"><img src="icons/terminal.png" style="width:17px;height:17px;opacity:0.85" alt="terminal" onerror="this.onerror=null;this.style.display='none'">
           <span id="sshBadge" style="display:none;position:absolute;top:3px;right:3px;width:7px;height:7px;border-radius:50%;background:var(--ok);border:1.5px solid var(--glass)"></span>
@@ -981,7 +1158,7 @@
     <aside class="sidebar" id="sidebar">
       <div class="sb-header">
         <div class="search-wrap">
-          <img src="icons/search.png" style="position:absolute;left:0.6rem;top:50%;transform:translateY(-50%);width:14px;height:14px;opacity:0.85;pointer-events:none" alt="search" onerror="this.onerror=null;this.style.display='none'">
+          <img src="icons/search.png" class="search-icon" style="width:14px;height:14px;opacity:0.65;" alt="search" onerror="this.onerror=null;this.style.display='none'">
           <input type="text" class="search-box" id="searchBox" placeholder="Search…">
         </div>
         <button class="sb-icon-btn" id="addFolderBtn" title="New folder"><img src="icons/folder-plus.png" style="width:16px;height:16px;opacity:0.85" alt="folder-plus" onerror="this.onerror=null;this.style.display='none'"></button>
@@ -1030,6 +1207,15 @@
       <div class="ssh-tabs" id="sshTabs">
         <span style="font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--tm);padding:0 0.5rem">No sessions</span>
       </div>
+      <div class="ssh-font-ctrl">
+        <button class="ssh-font-btn" id="sshFontDec" title="Decrease font size">−</button>
+        <span class="ssh-font-size" id="sshFontSizeLabel">13</span>
+        <button class="ssh-font-btn" id="sshFontInc" title="Increase font size">+</button>
+      </div>
+      <button class="ssh-action-btn" id="sshSnippetsBtn" title="Command snippets" style="font-size:0.65rem;font-weight:700;letter-spacing:0.05em;font-family:'DM Mono',monospace">⌘</button>
+      <button class="ssh-action-btn" id="sshSplitBtn" title="Split pane">
+        <svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+      </button>
       <div class="ssh-panel-actions">
         <button class="ssh-action-btn" id="sshNewBtn" title="New session"><img src="icons/plus.png" style="width:12px;height:12px;opacity:0.85" alt="plus" onerror="this.onerror=null;this.style.display='none'"></button>
         <button class="ssh-action-btn" id="sshExpandBtn" title="Toggle expand">
@@ -1040,7 +1226,20 @@
         </button>
       </div>
     </div>
-    <div class="ssh-terminals" id="sshTerminals"></div>
+    <div style="display:flex;flex:1;min-height:0;overflow:hidden">
+      <div class="ssh-terminals" id="sshTerminals"></div>
+      <div class="ssh-snippets-panel hidden" id="sshSnippetsPanel">
+        <div class="snip-hd">
+          <span>Snippets</span>
+          <button onclick="document.getElementById('sshSnippetsPanel').classList.add('hidden')" style="background:none;border:none;color:var(--tm);cursor:pointer;font-size:0.8rem;line-height:1">✕</button>
+        </div>
+        <div class="snip-list" id="snippetList"></div>
+        <div class="snip-add-row">
+          <input class="snip-input" id="snippetInput" placeholder="New command…">
+          <button class="ssh-font-btn" onclick="addSnippet()" title="Add">+</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ════════════ FOLDER MODAL ════════════ -->
@@ -1224,6 +1423,11 @@
               <span id="bgOpacityLabel">40%</span>
             </div>
             <div class="slider-row">
+              <label>Image blur</label>
+              <input type="range" id="bgImageBlur" min="0" max="20" value="0" oninput="updateBgImageBlur()">
+              <span id="bgImageBlurLabel">0px</span>
+            </div>
+            <div class="slider-row">
               <label>Panel blur</label>
               <input type="range" id="bgBlurLevel" min="4" max="48" value="28" oninput="updateCardBlur()">
               <span id="bgBlurLabel">28px</span>
@@ -1246,6 +1450,56 @@
           <div class="toggle-row">
             <div><label>Lightweight mode</label><small>Disables blur &amp; backdrop-filter for low-spec devices. Glass surfaces become solid.</small></div>
             <div class="sw" id="perfModeSw" onclick="togglePerfMode()"><div class="sw-knob"></div></div>
+          </div>
+        </div>
+
+        <!-- ══ APPEARANCE ══ -->
+        <div class="ss">
+          <div class="ss-title">Appearance</div>
+          <div class="toggle-row">
+            <div><label>Clock in header</label><small>Shows current time next to the logo.</small></div>
+            <div class="sw" id="clockSw" onclick="toggleClock()"><div class="sw-knob"></div></div>
+          </div>
+          <div class="toggle-row">
+            <div><label>Compact header</label><small>Reduces header height, hides hint text.</small></div>
+            <div class="sw" id="compactSw" onclick="toggleCompactHeader()"><div class="sw-knob"></div></div>
+          </div>
+          <div class="toggle-row">
+            <div><label>Desktop notifications</label><small>Notify when a service goes down.</small></div>
+            <div class="sw" id="notifSw" onclick="toggleNotifications()"><div class="sw-knob"></div></div>
+          </div>
+        </div>
+
+        <!-- ══ LOCK SCREEN ══ -->
+        <div class="ss">
+          <div class="ss-title">Lock Screen</div>
+          <div class="toggle-row" style="margin-bottom:0.65rem">
+            <div><label>Enable lock screen</label><small>Requires a 4-digit PIN to view the dashboard.</small></div>
+            <div class="sw" id="lockSw" onclick="toggleLock()"><div class="sw-knob"></div></div>
+          </div>
+          <div id="pinSetupArea" style="display:none">
+            <div class="fg">
+              <label>Set PIN (4 digits)</label>
+              <input type="password" id="pinInput" maxlength="4" pattern="[0-9]{4}" placeholder="••••" inputmode="numeric" style="letter-spacing:0.3em;font-size:1.1rem;text-align:center;max-width:120px">
+              <small>Numbers only. Stored locally, never sent anywhere.</small>
+            </div>
+            <div style="display:flex;gap:0.45rem;flex-wrap:wrap">
+              <button class="btn btn-p" onclick="savePin()">Save PIN</button>
+              <button class="btn btn-d" onclick="clearPin()">Remove PIN</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══ ADVANCED ══ -->
+        <div class="ss">
+          <div class="ss-title">Advanced</div>
+          <div class="fg">
+            <label>Custom CSS</label>
+            <textarea class="custom-css-ta" id="customCssArea" placeholder="/* your custom CSS here */"></textarea>
+          </div>
+          <div style="display:flex;gap:0.45rem">
+            <button class="btn btn-p" onclick="applyCustomCss()">Apply CSS</button>
+            <button class="btn btn-s" onclick="clearCustomCss()">Clear</button>
           </div>
         </div>
 
@@ -1279,6 +1533,25 @@
     </div>
   </div>
 
+
+  <!-- ════════════ NOTES MODAL ════════════ -->
+  <div class="overlay" id="notesOverlay">
+    <div class="modal" style="max-width:460px">
+      <div class="modal-hd">
+        <h2 id="notesTitle">Notes</h2>
+        <button class="modal-close" id="notesClose"><img src="icons/x.png" style="width:18px;height:18px;opacity:0.85" alt="x" onerror="this.onerror=null;this.style.display='none'"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="notesServiceId">
+        <textarea class="notes-ta fg" id="notesText" placeholder="Add notes about this service…"></textarea>
+      </div>
+      <div class="modal-ft">
+        <button class="btn btn-s" id="notesCancelBtn">Cancel</button>
+        <button class="btn btn-p" id="notesSaveBtn">Save Notes</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ════════════ CREDITS ════════════ -->
   <button id="creditsBtn" style="position:fixed;bottom:1rem;right:1rem;z-index:60;padding:0.42rem 0.95rem;background:var(--glass);border:1px solid var(--glass-b);border-radius:20px;color:var(--tm);font-family:inherit;font-size:0.75rem;font-weight:600;letter-spacing:0.04em;cursor:pointer;backdrop-filter:blur(12px);transition:all 0.18s" onmouseover="this.style.color='var(--tp)';this.style.borderColor='var(--ac)'" onmouseout="this.style.color='var(--tm)';this.style.borderColor='var(--glass-b)'">Credits</button>
 
@@ -1309,6 +1582,78 @@
 
   <script>
   // ═══════════════════════════════════
+  // ICON FLAG — set to true to use built-in SVG icons instead of icons/*.png
+  // Flip this to true while waiting for custom icons to be ready.
+  // Works for ALL icons including ones created dynamically by JS.
+  // ═══════════════════════════════════
+  const USE_SVG_ICONS = true;
+
+  const _SVGS = {
+    'shield-check': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>',
+    'terminal':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>',
+    'settings':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+    'moon':         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>',
+    'sun':          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>',
+    'search':       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>',
+    'folder-plus':  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg>',
+    'panel-left':   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>',
+    'plus':         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+    'x':            '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+    'check':        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+    'server':       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>',
+    'folder':       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
+    'grid':         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>',
+    'chevron-down': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>',
+    'globe':        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+    'copy':         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+    'refresh':      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>',
+    'trash':        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
+    'download':     '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
+    'upload':       '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>',
+  };
+
+  // icon(name, size, extraStyle, id) — call from anywhere, static HTML or JS template literals.
+  // Returns <img> tag when USE_SVG_ICONS=false, inline SVG span when true.
+  function icon(name, size, extraStyle, id) {
+    size = size || '16px';
+    const idAttr = id ? ` id="${id}"` : '';
+    if (!USE_SVG_ICONS) {
+      const oe = `this.onerror=null;this.style.display='none'`;
+      return `<img src="icons/${name}.png" style="width:${size};height:${size};opacity:0.85;${extraStyle||''}" alt="${name}"${idAttr} onerror="${oe}">`;
+    }
+    const svg = _SVGS[name] || _SVGS['server'];
+    return `<span${idAttr} style="display:inline-flex;align-items:center;justify-content:center;width:${size};height:${size};flex-shrink:0;${extraStyle||''}">${svg.replace('<svg ', `<svg style="width:${size};height:${size}" `)}</span>`;
+  }
+
+  // On page load, also replace any static HTML img[src^="icons/"] tags
+  // (for the ones hardcoded in HTML that can't use the icon() helper)
+  (function(){
+    if (!USE_SVG_ICONS) return;
+    document.querySelectorAll('img[src^="icons/"]').forEach(img => {
+      const name = img.getAttribute('src').split('/').pop().replace('.png','');
+      if (name === 'rei' || name === 'credits-avatar') return; // keep custom images
+      const w = img.style.width || '16px';
+      const h = img.style.height || '16px';
+      const svg = _SVGS[name];
+      if (!svg) { img.style.display='none'; return; }
+      let el;
+      if (img.closest('.search-wrap')) {
+        // Insert the SVG directly as the replacement — class handles all positioning
+        const tmp = document.createElement('div');
+        tmp.innerHTML = svg.replace('<svg ', '<svg class="search-icon" ');
+        el = tmp.firstElementChild;
+      } else {
+        el = document.createElement('span');
+        el.style.cssText = `display:inline-flex;align-items:center;justify-content:center;width:${w};height:${h};flex-shrink:0;`;
+        el.innerHTML = svg.replace('<svg ', `<svg style="width:${w};height:${h}" `);
+      }
+      const span = el;
+      if (img.id) { span.id = img.id; img.removeAttribute('id'); }
+      img.replaceWith(span);
+    });
+  })();
+
+  // ═══════════════════════════════════
   // STORAGE
   // ═══════════════════════════════════
   const TREE_KEY    = 'kurudash-tree';
@@ -1316,6 +1661,13 @@
   const THEME_KEY   = 'kurudash-theme';
   const CUSTOM_KEY  = 'kurudash-custom-theme';
   const LEGACY_KEY  = 'kurudash-data';
+  const NOTES_KEY   = 'kurudash-notes';
+  const SNIPPETS_KEY= 'kurudash-snippets';
+  const PINS_KEY    = 'kurudash-pinned';
+  const LOCK_KEY    = 'kurudash-lock-pin';
+  const UI_KEY      = 'kurudash-ui';
+  const CSS_KEY     = 'kurudash-custom-css';
+  const SSH_FONT_KEY= 'kurudash-ssh-font';
 
   // migrate legacy
   (function(){
@@ -1336,6 +1688,10 @@
   let selectedFolderId = null;
   let searchQ = '';
   let selectedId = null;
+  let viewMode = 'grid'; // 'grid' or 'list'
+  let pinnedIds = new Set(JSON.parse(localStorage.getItem(PINS_KEY)||'[]'));
+  let notesMap = JSON.parse(localStorage.getItem(NOTES_KEY)||'{}');
+  let statusHistory = {}; // id -> [{status,rt,ts}] last 10
 
   // ═══════════════════════════════════
   // THEMES
@@ -1373,6 +1729,8 @@
     document.getElementById('sunIcon').style.display  = isDark ? 'block' : 'none';
     if (id === 'custom' && cd) applyCustomVars(cd);
     renderThemeGrid();
+    // Re-adjust icon filter if background is active
+    if (localStorage.getItem(BG_TYPE_KEY)) updateIconFilterForBg();
   }
 
   function applyCustomVars(d) {
@@ -1684,15 +2042,32 @@
   // ═══════════════════════════════════
   async function checkStatus(svc){
     const url=normalizeUrl(svc.statusUrl||svc.controlUrl||svc.ip);
+    const prevStatus = svc.status;
     svc.status='checking';render();
     if(!url){svc.status='unknown';render();return;}
+    const t0=Date.now();
     try{
       const ctrl=new AbortController();
       const tid=setTimeout(()=>ctrl.abort(),5000);
       await fetch(url,{mode:'no-cors',signal:ctrl.signal});
       clearTimeout(tid);
       svc.status='up';
-    }catch{svc.status='down';}
+      svc.responseTime=Date.now()-t0;
+    }catch{
+      svc.status='down';
+      svc.responseTime=null;
+    }
+    // Record history
+    if(!statusHistory[svc.id])statusHistory[svc.id]=[];
+    statusHistory[svc.id].push({s:svc.status,rt:svc.responseTime,ts:Date.now()});
+    if(statusHistory[svc.id].length>10)statusHistory[svc.id].shift();
+    // Desktop notification on down
+    if(svc.status==='down'&&prevStatus==='up'){
+      const uiOpts=JSON.parse(localStorage.getItem(UI_KEY)||'{}');
+      if(uiOpts.notifications&&Notification.permission==='granted'){
+        new Notification('KuruDash — Service Down',{body:`${svc.name} (${svc.ip}) is not responding.`,icon:'icons/rei.png'});
+      }
+    }
     render();
   }
 
@@ -1710,15 +2085,15 @@
         if(n.type==='service') return `<div class="tree-node" data-id="${n.id}" data-type="service">
           <div class="tree-item${selectedId===n.id?' selected':''}">
             <span class="expand" style="visibility:hidden"></span>
-            <span class="ti-icon"><img src="icons/server.png" style="width:14px;height:14px;opacity:0.6" alt="server" onerror="this.onerror=null;this.style.display='none'"></span>
+            <span class="ti-icon">${icon('server','14px')}</span>
             <span class="tree-label">${eH(n.name)}</span>
           </div></div>`;
         const isC=collapsedIds.has(n.id);
         if(!(n.children||[]).some(matches)&&searchQ)return'';
         return`<div class="tree-node" data-id="${n.id}" data-type="folder">
           <div class="tree-item${selectedFolderId===n.id?' selected':''}">
-            <span class="expand${isC?' collapsed':''}"><img src="icons/chevron-down.png" style="width:12px;height:12px;opacity:0.7" alt="expand" onerror="this.onerror=null;this.style.display='none'"></span>
-            <span class="ti-icon"><img src="icons/folder.png" style="width:14px;height:14px;opacity:0.7" alt="folder" onerror="this.onerror=null;this.style.display='none'"></span>
+            <span class="expand${isC?' collapsed':''}">${icon('chevron-down','12px')}</span>
+            <span class="ti-icon">${icon('folder','14px')}</span>
             <span class="tree-label">${eH(n.name)}</span>
           </div>
           <div class="tree-children" style="display:${isC?'none':'block'}">${renderNodes(n.children||[])}</div>
@@ -1729,7 +2104,7 @@
     document.getElementById('tree').innerHTML=`<div class="tree-node" data-id="root" data-type="root">
       <div class="tree-item${!selectedFolderId?' selected':''}">
         <span class="expand" style="visibility:hidden"></span>
-        <span class="ti-icon"><img src="icons/grid.png" style="width:14px;height:14px;opacity:0.7" alt="grid" onerror="this.onerror=null;this.style.display='none'"></span>
+        <span class="ti-icon">${icon('grid','14px')}</span>
         <span class="tree-label">All Services</span>
       </div>
       <div class="tree-children">${renderNodes(tree)}</div>
@@ -1785,29 +2160,72 @@
     if(!filtered.length){grid.innerHTML='';empty.style.display='block';return;}
     empty.style.display='none';
 
-    grid.innerHTML=filtered.map(s=>{
+    // Split pinned vs rest
+    const pinnedSvcs = filtered.filter(s=>pinnedIds.has(s.id));
+    const normalSvcs = filtered.filter(s=>!pinnedIds.has(s.id));
+
+    function buildCard(s){
       const imgSrc=resolveIcon(s.image);
       const img=imgSrc
         ?`<div class="card-icon-area"><img class="card-image" src="${eA(imgSrc)}" alt="" onerror="this.parentElement.outerHTML='<div class=\\'card-placeholder\\'><svg viewBox=\\'0 0 24 24\\' style=\\'width:28px;height:28px;stroke:var(--tm);fill:none;stroke-width:1.5;opacity:0.45\\'><rect x=\\'2\\' y=\\'2\\' width=\\'20\\' height=\\'8\\' rx=\\'2\\'/><rect x=\\'2\\' y=\\'14\\' width=\\'20\\' height=\\'8\\' rx=\\'2\\'/></svg></div>'"></div>`
-        :`<div class="card-placeholder"><img src="icons/server.png" style="width:28px;height:28px;opacity:0.4" alt="server" onerror="this.onerror=null;this.style.display='none'"></div>`;
+        :`<div class="card-placeholder">${icon('server','28px','opacity:0.4')}</div>`;
       const sshBadge=s.connectionType==='ssh'?`<span class="card-ssh-badge">SSH</span>`:'';
+      const isPinned=pinnedIds.has(s.id);
+      const hasNote=!!(notesMap[s.id]&&notesMap[s.id].trim());
+      // Sparkline
+      const hist=statusHistory[s.id]||[];
+      const sparkHtml=hist.length?`<div class="sparkline">${hist.map(h=>{
+        const col=h.s==='up'?'var(--ok)':h.s==='down'?'var(--err)':'var(--warn)';
+        const maxRt=Math.max(...hist.filter(x=>x.rt).map(x=>x.rt),1);
+        const ht=h.rt?Math.max(3,Math.round((h.rt/maxRt)*14)):4;
+        return`<div class="spark-dot" style="height:${ht}px;background:${col}"></div>`;
+      }).join('')}</div>`:'';
+      // Response time
+      const rtHtml=s.responseTime?`<div class="card-rt">${s.responseTime}ms</div>`:'';
       return`<div class="card${selectedId===s.id?' selected':''}" data-id="${s.id}" draggable="true">
         <div class="drag-handle"><span></span><span></span><span></span></div>
         ${sshBadge}
+        ${hasNote?'<span class="card-note-dot"></span>':''}
+        <button class="card-pin${isPinned?' pinned':''}" data-pin="${s.id}" title="${isPinned?'Unpin':'Pin'}">★</button>
         ${img}
         <div class="card-body">
           <div class="card-hd"><span class="dot ${s.status}"></span><span class="card-name">${eH(s.name)}</span></div>
           <div class="card-ip">${eH(s.ip)}</div>
+          ${sparkHtml}${rtHtml}
         </div>
       </div>`;
-    }).join('');
+    }
+
+    let gridHtml='';
+    if(pinnedSvcs.length){
+      gridHtml+=`<div class="pinned-section"><div class="pinned-label">Pinned</div><div class="grid${viewMode==='list'?' list-view':''}" style="margin-bottom:0.85rem">${pinnedSvcs.map(buildCard).join('')}</div></div>`;
+    }
+    if(normalSvcs.length||!pinnedSvcs.length){
+      grid.innerHTML=gridHtml+`${normalSvcs.map(buildCard).join('')}`;
+    } else {
+      grid.innerHTML=gridHtml;
+    }
+    // Apply list view class
+    document.getElementById('grid').className='grid'+(viewMode==='list'?' list-view':'');
 
     initDnD();
 
-    grid.querySelectorAll('.card').forEach(card=>{
+    document.querySelectorAll('[data-pin]').forEach(btn=>{
+      btn.addEventListener('click',e=>{
+        e.stopPropagation();
+        const id=btn.dataset.pin;
+        if(pinnedIds.has(id)){pinnedIds.delete(id);}else{pinnedIds.add(id);}
+        localStorage.setItem(PINS_KEY,JSON.stringify([...pinnedIds]));
+        render();
+      });
+    });
+    document.querySelectorAll('.card').forEach(card=>{
       const id=card.dataset.id;
       const s=allNodes().find(x=>x.type==='service'&&x.id===id);
-      card.addEventListener('click',ev=>{if(ev.detail===2)openConn(s);else selectService(id);});
+      card.addEventListener('click',ev=>{
+        if(ev.target.closest('[data-pin]'))return;
+        if(ev.detail===2)openConn(s);else selectService(id);
+      });
       card.addEventListener('contextmenu',ev=>{ev.preventDefault();openServiceModal(id);showProperties(id);});
     });
   }
@@ -1856,19 +2274,25 @@
       <div class="panel-row"><div class="panel-label">Connection</div><div class="panel-val">${connLabel}</div></div>
       ${s.controlUrl?`<div class="panel-row"><div class="panel-label">URL</div><div class="panel-val panel-mono" style="font-size:0.75rem;word-break:break-all">${eH(s.controlUrl)}</div></div>`:''}
       ${s.connectionType==='ssh'?`<div class="panel-row"><div class="panel-label">SSH</div><div class="panel-val panel-mono">${eH(s.sshUser)}@${eH(s.ip)}:${s.sshPort||22}</div></div>`:''}
-      <div class="panel-row"><button class="pact" onclick="openServiceModal('${s.id}')"><img src="icons/settings.png" style="width:15px;height:15px;opacity:0.8" alt="edit" onerror="this.onerror=null;this.style.display='none'"> Edit Service</button></div>`;
+      <div class="panel-row"><button class="pact" onclick="openServiceModal('${s.id}')">${icon('settings','15px','opacity:0.8')} Edit Service</button></div>`;
 
     let html='';
     if(s.connectionType==='web'&&s.controlUrl)
-      html+=`<button class="pact" data-action="open"><img src="icons/globe.png" style="width:15px;height:15px;opacity:0.8" alt="globe" onerror="this.onerror=null;this.style.display='none'"> Open Webpage</button>`;
+      html+=`<button class="pact" data-action="open">${icon('globe','15px','opacity:0.8')} Open Webpage</button>`;
 
     if(s.connectionType==='ssh'){
-      html+=`<button class="pact ssh-act" data-action="open-ssh-term"><img src="icons/terminal.png" style="width:15px;height:15px;opacity:0.8" alt="terminal" onerror="this.onerror=null;this.style.display='none'"> Open SSH Terminal</button>`;
-      html+=`<button class="pact" data-action="copy-ssh"><img src="icons/copy.png" style="width:15px;height:15px;opacity:0.8" alt="copy" onerror="this.onerror=null;this.style.display='none'"> Copy SSH Command</button>`;
+      html+=`<button class="pact ssh-act" data-action="open-ssh-term">${icon('terminal','15px','opacity:0.8')} Open SSH Terminal</button>`;
+      html+=`<button class="pact" data-action="copy-ssh">${icon('copy','15px','opacity:0.8')} Copy SSH Command</button>`;
     }
 
-    html+=`<button class="pact" data-action="refresh"><img src="icons/refresh.png" style="width:15px;height:15px;opacity:0.8" alt="refresh" onerror="this.onerror=null;this.style.display='none'"> Check Status</button>`;
-    html+=`<button class="pact btn-d" data-action="delete" style="margin-top:0.25rem;background:rgba(231,76,60,0.08);border-color:rgba(231,76,60,0.28);color:var(--err)"><img src="icons/trash.png" style="width:15px;height:15px;opacity:0.8" alt="trash" onerror="this.onerror=null;this.style.display='none'"> Delete</button>`;
+    html+=`<button class="pact" data-action="refresh">${icon('refresh','15px','opacity:0.8')} Check Status</button>`;
+    html+=`<button class="pact" data-action="notes"><svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> ${notesMap[s.id]?'Edit Notes ●':'Add Notes'}</button>`;
+    html+=`<div style="display:flex;gap:0.45rem;margin-top:0.25rem">
+      <button class="pact" data-action="override-up" style="flex:1;font-size:0.78rem;padding:0.55rem">Force Up</button>
+      <button class="pact" data-action="override-down" style="flex:1;font-size:0.78rem;padding:0.55rem">Force Down</button>
+      <button class="pact" data-action="override-clear" style="flex:1;font-size:0.78rem;padding:0.55rem">Auto</button>
+    </div>`;
+    html+=`<button class="pact btn-d" data-action="delete" style="margin-top:0.25rem;background:rgba(231,76,60,0.08);border-color:rgba(231,76,60,0.28);color:var(--err)">${icon('trash','15px','opacity:0.8')} Delete</button>`;
 
     document.getElementById('panelActs').innerHTML=html;
     document.getElementById('panelActs').querySelectorAll('[data-action]').forEach(btn=>{
@@ -1878,6 +2302,10 @@
           case 'open-ssh-term': openSshSession(s); break;
           case 'copy-ssh': navigator.clipboard.writeText(`ssh ${s.sshUser||'root'}@${s.ip} -p ${s.sshPort||22}`).then(()=>toast('📋 SSH command copied','ok')); break;
           case 'refresh': checkStatus(s); break;
+          case 'notes':   openNotesModal(s.id); break;
+          case 'override-up':   s.status='up';   s.manualOverride=true; render(); break;
+          case 'override-down': s.status='down'; s.manualOverride=true; render(); break;
+          case 'override-clear': s.status='unknown'; s.manualOverride=false; checkStatus(s); break;
           case 'delete':
             if(confirm('Delete this service?')){
               removeFromTree(s.id);saveTree();renderTree();render();
@@ -2367,9 +2795,24 @@
     // Apply blur & card opacity
     const blur = opts.blur !== undefined ? opts.blur : 28;
     const cardOp = opts.cardOpacity !== undefined ? opts.cardOpacity : 22;
+    const bgBlur = opts.bgBlur !== undefined ? opts.bgBlur : 0;
     document.documentElement.style.setProperty('--card-blur', `blur(${blur}px) saturate(160%)`);
-    document.documentElement.style.setProperty('--card-glass', `rgba(255,255,255,${cardOp/100})`);
-    document.documentElement.style.setProperty('--panel-glass', `rgba(255,255,255,${Math.min(cardOp+4,60)/100})`);
+    // Use theme glass color tinted to the right opacity rather than flat white
+    const style = getComputedStyle(document.documentElement);
+    const themeGlass = style.getPropertyValue('--glass').trim() || 'rgba(255,255,255,0.15)';
+    // Parse the alpha from the theme glass and scale it by cardOp
+    const glassAlpha = (cardOp / 100) * 0.9;
+    const isDark = ['dark','mocha','nord','terminal','flat','custom','aero-dark','sakura-dark']
+      .includes(document.body.getAttribute('data-theme'));
+    const cardGlass = isDark
+      ? themeGlass.replace(/[\d.]+\)$/, glassAlpha + ')')
+      : `rgba(255,255,255,${glassAlpha})`;
+    document.documentElement.style.setProperty('--card-glass', cardGlass);
+    document.documentElement.style.setProperty('--panel-glass', cardGlass);
+    // Background image blur
+    layer.style.filter = bgBlur > 0 ? `blur(${bgBlur}px)` : '';
+    layer.style.transform = bgBlur > 0 ? 'scale(1.05)' : ''; // prevent blur edge artifacts
+    updateIconFilterForBg();
   }
 
   function toggleBgEnabled() {
@@ -2448,6 +2891,7 @@
     const opts = getBgOpts(); opts.overlayOpacity = parseInt(v); saveBgOpts(opts);
     const overlay = document.getElementById('bgOverlay');
     overlay.style.background = `rgba(0,0,0,${v/100})`;
+    updateIconFilterForBg();
   }
 
   function updateCardBlur() {
@@ -2461,8 +2905,67 @@
     const v = document.getElementById('bgCardOpacity').value;
     document.getElementById('bgCardLabel').textContent = v + '%';
     const opts = getBgOpts(); opts.cardOpacity = parseInt(v); saveBgOpts(opts);
-    document.documentElement.style.setProperty('--card-glass', `rgba(255,255,255,${v/100})`);
-    document.documentElement.style.setProperty('--panel-glass', `rgba(255,255,255,${Math.min(parseInt(v)+4,60)/100})`);
+    const glassAlpha = (parseInt(v) / 100) * 0.9;
+    const isDark = ['dark','mocha','nord','terminal','flat','custom','aero-dark','sakura-dark']
+      .includes(document.body.getAttribute('data-theme'));
+    const themeGlass = getComputedStyle(document.documentElement).getPropertyValue('--glass').trim();
+    const cardGlass = isDark
+      ? themeGlass.replace(/[\d.]+\)$/, glassAlpha + ')')
+      : `rgba(255,255,255,${glassAlpha})`;
+    document.documentElement.style.setProperty('--card-glass', cardGlass);
+    document.documentElement.style.setProperty('--panel-glass', cardGlass);
+  }
+
+  function updateBgImageBlur() {
+    const v = document.getElementById('bgImageBlur').value;
+    document.getElementById('bgImageBlurLabel').textContent = v + 'px';
+    const opts = getBgOpts(); opts.bgBlur = parseInt(v); saveBgOpts(opts);
+    const layer = document.getElementById('bgLayer');
+    layer.style.filter = parseInt(v) > 0 ? `blur(${v}px)` : '';
+    layer.style.transform = parseInt(v) > 0 ? 'scale(1.05)' : '';
+  }
+
+
+  // ═══════════════════════════════════
+  // ICON FILTER — adjust for background
+  // ═══════════════════════════════════
+  function updateIconFilterForBg() {
+    const type = localStorage.getItem(BG_TYPE_KEY);
+    const opts = getBgOpts();
+    const overlay = opts.overlayOpacity !== undefined ? opts.overlayOpacity : 40;
+
+    if (!type) {
+      // No background — remove any override, let theme CSS take over
+      document.documentElement.style.removeProperty('--icon-filter');
+      return;
+    }
+
+    // Background is on — the dark overlay means the surface is darker
+    // so icons need to be brighter (higher invert %) to stay visible
+    // brightness boost: overlay 0% = no change, overlay 85% = significant boost
+    const boost = 1 + (overlay / 100) * 0.7;
+
+    // Get the theme's native icon filter from computed style
+    // We stored it as a CSS var on :root — read it from the stylesheet instead
+    const theme = document.body.getAttribute('data-theme') || 'aero';
+    const themeFilters = {
+      'aero':        'brightness(0) saturate(100%) invert(30%) sepia(60%) saturate(500%) hue-rotate(161deg)',
+      'aero-dark':   'brightness(0) saturate(100%) invert(61%) sepia(59%) saturate(245%) hue-rotate(166deg)',
+      'dark':        'brightness(0) saturate(100%) invert(60%) sepia(36%) saturate(152%) hue-rotate(173deg)',
+      'mocha':       'brightness(0) saturate(100%) invert(67%) sepia(29%) saturate(120%) hue-rotate(204deg)',
+      'nord':        'brightness(0) saturate(100%) invert(71%) sepia(32%) saturate(133%) hue-rotate(168deg)',
+      'solarized':   'brightness(0) saturate(100%) invert(30%) sepia(40%) saturate(300%) hue-rotate(164deg)',
+      'sakura':      'brightness(0) saturate(100%) invert(30%) sepia(50%) saturate(400%) hue-rotate(300deg)',
+      'sakura-dark': 'brightness(0) saturate(100%) invert(63%) sepia(40%) saturate(168%) hue-rotate(286deg)',
+      'terminal':    'brightness(0) saturate(100%) invert(31%) sepia(100%) saturate(500%) hue-rotate(99deg)',
+      'flat':        'brightness(0) saturate(100%) invert(66%) sepia(21%) saturate(100%) hue-rotate(172deg)',
+      'flat-light':  'brightness(0) saturate(100%) invert(32%) sepia(20%) saturate(200%) hue-rotate(174deg)',
+      'custom':      'brightness(0) saturate(100%) invert(67%) sepia(29%) saturate(120%) hue-rotate(204deg)',
+    };
+    const base = themeFilters[theme] || themeFilters['dark'];
+    // Append a brightness boost at the end of the filter chain
+    const boosted = base + ` brightness(${boost.toFixed(2)})`;
+    document.documentElement.style.setProperty('--icon-filter', boosted);
   }
 
   function resetBg() {
@@ -2474,6 +2977,7 @@
     document.documentElement.style.removeProperty('--card-blur');
     document.documentElement.style.removeProperty('--card-glass');
     document.documentElement.style.removeProperty('--panel-glass');
+    document.documentElement.style.removeProperty('--icon-filter');
     applyBackground();
     toast('Background reset','ok');
   }
@@ -2545,6 +3049,10 @@
       document.getElementById('bgCardOpacity').value = opts.cardOpacity;
       document.getElementById('bgCardLabel').textContent = opts.cardOpacity + '%';
     }
+    if (opts.bgBlur !== undefined) {
+      document.getElementById('bgImageBlur').value = opts.bgBlur;
+      document.getElementById('bgImageBlurLabel').textContent = opts.bgBlur + 'px';
+    }
     // bg source tabs
     document.querySelectorAll('.bg-tab').forEach(t=>{
       t.addEventListener('click',()=>{
@@ -2581,12 +3089,368 @@
   });
 
 
+
+  // ═══════════════════════════════════
+  // VIEW TOGGLE (grid / list)
+  // ═══════════════════════════════════
+  document.getElementById('viewToggleBtn').addEventListener('click',()=>{
+    viewMode = viewMode==='grid'?'list':'grid';
+    const btn = document.getElementById('viewToggleBtn');
+    btn.classList.toggle('active', viewMode==='list');
+    render();
+  });
+
+  // ═══════════════════════════════════
+  // KEYBOARD SHORTCUTS
+  // ═══════════════════════════════════
+  document.addEventListener('keydown',e=>{
+    if(document.getElementById('lockscreen')&&!document.getElementById('lockscreen').classList.contains('hidden'))return;
+    const tag=(document.activeElement.tagName||'').toLowerCase();
+    if(tag==='input'||tag==='textarea'||tag==='select')return;
+    switch(e.key){
+      case 'a': case 'A': document.getElementById('addBtn').click(); break;
+      case 'f': case 'F': document.getElementById('searchBox').focus(); e.preventDefault(); break;
+      case 's': case 'S': document.getElementById('settingsBtn').click(); break;
+      case 't': case 'T': document.getElementById('sshPanelToggle').click(); break;
+      case 'v': case 'V': document.getElementById('viewToggleBtn').click(); break;
+      case 'Escape':
+        document.getElementById('panel').classList.remove('open');
+        document.querySelectorAll('.overlay.open').forEach(o=>o.classList.remove('open'));
+        break;
+    }
+  });
+
+  // ═══════════════════════════════════
+  // NOTES
+  // ═══════════════════════════════════
+  function openNotesModal(id){
+    const s=allNodes().find(x=>x.type==='service'&&x.id===id);
+    if(!s)return;
+    document.getElementById('notesTitle').textContent='Notes — '+s.name;
+    document.getElementById('notesServiceId').value=id;
+    document.getElementById('notesText').value=notesMap[id]||'';
+    document.getElementById('notesOverlay').classList.add('open');
+  }
+  document.getElementById('notesClose').addEventListener('click',()=>document.getElementById('notesOverlay').classList.remove('open'));
+  document.getElementById('notesCancelBtn').addEventListener('click',()=>document.getElementById('notesOverlay').classList.remove('open'));
+  document.getElementById('notesOverlay').addEventListener('click',e=>{if(e.target.id==='notesOverlay')document.getElementById('notesOverlay').classList.remove('open');});
+  document.getElementById('notesSaveBtn').addEventListener('click',()=>{
+    const id=document.getElementById('notesServiceId').value;
+    const txt=document.getElementById('notesText').value.trim();
+    if(txt){notesMap[id]=txt;}else{delete notesMap[id];}
+    localStorage.setItem(NOTES_KEY,JSON.stringify(notesMap));
+    document.getElementById('notesOverlay').classList.remove('open');
+    render();
+    toast('Notes saved','ok');
+  });
+
+  // ═══════════════════════════════════
+  // CLOCK
+  // ═══════════════════════════════════
+  let clockInterval=null;
+  function toggleClock(){
+    const sw=document.getElementById('clockSw');
+    const clock=document.getElementById('headerClock');
+    const uiOpts=JSON.parse(localStorage.getItem(UI_KEY)||'{}');
+    uiOpts.clock=!uiOpts.clock;
+    localStorage.setItem(UI_KEY,JSON.stringify(uiOpts));
+    sw.classList.toggle('on',uiOpts.clock);
+    clock.style.display=uiOpts.clock?'block':'none';
+    if(uiOpts.clock){
+      if(!clockInterval)clockInterval=setInterval(updateClock,1000);
+      updateClock();
+    } else {
+      clearInterval(clockInterval);clockInterval=null;
+    }
+  }
+  function updateClock(){
+    const now=new Date();
+    document.getElementById('headerClock').textContent=now.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+  }
+
+  // ═══════════════════════════════════
+  // COMPACT HEADER
+  // ═══════════════════════════════════
+  function toggleCompactHeader(){
+    const sw=document.getElementById('compactSw');
+    const on=document.body.classList.toggle('compact-header');
+    const uiOpts=JSON.parse(localStorage.getItem(UI_KEY)||'{}');
+    uiOpts.compact=on;
+    localStorage.setItem(UI_KEY,JSON.stringify(uiOpts));
+    sw.classList.toggle('on',on);
+  }
+
+  // ═══════════════════════════════════
+  // DESKTOP NOTIFICATIONS
+  // ═══════════════════════════════════
+  function toggleNotifications(){
+    const sw=document.getElementById('notifSw');
+    const uiOpts=JSON.parse(localStorage.getItem(UI_KEY)||'{}');
+    if(!uiOpts.notifications){
+      Notification.requestPermission().then(p=>{
+        if(p==='granted'){
+          uiOpts.notifications=true;
+          localStorage.setItem(UI_KEY,JSON.stringify(uiOpts));
+          sw.classList.add('on');
+          toast('Notifications enabled','ok');
+        } else {
+          toast('Permission denied by browser','err');
+        }
+      });
+    } else {
+      uiOpts.notifications=false;
+      localStorage.setItem(UI_KEY,JSON.stringify(uiOpts));
+      sw.classList.remove('on');
+      toast('Notifications disabled');
+    }
+  }
+
+  // ═══════════════════════════════════
+  // LOCK SCREEN
+  // ═══════════════════════════════════
+  const LOCK_PIN_KEY = 'kurudash-lock-pin';
+  let pinBuffer='';
+
+  function toggleLock(){
+    const sw=document.getElementById('lockSw');
+    const area=document.getElementById('pinSetupArea');
+    const hasPin=!!localStorage.getItem(LOCK_PIN_KEY);
+    if(hasPin){
+      sw.classList.add('on');area.style.display='block';
+    } else {
+      sw.classList.toggle('on');
+      area.style.display=sw.classList.contains('on')?'block':'none';
+    }
+  }
+
+  function savePin(){
+    const val=document.getElementById('pinInput').value.trim();
+    if(!/^[0-9]{4}$/.test(val)){toast('PIN must be exactly 4 digits','err');return;}
+    localStorage.setItem(LOCK_PIN_KEY,val);
+    document.getElementById('lockSw').classList.add('on');
+    document.getElementById('pinSetupArea').style.display='block';
+    toast('PIN saved','ok');
+  }
+
+  function clearPin(){
+    localStorage.removeItem(LOCK_PIN_KEY);
+    document.getElementById('pinInput').value='';
+    document.getElementById('lockSw').classList.remove('on');
+    document.getElementById('pinSetupArea').style.display='none';
+    toast('Lock screen disabled');
+  }
+
+  function showLockScreen(){
+    if(!localStorage.getItem(LOCK_PIN_KEY))return;
+    pinBuffer='';
+    updatePinDots();
+    document.getElementById('lockErr').textContent='';
+    document.getElementById('lockscreen').classList.remove('hidden');
+  }
+
+  function pinPress(key){
+    if(key==='back'){pinBuffer=pinBuffer.slice(0,-1);}
+    else if(key==='clear'){pinBuffer='';}
+    else if(pinBuffer.length<4){pinBuffer+=key;}
+    updatePinDots();
+    if(pinBuffer.length===4){
+      setTimeout(()=>{
+        const correct=localStorage.getItem(LOCK_PIN_KEY);
+        if(pinBuffer===correct){
+          document.getElementById('lockscreen').classList.add('hidden');
+          document.getElementById('lockErr').textContent='';
+          pinBuffer='';updatePinDots();
+        } else {
+          document.querySelectorAll('.pin-dot').forEach(d=>d.classList.add('err'));
+          document.getElementById('lockErr').textContent='Incorrect PIN';
+          setTimeout(()=>{
+            document.querySelectorAll('.pin-dot').forEach(d=>d.classList.remove('err'));
+            pinBuffer='';updatePinDots();
+            document.getElementById('lockErr').textContent='';
+          },700);
+        }
+      },120);
+    }
+  }
+
+  function updatePinDots(){
+    for(let i=0;i<4;i++){
+      const d=document.getElementById('pd'+i);
+      if(d){d.classList.toggle('filled',i<pinBuffer.length);d.classList.remove('err');}
+    }
+  }
+
+  // Auto-lock on visibility change
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden)return;
+    const uiOpts=JSON.parse(localStorage.getItem(UI_KEY)||'{}');
+    if(uiOpts.autoLock)showLockScreen();
+  });
+
+  // ═══════════════════════════════════
+  // SSH — FONT SIZE + SNIPPETS + SPLIT
+  // ═══════════════════════════════════
+  let sshFontSize=parseInt(localStorage.getItem(SSH_FONT_KEY)||'13');
+
+  function updateSshFontSize(delta){
+    sshFontSize=Math.max(9,Math.min(20,sshFontSize+delta));
+    localStorage.setItem(SSH_FONT_KEY,sshFontSize);
+    document.getElementById('sshFontSizeLabel').textContent=sshFontSize;
+    // Update all open terminals
+    Object.values(sshSessions).forEach(sess=>{
+      if(sess.term){sess.term.options.fontSize=sshFontSize;if(sess.fitAddon)try{sess.fitAddon.fit();}catch(_){}}
+    });
+  }
+  document.getElementById('sshFontDec').addEventListener('click',()=>updateSshFontSize(-1));
+  document.getElementById('sshFontInc').addEventListener('click',()=>updateSshFontSize(1));
+  document.getElementById('sshFontSizeLabel').textContent=sshFontSize;
+
+  // Snippets
+  let snippets=JSON.parse(localStorage.getItem(SNIPPETS_KEY)||'[]');
+  function renderSnippets(){
+    const list=document.getElementById('snippetList');
+    if(!list)return;
+    list.innerHTML=snippets.map((s,i)=>`<div class="snip-item" data-snip="${i}" title="${eH(s)}">${eH(s)}<span onclick="deleteSnippet(${i});event.stopPropagation()" style="float:right;color:var(--err);margin-left:4px;cursor:pointer;opacity:0.6">✕</span></div>`).join('');
+    list.querySelectorAll('[data-snip]').forEach(el=>{
+      el.addEventListener('click',e=>{
+        if(e.target.tagName==='SPAN')return;
+        const cmd=snippets[parseInt(el.dataset.snip)];
+        if(!cmd)return;
+        const sess=sshSessions[activeSshId];
+        if(sess&&sess.term){sess.term.paste(cmd);}
+        else{navigator.clipboard.writeText(cmd).then(()=>toast('Copied to clipboard','ok'));}
+      });
+    });
+  }
+  function addSnippet(){
+    const input=document.getElementById('snippetInput');
+    const val=input.value.trim();
+    if(!val)return;
+    snippets.push(val);
+    localStorage.setItem(SNIPPETS_KEY,JSON.stringify(snippets));
+    input.value='';
+    renderSnippets();
+    toast('Snippet saved','ok');
+  }
+  function deleteSnippet(i){
+    snippets.splice(i,1);
+    localStorage.setItem(SNIPPETS_KEY,JSON.stringify(snippets));
+    renderSnippets();
+  }
+  document.getElementById('sshSnippetsBtn').addEventListener('click',()=>{
+    const panel=document.getElementById('sshSnippetsPanel');
+    panel.classList.toggle('hidden');
+    if(!panel.classList.contains('hidden'))renderSnippets();
+  });
+
+  // Split pane
+  let splitMode=false;
+  let splitSecondaryId=null;
+  document.getElementById('sshSplitBtn').addEventListener('click',()=>{
+    const terms=document.getElementById('sshTerminals');
+    splitMode=!splitMode;
+    document.getElementById('sshSplitBtn').classList.toggle('active',splitMode);
+    if(!splitMode){
+      terms.classList.remove('split');
+      document.querySelectorAll('.ssh-terminal-wrap.split-secondary').forEach(w=>w.classList.remove('split-secondary'));
+    } else {
+      terms.classList.add('split');
+      // Show second most recent tab as secondary
+      const ids=Object.keys(sshSessions).filter(id=>id!==activeSshId);
+      if(ids.length){
+        splitSecondaryId=ids[ids.length-1];
+        const wrap=document.getElementById('term_'+splitSecondaryId);
+        if(wrap)wrap.classList.add('split-secondary');
+      }
+    }
+    Object.keys(sshSessions).forEach(id=>fitTerminal(id));
+  });
+
+  // Override getXtermTheme to use current font size
+  const _origBuildXterm=buildXtermSession;
+
+  // ═══════════════════════════════════
+  // CUSTOM CSS
+  // ═══════════════════════════════════
+  function applyCustomCss(){
+    const css=document.getElementById('customCssArea').value;
+    localStorage.setItem(CSS_KEY,css);
+    let el=document.getElementById('customCssEl');
+    if(!el){el=document.createElement('style');el.id='customCssEl';document.head.appendChild(el);}
+    el.textContent=css;
+    toast('Custom CSS applied','ok');
+  }
+  function clearCustomCss(){
+    localStorage.removeItem(CSS_KEY);
+    document.getElementById('customCssArea').value='';
+    const el=document.getElementById('customCssEl');
+    if(el)el.textContent='';
+    toast('Custom CSS cleared');
+  }
+
+  // ═══════════════════════════════════
+  // INIT UI PREFS
+  // ═══════════════════════════════════
+  function initUIPrefs(){
+    const uiOpts=JSON.parse(localStorage.getItem(UI_KEY)||'{}');
+    // Clock
+    if(uiOpts.clock){
+      document.getElementById('clockSw').classList.add('on');
+      document.getElementById('headerClock').style.display='block';
+      clockInterval=setInterval(updateClock,1000);
+      updateClock();
+    }
+    // Compact header
+    if(uiOpts.compact){
+      document.body.classList.add('compact-header');
+      document.getElementById('compactSw').classList.add('on');
+    }
+    // Notifications
+    if(uiOpts.notifications&&Notification.permission==='granted'){
+      document.getElementById('notifSw').classList.add('on');
+    }
+    // Lock
+    if(localStorage.getItem(LOCK_PIN_KEY)){
+      document.getElementById('lockSw').classList.add('on');
+      document.getElementById('pinSetupArea').style.display='block';
+      showLockScreen();
+    }
+    // Custom CSS
+    const savedCss=localStorage.getItem(CSS_KEY);
+    if(savedCss){
+      document.getElementById('customCssArea').value=savedCss;
+      let el=document.getElementById('customCssEl');
+      if(!el){el=document.createElement('style');el.id='customCssEl';document.head.appendChild(el);}
+      el.textContent=savedCss;
+    }
+    // SSH font size label
+    document.getElementById('sshFontSizeLabel').textContent=sshFontSize;
+  }
+
+  // Wire settings open to also refresh UI pref toggles
+  document.getElementById('settingsBtn').addEventListener('click',()=>{
+    const uiOpts=JSON.parse(localStorage.getItem(UI_KEY)||'{}');
+    document.getElementById('clockSw').classList.toggle('on',!!uiOpts.clock);
+    document.getElementById('compactSw').classList.toggle('on',!!uiOpts.compact);
+    document.getElementById('notifSw').classList.toggle('on',!!(uiOpts.notifications&&Notification.permission==='granted'));
+    if(localStorage.getItem(LOCK_PIN_KEY)){
+      document.getElementById('lockSw').classList.add('on');
+      document.getElementById('pinSetupArea').style.display='block';
+    }
+    const savedCss=localStorage.getItem(CSS_KEY)||'';
+    document.getElementById('customCssArea').value=savedCss;
+    renderSnippets();
+  });
+
+
+
   // ═══════════════════════════════════
   // INIT
   // ═══════════════════════════════════
   initTheme();
   applyBackground();
   initPerfMode();
+  initUIPrefs();
   renderTree();
   render();
   allNodes().filter(s=>s.type==='service').forEach(s=>{if(s.status==='unknown'||s.status==='checking')checkStatus(s);});
