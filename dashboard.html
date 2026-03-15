@@ -2556,23 +2556,6 @@
     requestAnimationFrame(()=>{_renderPending=false;render();});
   }
 
-  function probeAlive(ip, timeoutMs) {
-    // WebSocket probe — no CORS restrictions, works on any host/port.
-    // A live host will refuse the WS upgrade (triggering onerror quickly but
-    // after a real round-trip). An offline host causes the OS to reject TCP
-    // instantly (onerror fires in <5ms with no network travel).
-    return new Promise(resolve => {
-      const t0 = performance.now();
-      let done = false;
-      const finish = v => { if (done) return; done = true; clearTimeout(tid); try { ws.close(); } catch(_){} resolve(v); };
-      const tid = setTimeout(() => finish(false), timeoutMs);
-      // Use ws:// on port 80 — routers, proxmox, nas etc. all have port 80 open
-      const ws = new WebSocket('ws://' + ip.replace(/^https?:\/\//,'').split('/')[0] + ':80');
-      ws.onopen  = () => finish(true);
-      ws.onerror = () => finish(performance.now() - t0 > 30); // <30ms = OS instant-reject = offline
-    });
-  }
-
   async function checkStatus(svc){
     if(svc.manualOverride){render();return;}
     const url=normalizeUrl(svc.statusUrl||svc.controlUrl||svc.ip);
@@ -2585,20 +2568,11 @@
       const tid=setTimeout(()=>ctrl.abort(),6000);
       await fetch(url,{mode:'no-cors',cache:'no-store',signal:ctrl.signal});
       clearTimeout(tid);
-      // Opaque success — host definitely up
       svc.status='up';
       svc.responseTime=Math.round(performance.now()-t0);
     }catch(e){
-      if(e.name==='AbortError'){
-        svc.status='down';
-        svc.responseTime=null;
-      } else {
-        // fetch threw (CORS/SSL/redirect) — use WS probe to confirm alive
-        const host=svc.ip||(svc.controlUrl||'').replace(/^https?:\/\//,'').split('/')[0].split(':')[0];
-        const alive = host ? await probeAlive(host, 3000) : false;
-        svc.status = alive ? 'up' : 'down';
-        svc.responseTime = alive ? Math.round(performance.now()-t0) : null;
-      }
+      svc.status='down';
+      svc.responseTime=null;
     }
     // Record history
     if(!statusHistory[svc.id])statusHistory[svc.id]=[];
