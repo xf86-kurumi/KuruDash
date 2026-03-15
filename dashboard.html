@@ -27,8 +27,8 @@
     [data-theme="aero"] {
       --bg: linear-gradient(145deg,#b8dcf4 0%,#9ecde8 30%,#88c2e8 60%,#a0d4f0 100%);
       --orb1: rgba(255,255,255,0.55); --orb2: rgba(140,210,245,0.45); --orb3: rgba(255,255,255,0.3);
-      --glass: rgba(255,255,255,0.22); --glass-b: rgba(255,255,255,0.55); --glass-s: rgba(255,255,255,0.65);
-      --glass-inner: rgba(255,255,255,0.12);
+      --glass: rgba(255,255,255,0.55); --glass-b: rgba(255,255,255,0.72); --glass-s: rgba(255,255,255,0.82);
+      --glass-inner: rgba(255,255,255,0.32);
       --tp: #0a3d55; --tm: #2a6880;
       --ac: #0088cc; --ag: rgba(0,136,204,0.25); --agr: linear-gradient(145deg,#40c0f0,#0088cc 55%,#0066a0);
       --ok: #00a878; --okg: rgba(0,168,120,0.4);
@@ -95,8 +95,8 @@
     [data-theme="solarized"] {
       --bg: linear-gradient(145deg,#f5e8c8 0%,#ecdec0 35%,#e2d4b4 100%);
       --orb1: rgba(255,255,200,0.5); --orb2: rgba(200,170,100,0.15); --orb3: rgba(255,255,255,0.3);
-      --glass: rgba(255,255,255,0.38); --glass-b: rgba(255,255,255,0.72); --glass-s: rgba(255,255,255,0.55);
-      --glass-inner: rgba(255,255,255,0.2);
+      --glass: rgba(255,248,230,0.62); --glass-b: rgba(255,255,255,0.78); --glass-s: rgba(255,255,255,0.65);
+      --glass-inner: rgba(255,248,230,0.38);
       --tp: #053640; --tm: #507080;
       --ac: #2080c0; --ag: rgba(32,128,192,0.22); --agr: linear-gradient(145deg,#40a0e0,#2080c0 55%,#1060a0);
       --ok: #607800; --okg: rgba(96,120,0,0.35);
@@ -112,8 +112,8 @@
     [data-theme="sakura"] {
       --bg: linear-gradient(145deg,#f8d8e8 0%,#f0c8e0 35%,#e8b8d8 100%);
       --orb1: rgba(255,255,255,0.6); --orb2: rgba(255,180,220,0.45); --orb3: rgba(255,220,240,0.35);
-      --glass: rgba(255,255,255,0.28); --glass-b: rgba(255,255,255,0.68); --glass-s: rgba(255,255,255,0.5);
-      --glass-inner: rgba(255,255,255,0.15);
+      --glass: rgba(255,255,255,0.52); --glass-b: rgba(255,255,255,0.78); --glass-s: rgba(255,255,255,0.7);
+      --glass-inner: rgba(255,255,255,0.3);
       --tp: #601840; --tm: #a05070;
       --ac: #d01878; --ag: rgba(208,24,120,0.22); --agr: linear-gradient(145deg,#f050b0,#d01878 55%,#a00060);
       --ok: #408060; --okg: rgba(64,128,96,0.35);
@@ -243,6 +243,8 @@
       height: 100%; min-height: 100vh;
       overflow: hidden;
       transition: background 0.5s, color 0.3s;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     body::before {
@@ -293,14 +295,14 @@
     header {
       grid-column: 1 / -1;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0.75rem 1.3rem; gap: 0.85rem;
-      border-radius: 20px;
+      padding: 0.62rem 1.2rem; gap: 0.85rem;
+      border-radius: 18px;
       position: relative; z-index: 10;
       background: var(--panel-glass, var(--glass));
-      backdrop-filter: var(--card-blur, blur(32px) saturate(160%));
-      -webkit-backdrop-filter: var(--card-blur, blur(32px) saturate(160%));
+      backdrop-filter: var(--card-blur, blur(40px) saturate(180%));
+      -webkit-backdrop-filter: var(--card-blur, blur(40px) saturate(180%));
       border: 1px solid var(--glass-b);
-      box-shadow: 0 8px 32px var(--shadow), inset 0 1px 0 var(--glass-s);
+      box-shadow: 0 4px 24px var(--shadow), inset 0 1px 0 var(--glass-s), inset 0 -1px 0 rgba(0,0,0,0.05);
     }
 
     .header-left { display: flex; align-items: center; gap: 0.65rem; }
@@ -317,37 +319,37 @@
 
     .logo-text {
       font-family: 'Instrument Serif', serif;
-      font-size: 1.4rem; font-style: italic; letter-spacing: -0.02em;
+      font-size: 1.35rem; font-style: italic; letter-spacing: -0.02em;
       background: var(--agr); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
     }
 
     .header-hint {
-      font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.82rem; font-weight: 400; color: var(--tm); padding: 0.3rem 0.9rem;
+      font-family: 'Outfit', sans-serif; font-size: 0.76rem; font-weight: 400; color: var(--tm); padding: 0.28rem 0.85rem;
       background: var(--ib); border: 1px solid var(--glass-b); border-radius: 20px;
-      white-space: nowrap; letter-spacing: 0.01em;
+      white-space: nowrap; letter-spacing: 0.01em; opacity: 0.85;
     }
     @media (max-width: 780px) { .header-hint { display: none; } }
 
     .header-right { display: flex; align-items: center; gap: 0.4rem; margin-left: auto; }
 
     .hbtn {
-      width: 38px; height: 38px; border-radius: 11px;
+      width: 34px; height: 34px; border-radius: 10px;
       border: 1px solid var(--glass-b); background: var(--glass-inner);
       color: var(--tm); cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s; flex-shrink: 0;
+      transition: all 0.2s cubic-bezier(0.34,1.2,0.64,1); flex-shrink: 0;
       backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
       position: relative; overflow: hidden;
     }
     .hbtn::before { display: none; }
     .hbtn:hover {
-      background: var(--glass); border-color: var(--ac);
-      box-shadow: 0 4px 14px var(--ag), inset 0 1px 0 var(--glass-s);
-      color: var(--tp); transform: translateY(-1px);
+      background: var(--ag); border-color: var(--ac);
+      box-shadow: 0 2px 12px var(--ag), inset 0 1px 0 var(--glass-s);
+      color: var(--tp); transform: translateY(-1px) scale(1.05);
     }
-    .hbtn.active { background: var(--ag); border-color: var(--ac); }
-    .hbtn img { width: 17px; height: 17px; object-fit: contain; vertical-align: middle; }
-    .hbtn svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .hbtn.active { background: var(--ag); border-color: var(--ac); box-shadow: 0 2px 8px var(--ag); }
+    .hbtn img { width: 16px; height: 16px; object-fit: contain; vertical-align: middle; }
+    .hbtn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
     /* ════ SIDEBAR ════ */
     .sidebar {
@@ -356,10 +358,10 @@
       border-radius: 18px;
       transition: opacity 0.3s, width 0.3s;
       background: var(--panel-glass, var(--glass));
-      backdrop-filter: var(--card-blur, blur(32px) saturate(160%));
-      -webkit-backdrop-filter: var(--card-blur, blur(32px) saturate(160%));
+      backdrop-filter: var(--card-blur, blur(40px) saturate(180%));
+      -webkit-backdrop-filter: var(--card-blur, blur(40px) saturate(180%));
       border: 1px solid var(--glass-b);
-      box-shadow: 0 8px 32px var(--shadow), inset 0 1px 0 var(--glass-s);
+      box-shadow: 0 4px 24px var(--shadow), inset 0 1px 0 var(--glass-s);
     }
     .app.sidebar-hidden .sidebar { opacity: 0; pointer-events: none; width: 0; border: none; }
 
@@ -371,21 +373,21 @@
     .search-wrap { position: relative; flex: 1; }
     .search-icon {
       position: absolute;
-      left: 0.6rem;
-      top: calc(50% - 1px);
+      left: 0.65rem;
+      top: 50%;
       transform: translateY(-50%);
-      width: 14px;
-      height: 14px;
+      width: 13px;
+      height: 13px;
       pointer-events: none;
-      opacity: 0.65;
+      opacity: 0.55;
       stroke: var(--tm);
       fill: none;
       overflow: visible;
     }
     .search-box {
-      width: 100%; padding: 0.44rem 0.75rem 0.44rem 2rem;
+      width: 100%; padding: 0.46rem 0.75rem 0.46rem 2.1rem;
       background: var(--ib); border: 1px solid var(--ibr);
-      border-radius: 11px; color: var(--tp); font-family: inherit; font-size: 0.83rem;
+      border-radius: 10px; color: var(--tp); font-family: inherit; font-size: 0.82rem;
       transition: all 0.2s; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     }
     .search-box:focus { outline: none; border-color: var(--ac); box-shadow: 0 0 0 3px var(--ag); }
@@ -405,19 +407,20 @@
     .tree::-webkit-scrollbar { width: 3px; }
     .tree::-webkit-scrollbar-thumb { background: var(--ag); border-radius: 2px; }
 
-    .tree-node { margin: 0.04rem 0; }
+    .tree-node { margin: 0.02rem 0; }
     .tree-item {
-      display: flex; align-items: center; gap: 0.42rem;
-      padding: 0.45rem 0.65rem; border-radius: 11px; cursor: pointer;
-      transition: all 0.15s; color: var(--tp); user-select: none;
-      font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.9rem; font-weight: 400;
+      display: flex; align-items: center; gap: 0.4rem;
+      padding: 0.42rem 0.6rem; border-radius: 10px; cursor: pointer;
+      transition: all 0.15s ease; color: var(--tp); user-select: none;
+      font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.88rem; font-weight: 400;
+      border: 1px solid transparent;
     }
-    .tree-item:hover { background: var(--glass-inner); }
+    .tree-item:hover { background: var(--glass-inner); border-color: var(--glass-b); }
     .tree-item.selected {
       background: var(--ag);
-      border-left: 2px solid var(--ac);
-      padding-left: calc(0.55rem - 2px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+      border-color: var(--ac);
+      padding-left: 0.6rem;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 2px 8px var(--ag);
     }
     .tree-item .expand { width: 16px; height: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: transform 0.2s; opacity: 0.55; }
     .tree-item .expand.collapsed { transform: rotate(-90deg); }
@@ -447,22 +450,22 @@
     .toggle-btn img, .toggle-btn svg { width: 16px; height: 16px; object-fit: contain; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
     .breadcrumb {
-      font-family: 'Instrument Serif', serif; font-style: italic;
-      font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.15rem; font-weight: 400; letter-spacing: -0.02em;
+      font-family: 'Outfit', sans-serif; font-style: normal;
+      font-size: 1.0rem; font-weight: 600; letter-spacing: -0.02em;
       color: var(--tp); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     }
 
     .add-btn {
-      display: flex; align-items: center; gap: 0.4rem;
-      padding: 0.56rem 1.15rem;
-      background: var(--agr); color: white; border: none; border-radius: 13px;
-      font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: 0.95rem;
-      cursor: pointer; transition: all 0.22s;
-      box-shadow: 0 4px 16px var(--ag), inset 0 1px 0 rgba(255,255,255,0.25);
-      white-space: nowrap; letter-spacing: 0.01em;
+      display: flex; align-items: center; gap: 0.38rem;
+      padding: 0.5rem 1.1rem;
+      background: var(--agr); color: white; border: none; border-radius: 12px;
+      font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 0.84rem;
+      cursor: pointer; transition: all 0.22s cubic-bezier(0.34,1.2,0.64,1);
+      box-shadow: 0 3px 14px var(--ag), inset 0 1px 0 rgba(255,255,255,0.22);
+      white-space: nowrap; letter-spacing: 0.005em;
     }
-    .add-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--ag); }
-    .add-btn img, .add-btn svg { width: 14px; height: 14px; object-fit: contain; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+    .add-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px var(--ag); }
+    .add-btn img, .add-btn svg { width: 13px; height: 13px; object-fit: contain; stroke: white; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
     .btn-ghost {
       background: var(--glass); color: var(--tp);
       box-shadow: none; border: 1px solid var(--glass-b);
@@ -482,8 +485,8 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(178px, 225px));
-      gap: 1rem; padding-bottom: 1.4rem; padding-top: 6px;
+      grid-template-columns: repeat(auto-fill, minmax(168px, 215px));
+      gap: 0.85rem; padding-bottom: 1.4rem; padding-top: 4px;
     }
 
     /* ════ SERVICE CARD — LIQUID GLASS ════ */
@@ -492,10 +495,10 @@
       backdrop-filter: var(--card-blur, blur(28px) saturate(160%));
       -webkit-backdrop-filter: var(--card-blur, blur(28px) saturate(160%));
       border: 1px solid var(--glass-b);
-      border-radius: 20px; overflow: hidden;
+      border-radius: 18px; overflow: hidden;
       cursor: pointer;
-      transition: transform 0.28s cubic-bezier(0.34,1.2,0.64,1), box-shadow 0.28s, border-color 0.2s;
-      box-shadow: 0 4px 20px var(--shadow), inset 0 1px 0 var(--glass-s);
+      transition: transform 0.26s cubic-bezier(0.34,1.15,0.64,1), box-shadow 0.26s, border-color 0.18s;
+      box-shadow: 0 2px 12px var(--shadow), inset 0 1px 0 var(--glass-s);
       position: relative;
       will-change: transform;
     }
@@ -515,54 +518,54 @@
     }
 
     .card:hover {
-      transform: translateY(-5px) scale(1.025);
-      box-shadow: 0 16px 48px var(--shadow), 0 4px 16px var(--ag), inset 0 1px 0 var(--glass-s);
+      transform: translateY(-4px) scale(1.018);
+      box-shadow: 0 12px 40px var(--shadow), 0 3px 12px var(--ag), inset 0 1px 0 var(--glass-s);
       border-color: var(--ac);
     }
     .card.selected {
       border-color: var(--ac);
-      box-shadow: 0 0 0 2px var(--ag), 0 8px 28px var(--shadow), inset 0 1px 0 var(--glass-s);
+      box-shadow: 0 0 0 2px var(--ag), 0 6px 24px var(--shadow), inset 0 1px 0 var(--glass-s);
     }
 
     /* Icon area */
     .card-icon-area {
-      width: 100%; height: 108px;
+      width: 100%; height: 100px;
       display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(160deg, var(--ag) 0%, var(--glass-inner) 80%);
+      background: linear-gradient(155deg, var(--ag) 0%, var(--glass-inner) 75%);
       position: relative; overflow: hidden;
-      padding: 12px;
+      padding: 10px;
     }
     .card-icon-area::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 28px;
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 32px;
       background: linear-gradient(to top, var(--glass) 0%, transparent 100%);
       z-index: 1; pointer-events: none;
     }
     .card-image {
-      width: 64px; height: 64px; object-fit: contain;
-      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.18));
-      transition: transform 0.28s cubic-bezier(0.34,1.2,0.64,1);
+      width: 60px; height: 60px; object-fit: contain;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.15));
+      transition: transform 0.26s cubic-bezier(0.34,1.2,0.64,1);
       position: relative; z-index: 2;
-      border-radius: 11px;
+      border-radius: 10px;
     }
-    .card:hover .card-image { transform: scale(1.1) translateY(-3px); }
+    .card:hover .card-image { transform: scale(1.08) translateY(-2px); }
 
     .card-placeholder {
-      width: 100%; height: 108px;
-      background: linear-gradient(160deg, var(--ag) 0%, var(--glass-inner) 80%);
+      width: 100%; height: 100px;
+      background: linear-gradient(155deg, var(--ag) 0%, var(--glass-inner) 75%);
       display: flex; align-items: center; justify-content: center;
     }
-    .card-placeholder img { width: 36px; height: 36px; opacity: 0.35; }
-    .card-placeholder svg { width: 32px; height: 32px; stroke: var(--tm); fill: none; stroke-width: 1.5; opacity: 0.35; }
+    .card-placeholder img { width: 32px; height: 32px; opacity: 0.3; }
+    .card-placeholder svg { width: 28px; height: 28px; stroke: var(--tm); fill: none; stroke-width: 1.5; opacity: 0.3; }
 
-    .card-body { padding: 0.75rem 1rem 0.88rem; position: relative; z-index: 2; }
-    .card-hd { display: flex; align-items: center; gap: 0.4rem; margin-bottom: 0.2rem; }
-    .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .dot.up    { background: var(--ok); box-shadow: 0 0 6px var(--okg); }
-    .dot.down  { background: var(--err); box-shadow: 0 0 6px var(--errg); }
-    .dot.checking { background: var(--warn); animation: pulse 1.2s infinite; }
-    .dot.unknown  { background: var(--tm); opacity: 0.35; }
-    .card-name { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -0.01em; }
-    .card-ip { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--tm); opacity: 0.75; margin-top: 0.1rem; }
+    .card-hd { display: flex; align-items: center; gap: 0.45rem; margin-bottom: 0.22rem; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; position: relative; }
+    .dot.up    { background: var(--ok); box-shadow: 0 0 0 2px rgba(0,0,0,0.08), 0 0 8px var(--okg); }
+    .dot.down  { background: var(--err); box-shadow: 0 0 0 2px rgba(0,0,0,0.08), 0 0 8px var(--errg); }
+    .dot.checking { background: var(--warn); box-shadow: 0 0 0 2px rgba(0,0,0,0.08); animation: pulse 1.2s infinite; }
+    .dot.unknown  { background: var(--tm); opacity: 0.4; }
+    .card-body { padding: 0.7rem 0.95rem 0.85rem; position: relative; z-index: 2; }
+    .card-name { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; font-size: 0.93rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -0.01em; color: var(--tp); }
+    .card-ip { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--tm); opacity: 0.7; margin-top: 0.12rem; }
 
     .card-ssh-badge {
       position: absolute; top: 7px; left: 7px; z-index: 4;
@@ -587,38 +590,39 @@
     .empty-state { text-align: center; padding: 4rem 2rem; color: var(--tm); }
     .empty-state p { margin-bottom: 1rem; font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1rem; font-weight: 400; }
 
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
-
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    @keyframes statusPulse { 0%,100%{box-shadow:0 0 0 0 var(--okg), 0 0 8px var(--okg)} 60%{box-shadow:0 0 0 5px transparent, 0 0 8px var(--okg)} }
+    .dot.up { animation: statusPulse 3s ease-in-out infinite; }
     /* ════ PROPERTIES PANEL ════ */
     .panel {
-      position: fixed; top: 0; right: 0; width: min(400px,90vw); height: 100vh;
-      backdrop-filter: blur(36px) saturate(160%); -webkit-backdrop-filter: blur(36px) saturate(160%);
+      position: fixed; top: 0; right: 0; width: min(380px,88vw); height: 100vh;
+      backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%);
       background: var(--glass);
-      border-left: 1px solid var(--glass-b); padding: 1.5rem; overflow-y: auto;
-      transform: translateX(100%); transition: transform 0.32s ease; z-index: 50;
-      box-shadow: -12px 0 48px var(--shadow);
+      border-left: 1px solid var(--glass-b); padding: 1.4rem; overflow-y: auto;
+      transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); z-index: 50;
+      box-shadow: -8px 0 40px var(--shadow);
     }
     .panel.open { transform: translateX(0); }
-    .panel-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.1rem; padding-bottom: 0.85rem; border-bottom: 1px solid var(--glass-b); }
-    .panel-hd h3 { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.15rem; font-weight: 400; letter-spacing: -0.02em; }
+    .panel-hd { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--glass-b); }
+    .panel-hd h3 { font-family: 'Outfit', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: -0.02em; }
     .panel-close { background: none; border: none; color: var(--tm); cursor: pointer; padding: 0.2rem; border-radius: 6px; transition: all 0.15s; display: flex; align-items: center; }
     .panel-close:hover { background: var(--glass-inner); color: var(--tp); }
-    .panel-close img, .panel-close svg { width: 17px; height: 17px; object-fit: contain; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
-    .panel-row { margin-bottom: 1rem; }
-    .panel-label { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.82rem; font-weight: 400; text-transform: none; letter-spacing: 0; color: var(--tm); margin-bottom: 0.3rem; }
-    .panel-val { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.92rem; }
-    .panel-mono { font-family: 'DM Mono', monospace; font-size: 0.84rem; }
-    .panel-acts { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 1.2rem; }
+    .panel-close img, .panel-close svg { width: 16px; height: 16px; object-fit: contain; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+    .panel-row { margin-bottom: 0.9rem; }
+    .panel-label { font-family: 'Outfit', sans-serif; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--tm); margin-bottom: 0.28rem; }
+    .panel-val { font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 500; }
+    .panel-mono { font-family: 'DM Mono', monospace; font-size: 0.82rem; }
+    .panel-acts { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1.1rem; }
     .pact {
-      display: flex; align-items: center; gap: 0.55rem;
-      padding: 0.85rem 1rem; background: var(--glass-inner);
-      border: 1px solid var(--glass-b); border-radius: 13px;
-      color: var(--tp); font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.95rem; font-weight: 400;
-      cursor: pointer; transition: all 0.18s; text-align: left; width: 100%;
+      display: flex; align-items: center; gap: 0.5rem;
+      padding: 0.78rem 0.95rem; background: var(--glass-inner);
+      border: 1px solid var(--glass-b); border-radius: 12px;
+      color: var(--tp); font-family: 'Outfit', sans-serif; font-size: 0.88rem; font-weight: 500;
+      cursor: pointer; transition: all 0.18s ease; text-align: left; width: 100%;
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     }
-    .pact:hover { background: var(--glass); border-color: var(--ac); box-shadow: 0 4px 14px var(--ag); }
-    .pact img, .pact svg { width: 17px; height: 17px; flex-shrink: 0; opacity: 0.8; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .pact:hover { background: var(--glass); border-color: var(--ac); box-shadow: 0 3px 12px var(--ag); transform: translateX(2px); }
+    .pact img, .pact svg { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.8; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
     .pact.ssh-act { background: var(--ag); border-color: var(--ac); }
     .pact.ssh-act:hover { background: var(--ac); color: white; }
 
@@ -626,10 +630,10 @@
     .ssh-panel {
       position: fixed; bottom: 0; left: 0; right: 0;
       height: 0; overflow: hidden;
-      backdrop-filter: blur(36px) saturate(160%); -webkit-backdrop-filter: blur(36px) saturate(160%);
+      backdrop-filter: blur(24px) saturate(160%); -webkit-backdrop-filter: blur(24px) saturate(160%);
       background: var(--glass);
       border-top: 1px solid var(--glass-b);
-      box-shadow: 0 -12px 48px var(--shadow);
+      box-shadow: 0 -8px 32px var(--shadow);
       transition: height 0.35s cubic-bezier(0.4,0,0.2,1);
       z-index: 80;
       display: flex; flex-direction: column;
@@ -639,25 +643,25 @@
 
     .ssh-panel-hd {
       display: flex; align-items: center; gap: 0.5rem;
-      padding: 0.5rem 1rem; border-bottom: 1px solid var(--glass-b);
-      flex-shrink: 0; height: 46px;
+      padding: 0.45rem 0.9rem; border-bottom: 1px solid var(--glass-b);
+      flex-shrink: 0; height: 44px;
       background: var(--glass-inner);
     }
 
-    .ssh-tabs { display: flex; align-items: center; gap: 0.2rem; flex: 1; overflow-x: auto; min-width: 0; }
+    .ssh-tabs { display: flex; align-items: center; gap: 0.18rem; flex: 1; overflow-x: auto; min-width: 0; }
     .ssh-tabs::-webkit-scrollbar { height: 2px; }
     .ssh-tabs::-webkit-scrollbar-thumb { background: var(--ag); }
 
     .ssh-tab {
-      display: flex; align-items: center; gap: 0.38rem;
-      padding: 0.28rem 0.8rem; border-radius: 9px;
-      font-family: 'DM Mono', monospace; font-size: 0.75rem; font-weight: 400;
+      display: flex; align-items: center; gap: 0.35rem;
+      padding: 0.26rem 0.75rem; border-radius: 8px;
+      font-family: 'DM Mono', monospace; font-size: 0.73rem; font-weight: 400;
       color: var(--tm); cursor: pointer; white-space: nowrap; flex-shrink: 0;
       border: 1px solid transparent; transition: all 0.15s;
       background: none;
     }
     .ssh-tab:hover { background: var(--glass-inner); color: var(--tp); }
-    .ssh-tab.active { background: var(--ag); color: var(--tp); border-color: var(--ac); box-shadow: inset 0 1px 0 rgba(255,255,255,0.1); }
+    .ssh-tab.active { background: var(--ag); color: var(--tp); border-color: var(--ac); box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 2px 6px var(--ag); }
     .ssh-tab-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); flex-shrink: 0; }
     .ssh-tab-dot.connecting { background: var(--warn); animation: pulse 1s infinite; }
     .ssh-tab-dot.error { background: var(--err); }
@@ -727,19 +731,19 @@
     /* ════ MODALS ════ */
     .overlay {
       position: fixed; inset: 0;
-      background: rgba(0,0,0,0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.25); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
       display: flex; align-items: center; justify-content: center;
       z-index: 100; opacity: 0; visibility: hidden; transition: all 0.22s; padding: 1rem;
     }
     .overlay.open { opacity: 1; visibility: visible; }
 
     .modal {
-      backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%);
+      backdrop-filter: blur(32px) saturate(180%); -webkit-backdrop-filter: blur(32px) saturate(180%);
       background: var(--glass);
-      border: 1px solid var(--glass-b); border-radius: 24px;
+      border: 1px solid var(--glass-b); border-radius: 22px;
       width: 100%; max-width: 490px; max-height: 90vh; overflow-y: auto;
-      transform: scale(0.93) translateY(16px); transition: transform 0.32s cubic-bezier(0.34,1.3,0.64,1);
-      box-shadow: 0 40px 80px var(--shadow), 0 8px 24px rgba(0,0,0,0.1), inset 0 1px 0 var(--glass-s);
+      transform: scale(0.94) translateY(18px); transition: transform 0.3s cubic-bezier(0.34,1.25,0.64,1);
+      box-shadow: 0 32px 72px var(--shadow), 0 6px 20px rgba(0,0,0,0.08), inset 0 1px 0 var(--glass-s);
       position: relative;
     }
     .modal::before {
@@ -753,7 +757,7 @@
       padding: 1.2rem 1.4rem; border-bottom: 1px solid var(--glass-b);
       display: flex; justify-content: space-between; align-items: center;
     }
-    .modal-hd h2 { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 1.2rem; font-weight: 400; letter-spacing: -0.02em; }
+    .modal-hd h2 { font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em; }
     .modal-close { background: none; border: none; color: var(--tm); cursor: pointer; padding: 0.2rem; border-radius: 7px; display: flex; align-items: center; transition: all 0.15s; }
     .modal-close:hover { background: var(--glass-inner); color: var(--tp); }
     .modal-close img, .modal-close svg { width: 17px; height: 17px; object-fit: contain; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
@@ -761,35 +765,36 @@
     .modal-body { padding: 1.35rem; }
     .modal-ft { padding: 1rem 1.35rem; border-top: 1px solid var(--glass-b); display: flex; justify-content: flex-end; gap: 0.55rem; flex-wrap: wrap; }
 
-    .fg { margin-bottom: 0.95rem; }
-    .fg label { display: block; margin-bottom: 0.3rem; font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.88rem; font-weight: 400; color: var(--tm); text-transform: none; letter-spacing: 0; }
+    .fg { margin-bottom: 0.9rem; }
+    .fg label { display: block; margin-bottom: 0.28rem; font-family: 'Outfit', sans-serif; font-style: normal; font-size: 0.78rem; font-weight: 600; color: var(--tm); text-transform: uppercase; letter-spacing: 0.06em; }
     .fg input, .fg select, .fg textarea {
-      width: 100%; padding: 0.64rem 1rem;
+      width: 100%; padding: 0.6rem 0.95rem;
       background: var(--ib); border: 1px solid var(--ibr);
-      border-radius: 12px; color: var(--tp); font-family: inherit; font-size: 0.92rem;
+      border-radius: 11px; color: var(--tp); font-family: inherit; font-size: 0.9rem;
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      transition: all 0.18s;
     }
-    .fg input:focus, .fg select:focus, .fg textarea:focus { outline: none; border-color: var(--ac); box-shadow: 0 0 0 3px var(--ag); }
-    .fg small { display: block; margin-top: 0.26rem; font-size: 0.7rem; color: var(--tm); }
-    .fg textarea { resize: vertical; min-height: 90px; font-family: 'DM Mono', monospace; font-size: 0.76rem; }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { outline: none; border-color: var(--ac); box-shadow: 0 0 0 3px var(--ag); background: var(--glass-inner); }
+    .fg small { display: block; margin-top: 0.24rem; font-size: 0.7rem; color: var(--tm); }
+    .fg textarea { resize: vertical; min-height: 88px; font-family: 'DM Mono', monospace; font-size: 0.75rem; }
 
     .tabs { display: flex; gap: 0.2rem; margin-bottom: 1.1rem; padding: 0.28rem; background: var(--ib); border-radius: 12px; border: 1px solid var(--glass-b); }
-    .tab { flex: 1; padding: 0.52rem; background: none; border: none; border-radius: 9px; color: var(--tm); font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.92rem; font-weight: 400; cursor: pointer; transition: all 0.18s; }
+    .tab { flex: 1; padding: 0.52rem; background: none; border: none; border-radius: 9px; color: var(--tm); font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.18s; }
     .tab.active { background: var(--glass); color: var(--tp); box-shadow: 0 2px 10px var(--shadow), inset 0 1px 0 rgba(255,255,255,0.1); }
     .tab:hover:not(.active) { color: var(--tp); }
     .tab-c { display: none; }
     .tab-c.active { display: block; }
 
-    .btn { padding: 0.58rem 1.1rem; border-radius: 12px; font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.95rem; font-weight: 400; cursor: pointer; border: none; transition: all 0.18s; display: inline-flex; align-items: center; gap: 0.32rem; }
-    .btn img, .btn svg { width: 15px; height: 15px; object-fit: contain; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-    .btn-p { background: var(--agr); color: white; box-shadow: 0 4px 14px var(--ag); }
-    .btn-p:hover { transform: translateY(-1px); box-shadow: 0 6px 20px var(--ag); }
+    .btn { padding: 0.52rem 1.05rem; border-radius: 11px; font-family: 'Outfit', sans-serif; font-style: normal; font-size: 0.84rem; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s cubic-bezier(0.34,1.2,0.64,1); display: inline-flex; align-items: center; gap: 0.3rem; }
+    .btn img, .btn svg { width: 14px; height: 14px; object-fit: contain; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+    .btn-p { background: var(--agr); color: white; box-shadow: 0 3px 12px var(--ag); }
+    .btn-p:hover { transform: translateY(-1px); box-shadow: 0 5px 18px var(--ag); }
     .btn-s { background: var(--ib); color: var(--tp); border: 1px solid var(--glass-b); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-    .btn-s:hover { background: var(--glass); }
-    .btn-d { background: rgba(224,60,46,0.1); color: var(--err); border: 1px solid rgba(224,60,46,0.28); }
-    .btn-d:hover { background: var(--err); color: white; }
-    .btn-ok { background: rgba(0,168,120,0.1); color: var(--ok); border: 1px solid rgba(0,168,120,0.28); }
-    .btn-ok:hover { background: var(--ok); color: white; }
+    .btn-s:hover { background: var(--glass); border-color: var(--ac); }
+    .btn-d { background: rgba(224,60,46,0.08); color: var(--err); border: 1px solid rgba(224,60,46,0.2); }
+    .btn-d:hover { background: var(--err); color: white; transform: translateY(-1px); }
+    .btn-ok { background: rgba(0,168,120,0.08); color: var(--ok); border: 1px solid rgba(0,168,120,0.2); }
+    .btn-ok:hover { background: var(--ok); color: white; transform: translateY(-1px); }
 
     .icon-preview-wrap { width: 46px; height: 46px; border-radius: 11px; border: 1px solid var(--glass-b); background: var(--ib); display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
     .icon-preview-wrap svg { width: 20px; height: 20px; stroke: var(--tm); fill: none; stroke-width: 1.5; opacity: 0.42; }
@@ -797,14 +802,14 @@
     /* ════ SETTINGS ════ */
     .settings-modal { max-width: 550px; }
     .ss { margin-bottom: 1.5rem; }
-    .ss-title { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.95rem; font-weight: 400; letter-spacing: -0.01em; text-transform: none; color: var(--tp); margin-bottom: 0.72rem; padding-bottom: 0.38rem; border-bottom: 1px solid var(--glass-b); }
-    .theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(98px,1fr)); gap: 0.55rem; }
-    .t-swatch { border-radius: 11px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: all 0.18s; }
-    .t-swatch:hover { transform: translateY(-2px); }
-    .t-swatch.active { border-color: var(--ac); box-shadow: 0 0 0 2px var(--ag); }
-    .t-prev { height: 46px; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 8px; }
+    .ss-title { font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--tm); margin-bottom: 0.72rem; padding-bottom: 0.38rem; border-bottom: 1px solid var(--glass-b); }
+    .theme-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(92px,1fr)); gap: 0.5rem; }
+    .t-swatch { border-radius: 12px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: all 0.2s cubic-bezier(0.34,1.2,0.64,1); }
+    .t-swatch:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 6px 16px var(--shadow); }
+    .t-swatch.active { border-color: var(--ac); box-shadow: 0 0 0 3px var(--ag); }
+    .t-prev { height: 44px; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 8px; }
     .sdot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-    .t-lbl { padding: 0.26rem 0.45rem; font-size: 0.7rem; font-weight: 600; text-align: center; }
+    .t-lbl { padding: 0.24rem 0.45rem; font-size: 0.68rem; font-weight: 600; text-align: center; }
 
     .c-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
     .c-row { display: flex; align-items: center; gap: 0.45rem; padding: 0.45rem 0.65rem; background: var(--ib); border: 1px solid var(--glass-b); border-radius: 9px; }
@@ -821,18 +826,19 @@
 
     /* ════ TOAST ════ */
     .toast {
-      position: fixed; bottom: 1.4rem; left: 50%; transform: translateX(-50%) translateY(72px);
-      backdrop-filter: blur(28px) saturate(160%); -webkit-backdrop-filter: blur(28px) saturate(160%);
+      position: fixed; bottom: 1.6rem; left: 50%; transform: translateX(-50%) translateY(80px);
+      backdrop-filter: blur(32px) saturate(180%); -webkit-backdrop-filter: blur(32px) saturate(180%);
       background: var(--glass); border: 1px solid var(--glass-b);
-      padding: 0.6rem 1.2rem; border-radius: 30px;
-      font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.92rem; font-weight: 400; color: var(--tp);
-      box-shadow: 0 12px 32px var(--shadow); z-index: 999;
-      transition: transform 0.3s ease, opacity 0.3s ease; opacity: 0;
-      display: flex; align-items: center; gap: 0.48rem;
+      padding: 0.55rem 1.3rem; border-radius: 100px;
+      font-family: 'Outfit', sans-serif; font-size: 0.84rem; font-weight: 500; color: var(--tp);
+      box-shadow: 0 8px 28px var(--shadow), inset 0 1px 0 var(--glass-s); z-index: 999;
+      transition: transform 0.32s cubic-bezier(0.34,1.2,0.64,1), opacity 0.28s ease; opacity: 0;
+      display: flex; align-items: center; gap: 0.45rem;
+      white-space: nowrap;
     }
     .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-    .toast.ok { border-color: var(--ok); }
-    .toast.err { border-color: var(--err); }
+    .toast.ok { border-color: var(--ok); box-shadow: 0 8px 28px var(--shadow), 0 0 0 1px var(--okg); }
+    .toast.err { border-color: var(--err); box-shadow: 0 8px 28px var(--shadow), 0 0 0 1px var(--errg); }
 
     /* ════ MOBILE ════ */
     .sb-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 39; backdrop-filter: blur(3px); }
@@ -886,21 +892,21 @@
       padding: 0.55rem 0; border-bottom: 1px solid var(--glass-b);
     }
     .toggle-row:last-child { border-bottom: none; }
-    .toggle-row label { font-family: 'Instrument Serif', serif; font-style: italic; font-size: 0.95rem; font-weight: 400; color: var(--tp); flex: 1; }
+    .toggle-row label { font-family: 'Outfit', sans-serif; font-size: 0.88rem; font-weight: 500; color: var(--tp); flex: 1; }
     .toggle-row small { font-size: 0.72rem; color: var(--tm); display: block; margin-top: 0.1rem; }
     .sw {
-      position: relative; width: 40px; height: 22px; flex-shrink: 0;
+      position: relative; width: 38px; height: 21px; flex-shrink: 0;
       background: var(--ib); border: 1px solid var(--glass-b);
-      border-radius: 11px; cursor: pointer; transition: background 0.22s;
+      border-radius: 12px; cursor: pointer; transition: all 0.22s ease;
     }
-    .sw.on { background: var(--agr); border-color: var(--ac); }
+    .sw.on { background: var(--agr); border-color: var(--ac); box-shadow: 0 0 8px var(--ag); }
     .sw-knob {
       position: absolute; top: 2px; left: 2px;
-      width: 16px; height: 16px; border-radius: 50%;
-      background: white; box-shadow: 0 1px 4px rgba(0,0,0,0.25);
-      transition: transform 0.22s;
+      width: 15px; height: 15px; border-radius: 50%;
+      background: white; box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+      transition: transform 0.22s cubic-bezier(0.34,1.3,0.64,1);
     }
-    .sw.on .sw-knob { transform: translateX(18px); }
+    .sw.on .sw-knob { transform: translateX(17px); }
 
     /* ════ GRADIENT PICKER ════ */
     .grad-stops { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.65rem; }
@@ -1005,44 +1011,43 @@
     .grid.list-view .drag-handle { top:50%; transform:translateY(-50%); }
 
     /* ════ ANIMATED STATUS DOT ════ */
-    @keyframes statusPulse { 0%,100%{box-shadow:0 0 0 0 var(--okg)} 50%{box-shadow:0 0 0 4px transparent} }
-    .dot.up { animation: statusPulse 3s ease-in-out infinite; }
+    /* ════ PROPERTIES PANEL ════ */
 
     /* ════ LOCKSCREEN ════ */
     #lockscreen {
       position:fixed; inset:0; z-index:9999;
       display:flex; flex-direction:column; align-items:center; justify-content:center;
-      gap:1.5rem;
-      backdrop-filter:blur(40px) saturate(160%); -webkit-backdrop-filter:blur(40px) saturate(160%);
+      gap:1.4rem;
+      backdrop-filter:blur(48px) saturate(180%); -webkit-backdrop-filter:blur(48px) saturate(180%);
       background: var(--glass);
     }
     #lockscreen.hidden { display:none; }
-    .lock-title { font-family:'Instrument Serif',serif; font-style:italic; font-size:1.6rem; color:var(--tp); letter-spacing:-0.02em; }
-    .lock-subtitle { font-family:'Instrument Serif',serif; font-style:italic; font-size:0.92rem; color:var(--tm); margin-top:-0.75rem; }
-    .pin-dots { display:flex; gap:0.7rem; }
+    .lock-title { font-family:'Instrument Serif',serif; font-style:italic; font-size:1.8rem; color:var(--tp); letter-spacing:-0.03em; }
+    .lock-subtitle { font-family:'Outfit',sans-serif; font-size:0.82rem; font-weight:400; color:var(--tm); margin-top:-0.65rem; letter-spacing:0.01em; }
+    .pin-dots { display:flex; gap:0.65rem; }
     .pin-dot {
-      width:14px; height:14px; border-radius:50%;
+      width:13px; height:13px; border-radius:50%;
       border:2px solid var(--glass-b); background:transparent;
-      transition:background 0.15s, border-color 0.15s;
+      transition:background 0.18s cubic-bezier(0.34,1.3,0.64,1), border-color 0.15s, transform 0.18s;
     }
-    .pin-dot.filled { background:var(--ac); border-color:var(--ac); }
+    .pin-dot.filled { background:var(--ac); border-color:var(--ac); transform:scale(1.15); }
     .pin-dot.err { background:var(--err); border-color:var(--err); }
     .pin-pad {
-      display:grid; grid-template-columns:repeat(3,1fr); gap:0.55rem;
-      max-width:220px; width:100%;
+      display:grid; grid-template-columns:repeat(3,1fr); gap:0.5rem;
+      max-width:210px; width:100%;
     }
     .pin-key {
-      padding:0.85rem; border-radius:14px;
+      padding:0.82rem; border-radius:13px;
       border:1px solid var(--glass-b); background:var(--glass);
-      backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
-      font-family:inherit; font-size:1.1rem; font-weight:600;
-      color:var(--tp); cursor:pointer; transition:all 0.15s;
+      backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+      font-family:'Outfit',sans-serif; font-size:1.05rem; font-weight:600;
+      color:var(--tp); cursor:pointer; transition:all 0.15s cubic-bezier(0.34,1.2,0.64,1);
       text-align:center;
     }
-    .pin-key:hover { background:var(--ag); border-color:var(--ac); transform:scale(1.05); }
-    .pin-key:active { transform:scale(0.95); }
+    .pin-key:hover { background:var(--ag); border-color:var(--ac); transform:translateY(-1px) scale(1.04); box-shadow:0 4px 12px var(--ag); }
+    .pin-key:active { transform:scale(0.94); }
     .pin-key.wide { grid-column:span 2; }
-    .lock-err { font-size:0.8rem; color:var(--err); min-height:1.2em; }
+    .lock-err { font-size:0.78rem; font-family:'Outfit',sans-serif; color:var(--err); min-height:1.2em; }
 
     /* ════ SNIPPETS SIDEBAR in SSH ════ */
     .ssh-snippets-panel {
@@ -1051,7 +1056,7 @@
       background:var(--glass-inner);
     }
     .ssh-snippets-panel.hidden { display:none; }
-    .snip-hd { padding:0.45rem 0.65rem; border-bottom:1px solid var(--glass-b); font-family:'Instrument Serif',serif; font-style:italic; font-size:0.88rem; font-weight:400; text-transform:none; letter-spacing:0; color:var(--tm); display:flex; align-items:center; justify-content:space-between; }
+    .snip-hd { padding:0.42rem 0.62rem; border-bottom:1px solid var(--glass-b); font-family:'Outfit',sans-serif; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--tm); display:flex; align-items:center; justify-content:space-between; }
     .snip-list { flex:1; overflow-y:auto; padding:0.35rem; scrollbar-width:thin; scrollbar-color:var(--ag) transparent; }
     .snip-item { padding:0.4rem 0.55rem; border-radius:8px; cursor:pointer; font-family:'DM Mono',monospace; font-size:0.7rem; color:var(--tp); transition:background 0.15s; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; border:1px solid transparent; }
     .snip-item:hover { background:var(--ag); border-color:var(--ac); }
@@ -1085,10 +1090,10 @@
 
     /* ════ CLOCK ════ */
     #headerClock {
-      font-family:'DM Mono',monospace; font-size:0.78rem;
-      color:var(--tm); padding:0.26rem 0.75rem;
+      font-family:'DM Mono',monospace; font-size:0.75rem; font-weight:500;
+      color:var(--tm); padding:0.24rem 0.72rem;
       background:var(--ib); border:1px solid var(--glass-b); border-radius:20px;
-      white-space:nowrap; letter-spacing:0.02em;
+      white-space:nowrap; letter-spacing:0.04em;
     }
 
     /* ════ NOTES MODAL ════ */
@@ -1096,6 +1101,113 @@
 
     /* ════ SETTINGS — APPEARANCE SECTION ════ */
     .custom-css-ta { font-family:'DM Mono',monospace; font-size:0.72rem; min-height:120px; }
+
+    /* ════ SETTINGS TAB NAV ════ */
+    .stab {
+      display: flex; align-items: center; gap: 0.38rem;
+      padding: 0.52rem 0.9rem; background: none; border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--tm); font-family: 'Outfit', sans-serif; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; transition: all 0.18s; white-space: nowrap;
+      margin-bottom: -1px;
+    }
+    .stab svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; opacity: 0.7; }
+    .stab:hover { color: var(--tp); }
+    .stab.active { color: var(--ac); border-bottom-color: var(--ac); }
+    .stab.active svg { opacity: 1; }
+    .stab-c { display: none; }
+    .stab-c.active { display: block; }
+
+    /* ════ POLISH: improved sparkline bars ════ */
+    .sparkline { display:flex; align-items:flex-end; gap:1.5px; height:14px; margin-top:4px; }
+    .spark-dot {
+      width:4px; border-radius:2px; flex-shrink:0;
+      transition: height 0.35s cubic-bezier(0.34,1.2,0.64,1), background 0.3s;
+    }
+
+    /* ════ POLISH: response time label ════ */
+    .card-rt { font-family:'DM Mono',monospace; font-size:0.58rem; color:var(--tm); opacity:0.6; margin-top:2px; letter-spacing:0.02em; }
+
+    /* ════ POLISH: SSH badge sharper ════ */
+    .card-ssh-badge {
+      position: absolute; top: 6px; left: 6px; z-index: 4;
+      background: var(--agr); color: white;
+      font-family: 'DM Mono', monospace; font-size: 0.5rem; font-weight: 600;
+      padding: 2px 5px; border-radius: 5px; letter-spacing: 0.08em;
+      box-shadow: 0 2px 6px var(--ag);
+    }
+
+    /* ════ POLISH: note dot ════ */
+    .card-note-dot {
+      position:absolute; top:6px; right:20px; z-index:4;
+      width:6px; height:6px; border-radius:50%;
+      background:var(--warn); box-shadow:0 0 6px var(--warn);
+    }
+
+    /* ════ POLISH: drag handle dots ════ */
+    .drag-handle span { display: block; width: 9px; height: 1.5px; background: var(--tm); border-radius: 2px; }
+
+    /* ════ POLISH: empty state ════ */
+    .empty-state { text-align: center; padding: 3.5rem 2rem; color: var(--tm); }
+    .empty-state p { margin-bottom: 1rem; font-family: 'Outfit', sans-serif; font-size: 0.9rem; font-weight: 400; opacity: 0.7; }
+
+    /* ════ POLISH: info-box ════ */
+    .info-box { display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.8rem 0.95rem; background: var(--ag); border: 1px solid var(--ac); border-radius: 11px; margin-bottom: 0.5rem; }
+    .info-box p { font-size: 0.8rem; line-height: 1.55; color: var(--tp); font-family: 'Outfit', sans-serif; }
+
+    /* ════ POLISH: pinned section label ════ */
+    .pinned-label { font-family:'Outfit',sans-serif; font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; color:var(--tm); margin-bottom:0.5rem; padding-left:2px; }
+
+    /* ════ POLISH: tree children indent line ════ */
+    .tree-children { margin-left: 0.85rem; border-left: 1px solid var(--glass-b); padding-left: 0.3rem; opacity: 0.9; }
+
+    /* ════ POLISH: scrollbar throughout (scoped — never override form elements) ════ */
+    .tree, .grid-scroll, .modal, .panel, .snip-list, .ssh-terminals, .ssh-tabs,
+    .xterm-viewport, .overlay {
+      scrollbar-width: thin;
+      scrollbar-color: var(--ag) transparent;
+    }
+    .tree::-webkit-scrollbar, .grid-scroll::-webkit-scrollbar,
+    .modal::-webkit-scrollbar, .panel::-webkit-scrollbar,
+    .snip-list::-webkit-scrollbar { width: 4px; height: 4px; }
+    .tree::-webkit-scrollbar-thumb, .grid-scroll::-webkit-scrollbar-thumb,
+    .modal::-webkit-scrollbar-thumb, .panel::-webkit-scrollbar-thumb,
+    .snip-list::-webkit-scrollbar-thumb { background: var(--ag); border-radius: 4px; }
+    .tree::-webkit-scrollbar-track, .grid-scroll::-webkit-scrollbar-track,
+    .modal::-webkit-scrollbar-track, .panel::-webkit-scrollbar-track,
+    .snip-list::-webkit-scrollbar-track { background: transparent; }
+
+    /* Ensure select and inputs keep correct appearance */
+    .fg select, .fg input, .fg textarea,
+    .ssh-input, .snip-input, .search-box {
+      appearance: auto;
+      -webkit-appearance: auto;
+      color-scheme: light dark;
+    }
+    /* Fix select dropdown option colors in all themes */
+    .fg select option {
+      background: #1a1a2e;
+      color: #e0e0f0;
+    }
+    [data-theme="aero"] .fg select option,
+    [data-theme="solarized"] .fg select option,
+    [data-theme="sakura"] .fg select option,
+    [data-theme="flat-light"] .fg select option {
+      background: #f0f4f8;
+      color: #1a2a38;
+    }
+
+    /* ════ POLISH: grid-scroll padding ════ */
+    .grid-scroll { padding: 6px 2px 0 2px; }
+
+    /* ════ POLISH: sb-header padding ════ */
+    .sb-header { padding: 0.65rem; border-bottom: 1px solid var(--glass-b); display: flex; gap: 0.38rem; flex-shrink: 0; }
+
+    /* ════ POLISH: content toolbar bottom gap ════ */
+    .content-toolbar { padding-bottom: 0; }
+
+    /* ════ POLISH: app padding tighter ════ */
+    .app { padding: 12px; gap: 10px; }
 
   </style>
 </head>
@@ -1333,90 +1445,145 @@
 
   <!-- ════════════ SETTINGS MODAL ════════════ -->
   <div class="overlay" id="settingsOverlay">
-    <div class="modal settings-modal" style="max-width:540px">
+    <div class="modal settings-modal" style="max-width:560px">
       <div class="modal-hd">
         <h2>Settings</h2>
         <button class="modal-close" id="settingsClose"><img src="icons/x.png" style="width:18px;height:18px;opacity:0.85" alt="x" onerror="this.onerror=null;this.style.display='none'"></button>
       </div>
-      <div class="modal-body">
-        <div class="info-box" style="margin-bottom:1.2rem">
-          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <p><strong>100% local.</strong> Everything is stored in your browser's localStorage. Nothing is ever sent to any server.</p>
-        </div>
-        <div class="ss"><div class="ss-title">Theme</div><div class="theme-grid" id="themeGrid"></div></div>
-        <div class="ss" id="customThemeSection" style="display:none">
-          <div class="ss-title">Custom Theme</div>
-          <div class="c-grid" id="colorGrid"></div>
-          <div style="margin-top:0.65rem;display:flex;gap:0.45rem">
-            <button class="btn btn-p" id="applyCustomTheme"><img src="icons/check.png" style="width:14px;height:14px;opacity:0.85" alt="check" onerror="this.onerror=null;this.style.display='none'"> Apply</button>
-            <button class="btn btn-s" id="resetCustomTheme">Reset</button>
-          </div>
-        </div>
-        <div class="ss">
-          <div class="ss-title">Backup & Restore</div>
-          <p style="font-size:0.8rem;color:var(--tm);margin-bottom:0.65rem">Export your services and settings as JSON.</p>
-          <div class="sync-actions">
-            <button class="btn btn-p" id="exportBtn"><img src="icons/download.png" style="width:14px;height:14px;opacity:0.85" alt="download" onerror="this.onerror=null;this.style.display='none'"> Export JSON</button>
-            <button class="btn btn-s" id="copyJsonBtn"><img src="icons/copy.png" style="width:14px;height:14px;opacity:0.85" alt="copy" onerror="this.onerror=null;this.style.display='none'"> Copy</button>
-          </div>
-          <textarea class="fg sync-ta" id="syncTextarea" style="width:100%;margin-bottom:0.65rem" placeholder="Paste exported JSON here to import…"></textarea>
-          <div style="display:flex;gap:0.45rem">
-            <button class="btn btn-ok" id="importBtn"><img src="icons/upload.png" style="width:14px;height:14px;opacity:0.85" alt="upload" onerror="this.onerror=null;this.style.display='none'"> Import JSON</button>
-            <button class="btn btn-s" id="clearSyncBtn">Clear</button>
-          </div>
-        </div>
-        <!-- ══ BACKGROUND ══ -->
-        <div class="ss">
-          <div class="ss-title">Custom Background</div>
-          <div class="toggle-row" style="margin-bottom:0.65rem">
-            <div><label for="bgEnabled">Enable custom background</label><small>Off by default. May impact performance on low-spec devices.</small></div>
-            <div class="sw" id="bgEnabledSw" onclick="toggleBgEnabled()"><div class="sw-knob"></div></div>
-          </div>
-          <div id="bgControls" style="display:none">
-            <div class="bg-source-tabs">
-              <button class="bg-tab active" data-bg-tab="url">URL</button>
-              <button class="bg-tab" data-bg-tab="upload">Upload</button>
-              <button class="bg-tab" data-bg-tab="gradient">Gradient</button>
-            </div>
 
-            <!-- URL tab -->
-            <div class="bg-tab-panel active" id="bg-url-panel">
+      <!-- Settings tab nav -->
+      <div style="padding:0.6rem 1.1rem 0;border-bottom:1px solid var(--glass-b)">
+        <div style="display:flex;gap:0.1rem">
+          <button class="stab active" data-stab="appearance" onclick="switchSettingsTab(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            Appearance
+          </button>
+          <button class="stab" data-stab="background" onclick="switchSettingsTab(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m3 9 4-4 4 4 4-4 4 4"/><path d="M3 15l4 4 4-4 4 4 4-4"/></svg>
+            Background
+          </button>
+          <button class="stab" data-stab="data" onclick="switchSettingsTab(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4.03 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4.03 3 9 3s9-1.34 9-3"/></svg>
+            Data
+          </button>
+          <button class="stab" data-stab="advanced" onclick="switchSettingsTab(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            Advanced
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-body" style="padding-top:1rem">
+
+        <!-- ══ TAB: APPEARANCE ══ -->
+        <div class="stab-c active" id="stab-appearance">
+
+          <div class="ss">
+            <div class="ss-title">Theme</div>
+            <div class="theme-grid" id="themeGrid"></div>
+          </div>
+
+          <div class="ss" id="customThemeSection" style="display:none">
+            <div class="ss-title">Custom Theme Colors</div>
+            <div class="c-grid" id="colorGrid"></div>
+            <div style="margin-top:0.65rem;display:flex;gap:0.45rem">
+              <button class="btn btn-p" id="applyCustomTheme"><img src="icons/check.png" style="width:14px;height:14px;opacity:0.85" alt="check" onerror="this.onerror=null;this.style.display='none'"> Apply</button>
+              <button class="btn btn-s" id="resetCustomTheme">Reset</button>
+            </div>
+          </div>
+
+          <div class="ss">
+            <div class="ss-title">Interface</div>
+            <div class="toggle-row">
+              <div><label>Clock in header</label><small>Shows current time next to the logo.</small></div>
+              <div class="sw" id="clockSw" onclick="toggleClock()"><div class="sw-knob"></div></div>
+            </div>
+            <div class="toggle-row">
+              <div><label>Compact header</label><small>Reduces header height and hides hint text.</small></div>
+              <div class="sw" id="compactSw" onclick="toggleCompactHeader()"><div class="sw-knob"></div></div>
+            </div>
+            <div class="toggle-row">
+              <div><label>Desktop notifications</label><small>Get notified when a service goes down.</small></div>
+              <div class="sw" id="notifSw" onclick="toggleNotifications()"><div class="sw-knob"></div></div>
+            </div>
+            <div class="toggle-row">
+              <div><label>Lightweight mode</label><small>Disables blur effects for low-spec devices.</small></div>
+              <div class="sw" id="perfModeSw" onclick="togglePerfMode()"><div class="sw-knob"></div></div>
+            </div>
+          </div>
+
+          <div class="ss">
+            <div class="ss-title">Lock Screen</div>
+            <div class="toggle-row" style="margin-bottom:0.65rem">
+              <div><label>Enable lock screen</label><small>Requires a 4-digit PIN to view the dashboard.</small></div>
+              <div class="sw" id="lockSw" onclick="toggleLock()"><div class="sw-knob"></div></div>
+            </div>
+            <div id="pinSetupArea" style="display:none">
               <div class="fg">
-                <label>Image URL</label>
-                <input type="text" id="bgUrlInput" placeholder="https://example.com/wallpaper.jpg">
-                <small>Direct image link (jpg, png, webp)</small>
+                <label>Set PIN (4 digits)</label>
+                <input type="password" id="pinInput" maxlength="4" pattern="[0-9]{4}" placeholder="••••" inputmode="numeric" style="letter-spacing:0.3em;font-size:1.1rem;text-align:center;max-width:120px">
+                <small>Numbers only. Stored locally, never sent anywhere.</small>
               </div>
-              <button class="btn btn-p" onclick="applyBgUrl()" style="margin-bottom:0.65rem">Apply URL</button>
+              <div style="display:flex;gap:0.45rem;flex-wrap:wrap">
+                <button class="btn btn-p" onclick="savePin()">Save PIN</button>
+                <button class="btn btn-d" onclick="clearPin()">Remove PIN</button>
+              </div>
             </div>
+          </div>
 
-            <!-- Upload tab -->
-            <div class="bg-tab-panel" id="bg-upload-panel">
-              <div class="fg">
-                <label>Local image file</label>
-                <input type="file" id="bgFileInput" accept="image/*" style="padding:0.4rem;font-size:0.82rem">
-                <small>Saved as base64 in localStorage (~5MB limit)</small>
-              </div>
-              <button class="btn btn-p" onclick="applyBgFile()" style="margin-bottom:0.65rem">Upload &amp; Apply</button>
+        </div>
+
+        <!-- ══ TAB: BACKGROUND ══ -->
+        <div class="stab-c" id="stab-background">
+
+          <div class="ss">
+            <div class="ss-title">Custom Background</div>
+            <div class="toggle-row" style="margin-bottom:0.8rem">
+              <div><label>Enable custom background</label><small>May impact performance on low-spec devices.</small></div>
+              <div class="sw" id="bgEnabledSw" onclick="toggleBgEnabled()"><div class="sw-knob"></div></div>
             </div>
-
-            <!-- Gradient tab -->
-            <div class="bg-tab-panel" id="bg-gradient-panel">
-              <div class="grad-stops">
-                <div class="grad-stop"><label>Color 1</label><input type="color" id="gc1" value="#0d1117" oninput="updateGradPreview()"></div>
-                <div class="grad-stop"><label>Color 2</label><input type="color" id="gc2" value="#1a2a4a" oninput="updateGradPreview()"></div>
-                <div class="grad-stop"><label>Color 3</label><input type="color" id="gc3" value="#0a1628" oninput="updateGradPreview()"></div>
+            <div id="bgControls" style="display:none">
+              <div class="bg-source-tabs">
+                <button class="bg-tab active" data-bg-tab="url">URL</button>
+                <button class="bg-tab" data-bg-tab="upload">Upload</button>
+                <button class="bg-tab" data-bg-tab="gradient">Gradient</button>
               </div>
-              <div class="grad-dir" id="gradDirBtns">
-                <button class="grad-dir-btn active" data-dir="145deg">↗ Diagonal</button>
-                <button class="grad-dir-btn" data-dir="180deg">↓ Down</button>
-                <button class="grad-dir-btn" data-dir="90deg">→ Right</button>
-                <button class="grad-dir-btn" data-dir="0deg">↑ Up</button>
+              <div class="bg-tab-panel active" id="bg-url-panel">
+                <div class="fg">
+                  <label>Image URL</label>
+                  <input type="text" id="bgUrlInput" placeholder="https://example.com/wallpaper.jpg">
+                  <small>Direct image link (jpg, png, webp)</small>
+                </div>
+                <button class="btn btn-p" onclick="applyBgUrl()" style="margin-bottom:0.65rem">Apply URL</button>
               </div>
-              <div class="grad-preview" id="gradPreview"></div>
-              <button class="btn btn-p" onclick="applyBgGradient()" style="margin-bottom:0.65rem">Apply Gradient</button>
+              <div class="bg-tab-panel" id="bg-upload-panel">
+                <div class="fg">
+                  <label>Local image file</label>
+                  <input type="file" id="bgFileInput" accept="image/*" style="padding:0.4rem;font-size:0.82rem">
+                  <small>Saved as base64 in localStorage (~5MB limit)</small>
+                </div>
+                <button class="btn btn-p" onclick="applyBgFile()" style="margin-bottom:0.65rem">Upload &amp; Apply</button>
+              </div>
+              <div class="bg-tab-panel" id="bg-gradient-panel">
+                <div class="grad-stops">
+                  <div class="grad-stop"><label>Color 1</label><input type="color" id="gc1" value="#0d1117" oninput="updateGradPreview()"></div>
+                  <div class="grad-stop"><label>Color 2</label><input type="color" id="gc2" value="#1a2a4a" oninput="updateGradPreview()"></div>
+                  <div class="grad-stop"><label>Color 3</label><input type="color" id="gc3" value="#0a1628" oninput="updateGradPreview()"></div>
+                </div>
+                <div class="grad-dir" id="gradDirBtns">
+                  <button class="grad-dir-btn active" data-dir="145deg">↗ Diagonal</button>
+                  <button class="grad-dir-btn" data-dir="180deg">↓ Down</button>
+                  <button class="grad-dir-btn" data-dir="90deg">→ Right</button>
+                  <button class="grad-dir-btn" data-dir="0deg">↑ Up</button>
+                </div>
+                <div class="grad-preview" id="gradPreview"></div>
+                <button class="btn btn-p" onclick="applyBgGradient()" style="margin-bottom:0.65rem">Apply Gradient</button>
+              </div>
             </div>
+          </div>
 
-            <!-- Shared controls -->
+          <div class="ss">
+            <div class="ss-title">Background Adjustments</div>
             <div class="slider-row">
               <label>Overlay opacity</label>
               <input type="range" id="bgOverlayOpacity" min="0" max="85" value="40" oninput="updateBgOverlay()">
@@ -1437,76 +1604,68 @@
               <input type="range" id="bgCardOpacity" min="5" max="60" value="22" oninput="updateCardOpacity()">
               <span id="bgCardLabel">22%</span>
             </div>
-            <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-top:0.4rem">
-              <button class="btn btn-s" onclick="autoPickAccentFromBg()">Auto-pick accent from image</button>
+            <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-top:0.5rem">
+              <button class="btn btn-s" onclick="autoPickAccentFromBg()">Auto-pick accent</button>
               <button class="btn btn-s" onclick="resetBg()">Reset to default</button>
             </div>
           </div>
+
         </div>
 
-        <!-- ══ PERFORMANCE ══ -->
-        <div class="ss">
-          <div class="ss-title">Performance</div>
-          <div class="toggle-row">
-            <div><label>Lightweight mode</label><small>Disables blur &amp; backdrop-filter for low-spec devices. Glass surfaces become solid.</small></div>
-            <div class="sw" id="perfModeSw" onclick="togglePerfMode()"><div class="sw-knob"></div></div>
-          </div>
-        </div>
+        <!-- ══ TAB: DATA ══ -->
+        <div class="stab-c" id="stab-data">
 
-        <!-- ══ APPEARANCE ══ -->
-        <div class="ss">
-          <div class="ss-title">Appearance</div>
-          <div class="toggle-row">
-            <div><label>Clock in header</label><small>Shows current time next to the logo.</small></div>
-            <div class="sw" id="clockSw" onclick="toggleClock()"><div class="sw-knob"></div></div>
+          <div class="info-box" style="margin-bottom:1rem">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <p><strong>100% local.</strong> Everything stays in your browser's localStorage. Nothing is ever sent to any server.</p>
           </div>
-          <div class="toggle-row">
-            <div><label>Compact header</label><small>Reduces header height, hides hint text.</small></div>
-            <div class="sw" id="compactSw" onclick="toggleCompactHeader()"><div class="sw-knob"></div></div>
-          </div>
-          <div class="toggle-row">
-            <div><label>Desktop notifications</label><small>Notify when a service goes down.</small></div>
-            <div class="sw" id="notifSw" onclick="toggleNotifications()"><div class="sw-knob"></div></div>
-          </div>
-        </div>
 
-        <!-- ══ LOCK SCREEN ══ -->
-        <div class="ss">
-          <div class="ss-title">Lock Screen</div>
-          <div class="toggle-row" style="margin-bottom:0.65rem">
-            <div><label>Enable lock screen</label><small>Requires a 4-digit PIN to view the dashboard.</small></div>
-            <div class="sw" id="lockSw" onclick="toggleLock()"><div class="sw-knob"></div></div>
-          </div>
-          <div id="pinSetupArea" style="display:none">
-            <div class="fg">
-              <label>Set PIN (4 digits)</label>
-              <input type="password" id="pinInput" maxlength="4" pattern="[0-9]{4}" placeholder="••••" inputmode="numeric" style="letter-spacing:0.3em;font-size:1.1rem;text-align:center;max-width:120px">
-              <small>Numbers only. Stored locally, never sent anywhere.</small>
-            </div>
+          <div class="ss">
+            <div class="ss-title">Export</div>
+            <p style="font-size:0.8rem;color:var(--tm);margin-bottom:0.75rem">Save your services and settings as a JSON file.</p>
             <div style="display:flex;gap:0.45rem;flex-wrap:wrap">
-              <button class="btn btn-p" onclick="savePin()">Save PIN</button>
-              <button class="btn btn-d" onclick="clearPin()">Remove PIN</button>
+              <button class="btn btn-p" id="exportBtn"><img src="icons/download.png" style="width:14px;height:14px;opacity:0.85" alt="download" onerror="this.onerror=null;this.style.display='none'"> Export JSON</button>
+              <button class="btn btn-s" id="copyJsonBtn"><img src="icons/copy.png" style="width:14px;height:14px;opacity:0.85" alt="copy" onerror="this.onerror=null;this.style.display='none'"> Copy to clipboard</button>
             </div>
           </div>
+
+          <div class="ss">
+            <div class="ss-title">Import</div>
+            <p style="font-size:0.8rem;color:var(--tm);margin-bottom:0.75rem">Paste exported JSON below to restore a backup.</p>
+            <textarea class="fg sync-ta" id="syncTextarea" style="width:100%;margin-bottom:0.65rem" placeholder="Paste exported JSON here…"></textarea>
+            <div style="display:flex;gap:0.45rem">
+              <button class="btn btn-ok" id="importBtn"><img src="icons/upload.png" style="width:14px;height:14px;opacity:0.85" alt="upload" onerror="this.onerror=null;this.style.display='none'"> Import JSON</button>
+              <button class="btn btn-s" id="clearSyncBtn">Clear</button>
+            </div>
+          </div>
+
+          <div class="ss">
+            <div class="ss-title" style="color:var(--err)">Danger Zone</div>
+            <p style="font-size:0.8rem;color:var(--tm);margin-bottom:0.75rem">Permanently delete all services, folders and settings.</p>
+            <button class="btn btn-d" id="clearAllBtn" style="width:100%;justify-content:center">
+              <img src="icons/trash.png" style="width:14px;height:14px;opacity:0.85" alt="trash" onerror="this.onerror=null;this.style.display='none'"> Clear all data
+            </button>
+          </div>
+
         </div>
 
-        <!-- ══ ADVANCED ══ -->
-        <div class="ss">
-          <div class="ss-title">Advanced</div>
-          <div class="fg">
-            <label>Custom CSS</label>
-            <textarea class="custom-css-ta" id="customCssArea" placeholder="/* your custom CSS here */"></textarea>
+        <!-- ══ TAB: ADVANCED ══ -->
+        <div class="stab-c" id="stab-advanced">
+
+          <div class="ss">
+            <div class="ss-title">Custom CSS</div>
+            <p style="font-size:0.8rem;color:var(--tm);margin-bottom:0.75rem">Inject custom styles directly into the dashboard.</p>
+            <div class="fg">
+              <textarea class="custom-css-ta" id="customCssArea" placeholder="/* your custom CSS here */"></textarea>
+            </div>
+            <div style="display:flex;gap:0.45rem">
+              <button class="btn btn-p" onclick="applyCustomCss()">Apply CSS</button>
+              <button class="btn btn-s" onclick="clearCustomCss()">Clear</button>
+            </div>
           </div>
-          <div style="display:flex;gap:0.45rem">
-            <button class="btn btn-p" onclick="applyCustomCss()">Apply CSS</button>
-            <button class="btn btn-s" onclick="clearCustomCss()">Clear</button>
-          </div>
+
         </div>
 
-        <div class="ss">
-          <div class="ss-title">Danger Zone</div>
-          <button class="btn btn-d" id="clearAllBtn" style="width:100%;justify-content:center"><img src="icons/trash.png" style="width:14px;height:14px;opacity:0.85" alt="trash" onerror="this.onerror=null;this.style.display='none'"> Clear all data</button>
-        </div>
       </div>
     </div>
   </div>
@@ -1848,6 +2007,15 @@
     const grid=document.getElementById('colorGrid');
     const saved=JSON.parse(localStorage.getItem(CUSTOM_KEY)||'{}');
     grid.innerHTML=CCOLORS.map(c=>`<div class="c-row"><label>${c.label}</label><input type="color" data-prop="${c.prop}" value="${saved[c.prop]||c.def}"></div>`).join('');
+  }
+
+  // ═══════════════════════════════════
+  // SETTINGS TABS
+  // ═══════════════════════════════════
+  function switchSettingsTab(btn) {
+    const tab = btn.dataset.stab;
+    document.querySelectorAll('.stab').forEach(b => b.classList.toggle('active', b === btn));
+    document.querySelectorAll('.stab-c').forEach(c => c.classList.toggle('active', c.id === 'stab-' + tab));
   }
 
   document.getElementById('settingsBtn').addEventListener('click',()=>{
