@@ -59,7 +59,7 @@ Download dashboard.html and open it in any modern browser. No internet connectio
 **Option 2 — Clone the repository**
 
 ```
-git clone https://github.com/YOUR_USERNAME/kurudash
+https://github.com/xf86-kurumi/KuruDash/
 ```
 
 Open dashboard.html directly from the cloned folder.
