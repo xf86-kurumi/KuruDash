@@ -2545,48 +2545,112 @@
 
   // Search is wired in INIT section with debounce
 
-  // ═══════════════════════════════════
-  // STATUS CHECK
-  // ═══════════════════════════════════
-  // Debounced render for status updates — batch multiple concurrent checks
-  let _renderPending=false;
-  function scheduleRender(){
-    if(_renderPending)return;
-    _renderPending=true;
-    requestAnimationFrame(()=>{_renderPending=false;render();});
+// ═══════════════════════════════════
+// STATUS CHECK
+// ═══════════════════════════════════
+
+// Debounced render for status updates — batch multiple concurrent checks
+let _renderPending = false;
+function scheduleRender() {
+  if (_renderPending) return;
+  _renderPending = true;
+  requestAnimationFrame(() => {
+    _renderPending = false;
+    render();
+  });
+}
+
+async function checkStatus(svc) {
+  if (svc.manualOverride) {
+    render();
+    return;
   }
 
-  async function checkStatus(svc){
-    if(svc.manualOverride){render();return;}
-    const url=normalizeUrl(svc.statusUrl||svc.controlUrl||svc.ip);
-    const prevStatus = svc.status;
-    svc.status='checking';scheduleRender();
-    if(!url){svc.status='unknown';scheduleRender();return;}
-    const t0=performance.now();
-    try{
-      const ctrl=new AbortController();
-      const tid=setTimeout(()=>ctrl.abort(),6000);
-      await fetch(url,{mode:'no-cors',cache:'no-store',signal:ctrl.signal});
-      clearTimeout(tid);
-      svc.status='up';
-      svc.responseTime=Math.round(performance.now()-t0);
-    }catch(e){
-      svc.status='down';
-      svc.responseTime=null;
-    }
-    // Record history
-    if(!statusHistory[svc.id])statusHistory[svc.id]=[];
-    statusHistory[svc.id].push({s:svc.status,rt:svc.responseTime,ts:Date.now()});
-    if(statusHistory[svc.id].length>12)statusHistory[svc.id].shift();
-    // Desktop notification on down
-    if(svc.status==='down'&&prevStatus==='up'){
-      const uiOpts=JSON.parse(localStorage.getItem(UI_KEY)||'{}');
-      if(uiOpts.notifications&&Notification.permission==='granted'){
-        new Notification('KuruDash — Service Down',{body:`${svc.name} (${svc.ip}) is not responding.`,icon:'icons/rei.png'});
-      }
-    }
+  const url = normalizeUrl(svc.statusUrl || svc.controlUrl || svc.ip);
+  const prevStatus = svc.status;
+
+  svc.status = 'checking';
+  scheduleRender();
+
+  if (!url) {
+    svc.status = 'unknown';
     scheduleRender();
+    return;
   }
+
+  const t0 = performance.now();
+  let controller;
+
+  try {
+    controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
+
+    // IMPORTANT: Keep original fetch options - no-cors mode has restrictions!
+    await fetch(url, {
+      mode: 'no-cors',  // Must keep this for cross-origin requests
+      cache: 'no-store',
+      signal: controller.signal
+      // NO method: 'HEAD' - not allowed in no-cors mode
+      // NO keepalive - can interfere with abort signals
+    });
+
+    clearTimeout(timeoutId);
+
+    // If fetch doesn't throw with no-cors, it's considered "up"
+    // (even though we can't read the response)
+    svc.status = 'up';
+    svc.responseTime = Math.round(performance.now() - t0);
+
+  } catch (e) {
+    // If aborted = timeout, else network error
+    svc.status = 'down';
+    svc.responseTime = null;
+  } finally {
+    // Clean up controller
+    if (controller) {
+      clearTimeout(controller._timeoutId);
+    }
+  }
+
+  // Record history
+  if (!statusHistory[svc.id]) statusHistory[svc.id] = [];
+  statusHistory[svc.id].push({
+    s: svc.status,
+    rt: svc.responseTime,
+    ts: Date.now()
+  });
+
+  if (statusHistory[svc.id].length > 12) {
+    statusHistory[svc.id].shift();
+  }
+
+  // Desktop notification on down
+  if (svc.status === 'down' && prevStatus === 'up') {
+    try {
+      const uiOpts = JSON.parse(localStorage.getItem(UI_KEY) || '{}');
+      if (uiOpts.notifications && Notification.permission === 'granted') {
+        new Notification('KuruDash — Service Down', {
+          body: `${svc.name} (${svc.ip}) is not responding.`,
+          icon: 'icons/rei.png'
+        });
+      }
+    } catch (e) {
+      // Ignore notification errors
+    }
+  }
+
+  scheduleRender();
+}
+
+// Optional: Keep the URL cache but make it safe
+const urlCache = new Map();
+function normalizeUrlCached(url) {
+  if (!url) return null;
+  if (urlCache.has(url)) return urlCache.get(url);
+  const normalized = normalizeUrl(url);
+  urlCache.set(url, normalized);
+  return normalized;
+}
 
   // ═══════════════════════════════════
   // RENDER TREE
