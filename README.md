@@ -8,7 +8,7 @@ No backend. No database. No tracking. One HTML file.
 ## Overview
 
 KuruDash gives you a clean, organized view of all your self-hosted services from a single browser tab.
-Add services, group them into folders, monitor their uptime, pull live stats from Netdata or any JSON API, and SSH directly into your servers — all without running any server-side code. Everything is stored in your browser's localStorage and never leaves your device.
+Add services, group them into folders, monitor their uptime, pull live stats from **KuruAgent**, Netdata, or any JSON API, and SSH directly into your servers — all without running any server-side code. Everything is stored in your browser's localStorage and never leaves your device.
 
 ---
 
@@ -36,9 +36,11 @@ Add services, group them into folders, monitor their uptime, pull live stats fro
 - 10 preset types: CPU Load, RAM Usage, Disk Usage, Network In, Power Draw, Temperature, Uptime, Load Avg, Docker Containers, Custom
 - Custom widget type for any JSON endpoint
 - Configurable data URL, JSON path (dot notation), unit, warn threshold, alert threshold
-- Color-coded progress bar — green/yellow/red based on thresholds
+- **Test button** — verify your URL and JSON path live before saving, shows the exact value found
+- Color-coded progress bar and tile border — green/yellow/red based on thresholds
+- Sparkline history graph per widget (last 30 data points)
 - Pauses polling when browser tab is hidden
-- Works with Netdata, Prometheus node_exporter, Home Assistant, Docker API, smart plug APIs, or any custom JSON endpoint
+- Works with **KuruAgent** (included), Netdata, Prometheus node_exporter, Home Assistant, Docker API, smart plug APIs, or any custom JSON endpoint
 - Widgets included in export/import/clear
 
 **SSH Terminal**
@@ -86,29 +88,59 @@ Open `dashboard.html` directly from the cloned folder.
 
 ## Widget Setup
 
-Widgets pull live data from any URL that returns JSON. The easiest path is **Netdata** — a free, zero-config monitoring agent that exposes a full REST API instantly on port 19999.
+Widgets pull live data from any URL that returns JSON. The fastest path is **KuruAgent** — a zero-dependency Python script included in this repo that exposes all your system metrics instantly with no configuration.
 
-### Step 1 — Install Netdata on each server you want to monitor
+### KuruAgent (recommended — included)
+
+KuruAgent is a single Python file with no pip dependencies. It runs on Linux, macOS, and Windows.
+
+```bash
+python3 kuruagent.py
+```
+
+That's it. It starts on port `9977` and serves all metrics immediately.
+
+```
+✓  KuruAgent is running!
+   Listening on  http://0.0.0.0:9977
+   JSON path      value
+```
+
+**Available endpoints**
+
+| Endpoint | Metric | JSON path |
+|----------|--------|-----------|
+| `/cpu` | CPU usage % | `value` |
+| `/ram` | RAM usage % | `value` |
+| `/disk` | Disk usage % | `value` |
+| `/temp` | CPU temperature °C | `value` |
+| `/load` | 1-minute load average | `value` |
+| `/uptime` | System uptime string | `value` |
+| `/net` | Network inbound KB/s | `value` |
+| `/docker` | Running container count | `value` |
+| `/all` | All metrics in one response | e.g. `cpu`, `ram` |
+| `/health` | Health check | — |
+
+**Custom port**
+
+```bash
+python3 kuruagent.py --port 8080
+python3 kuruagent.py --host 127.0.0.1 --port 9977
+```
+
+KuruAgent sends the correct CORS headers automatically — no extra configuration needed.
+
+---
+
+### Netdata (alternative)
+
+Netdata is a free, zero-config monitoring agent that exposes a full REST API on port 19999.
 
 ```bash
 curl https://my-netdata.io/kickstart.sh | sh
 ```
 
-That is all. Netdata starts automatically and is available at `http://YOUR_SERVER_IP:19999`. No configuration needed.
-
-### Step 2 — Add a widget in KuruDash
-
-1. Click the bar chart icon in the header (or press `W`)
-2. Pick a preset — CPU, RAM, Disk, Power, etc.
-3. Paste the data URL for your server
-4. Adjust the label, unit, warn/alert thresholds if needed
-5. Click **Add Widget**
-
-The widget appears in the strip above your service grid and refreshes every 8 seconds.
-
-### Netdata URL reference
-
-Replace `192.168.1.100` with your server's actual IP address.
+**Netdata URL reference** — replace `192.168.1.100` with your server's IP.
 
 | Widget | URL |
 |--------|-----|
@@ -119,11 +151,26 @@ Replace `192.168.1.100` with your server's actual IP address.
 | Temperature °C | `http://192.168.1.100:19999/api/v1/data?chart=sensors.coretemp&points=1&after=-1` |
 | Load average | `http://192.168.1.100:19999/api/v1/data?chart=system.load&points=1&after=-1` |
 
-All Netdata responses return `{ "data": [[value, ...]] }` — the default JSON path `data.0.0` works for all of them.
+All Netdata responses use JSON path `data.0.0`.
+
+---
+
+### Adding a widget in KuruDash
+
+1. Click the bar chart icon in the header (or press `W`)
+2. Pick a preset — CPU, RAM, Disk, Power, etc.
+3. Paste the data URL for your server
+4. Click **Test** to verify the connection live
+5. Adjust label, unit, warn/alert thresholds if needed
+6. Click **Add Widget**
+
+The widget appears in the strip above your service grid and refreshes every 8 seconds.
+
+---
 
 ### Docker container count
 
-Point the Containers preset at the Docker API socket proxy (or a lightweight API wrapper like [docker-proxy](https://github.com/Tecnativa/docker-socket-proxy)):
+Point the Containers preset at the Docker API socket proxy:
 
 ```
 URL:  http://192.168.1.100:2375/v1/info
@@ -131,8 +178,6 @@ Path: ContainersRunning
 ```
 
 ### Power draw (smart plugs and UPS)
-
-Any smart plug or UPS with an HTTP API works. Examples:
 
 **Shelly plug** — returns `{"apower": 87.4}`
 ```
@@ -143,7 +188,7 @@ Unit: W
 
 **TP-Link Tapo / Kasa** — use a local API wrapper like [python-kasa](https://github.com/python-kasa/python-kasa) with a simple HTTP shim.
 
-**APC UPS / Network UPS Tools (NUT)** — expose a JSON endpoint via the NUT web interface or a small Python script, then point the Power widget at it.
+**APC UPS / NUT** — expose a JSON endpoint via the NUT web interface or a small script, then point the Power widget at it.
 
 ### Custom widget for any JSON
 
@@ -157,9 +202,9 @@ Set path to `stats.temperature`.
 
 ### Fixing CORS errors
 
-Browsers block requests to other origins by default. If a widget shows "Error", you need to enable CORS on the server side.
+KuruAgent handles CORS automatically. For other sources:
 
-**For Netdata**, edit `/etc/netdata/netdata.conf`:
+**Netdata** — edit `/etc/netdata/netdata.conf`:
 
 ```ini
 [web]
@@ -170,9 +215,9 @@ Browsers block requests to other origins by default. If a widget shows "Error", 
 
 Then restart: `sudo systemctl restart netdata`
 
-**For any other API**, add the header `Access-Control-Allow-Origin: *` to the response. Most reverse proxies (nginx, Caddy, Traefik) can add this with one line.
+**Any other API** — add `Access-Control-Allow-Origin: *` to the response. One line in nginx, Caddy, or Traefik.
 
-**Simplest alternative** — open KuruDash from the same machine as the server, where there is no cross-origin restriction.
+**Simplest alternative** — open KuruDash on the same machine as the server (no cross-origin restriction).
 
 ---
 
@@ -190,7 +235,7 @@ ttyd -p 7681 bash       # shell relay (no login)
 ttyd -p 7681 login      # login prompt with authentication
 ```
 
-Then in KuruDash, add or edit a service → Connection tab → set type to SSH → enter `ws://192.168.1.100:7681`.
+Then in KuruDash: add or edit a service → Connection tab → set type to SSH → enter `ws://192.168.1.100:7681`.
 
 **Option B — webssh2 (full SSH key/password auth)**
 
@@ -208,17 +253,17 @@ Default relay address: `ws://YOUR_SERVER_IP:2222`
 3. Set Connection Type to SSH
 4. Enter username and port
 5. Enter the WebSocket relay URL
-6. Save — then double-click the card or click Open SSH Terminal in the properties panel
+6. Save — then double-click the card or click **Open SSH Terminal** in the properties panel
 
 ---
 
 ## Custom Background Setup
 
 1. Open Settings → Background tab
-2. Toggle Enable custom background on
+2. Toggle **Enable custom background** on
 3. Choose URL, Upload, or Gradient
 4. Use the sliders to adjust overlay opacity, panel blur, and card transparency
-5. Click Auto-pick accent to match the accent color to your wallpaper
+5. Click **Auto-pick accent** to match the accent color to your wallpaper
 
 Background settings are stored separately. Resetting clears only visual options, leaving all service data intact.
 
@@ -240,15 +285,15 @@ Background settings are stored separately. Resetting clears only visual options,
 
 ## Performance on Low-Spec Devices
 
-Open Settings → Interface → enable Lightweight mode. This disables all `backdrop-filter` and blur effects. The dashboard also respects the OS Reduce Motion accessibility setting automatically — all animations are disabled if the user has that enabled.
+Open Settings → Interface → enable **Lightweight mode**. This disables all `backdrop-filter` and blur effects. The dashboard also respects the OS Reduce Motion accessibility setting automatically — all animations are disabled if enabled.
 
 ---
 
 ## Backup and Restore
 
-Settings → Data tab → Export JSON (download or copy to clipboard).
+Settings → Data tab → **Export JSON** (download or copy to clipboard).
 
-To restore: paste the JSON and click Import. The export includes services, folders, theme, custom theme colors, widget configurations, notes, and pinned IDs. Background images are stored separately as base64 and excluded from export due to size.
+To restore: paste the JSON and click **Import**. The export includes services, folders, theme, custom theme colors, widget configurations, and notes. Background images are stored separately as base64 and excluded from export due to size.
 
 ---
 
@@ -258,6 +303,7 @@ To restore: paste the JSON and click Import. The export includes services, folde
 kurudash/
 ├── dashboard.html      The entire application
 ├── index.html          Landing page (optional, for GitHub Pages)
+├── kuruagent.py        Zero-dependency widget metrics server
 ├── README.md           This file
 ├── LICENSE             GPL v3
 ├── icons/              UI icons (PNG with built-in SVG fallbacks)
@@ -304,6 +350,7 @@ kurudash-ssh-font       SSH terminal font size
 kurudash-lock-pin       Lock screen PIN (stored locally only)
 kurudash-custom-css     User-injected custom CSS
 kurudash-widgets        Widget configurations
+kurudash-widget-hist    Widget sparkline history data
 ```
 
 ---
@@ -337,6 +384,7 @@ All of the above can be replaced with self-hosted alternatives.
 
 Icons — Aoi (hand-drawn icons and logo)
 Code, UI design, and project concept — xf86-kurumi
+KuruAgent — zero-dependency widget metrics server
 SSH terminal — xterm.js
 Fonts — Instrument Serif, Outfit, DM Mono via Google Fonts
 Hosting — Cloudflare Pages

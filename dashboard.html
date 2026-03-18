@@ -9,7 +9,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="KuruDash — homelab service dashboard">
+  <meta name="theme-color" content="#0d1520">
   <title>KuruDash</title>
+  <!-- ══ Favicon: uses rei.png from icons/ folder ══ -->
+  <link rel="icon" type="image/png" href="icons/rei.png">
+  <link rel="apple-touch-icon" href="icons/rei.png">
+  <link rel="shortcut icon" href="icons/rei.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- fonts loaded via @import in CSS -->
@@ -1104,6 +1110,91 @@
     body.compact-header header .header-hint { display:none !important; }
     body.compact-header .logo-text { font-size:1.1rem; }
 
+    /* ════ LOGO AVATAR ════ */
+    .logo-avatar-wrap {
+      position: relative;
+      width: 40px; height: 40px;
+      border-radius: 50%; flex-shrink: 0;
+      background: var(--agr);
+      padding: 2px;
+      box-shadow: 0 0 0 2px var(--ag), 0 3px 14px var(--ag);
+      transition: box-shadow 0.3s, transform 0.25s cubic-bezier(0.34,1.3,0.64,1);
+    }
+    .logo-avatar-wrap:hover {
+      box-shadow: 0 0 0 3px var(--ag), 0 6px 22px var(--ag);
+      transform: scale(1.07) rotate(-3deg);
+    }
+    .logo-avatar {
+      width: 100%; height: 100%;
+      border-radius: 50%; object-fit: cover;
+      display: block;
+    }
+    /* Subtle inner glow ring */
+    .logo-avatar-wrap::after {
+      content: '';
+      position: absolute; inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, var(--ac), transparent 40%, var(--ac) 80%, transparent);
+      z-index: -1;
+      opacity: 0.5;
+      animation: logoSpin 8s linear infinite;
+    }
+    @keyframes logoSpin { to { transform: rotate(360deg); } }
+
+    /* ════ POLISHED MODAL OVERLAY ════ */
+    .overlay.open {
+      animation: overlayIn 0.22s cubic-bezier(0.4,0,0.2,1) both;
+    }
+    @keyframes overlayIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .overlay.open .modal {
+      animation: modalIn 0.28s cubic-bezier(0.34,1.15,0.64,1) both;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.93) translateY(10px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    /* ════ POLISHED WIDGET TILES ════ */
+    .widget-tile {
+      position: relative;
+      transition: transform 0.22s cubic-bezier(0.34,1.15,0.64,1),
+                  box-shadow 0.22s ease,
+                  border-color 0.18s ease;
+    }
+    /* Animated gradient border on ok state */
+    .widget-tile.status-ok { border-color: var(--ok); }
+    .widget-tile.status-warn { border-color: var(--warn); }
+    .widget-tile.status-err { border-color: var(--err); }
+
+    /* ════ POLISHED CARD HOVER ════ */
+    .card { transition: transform 0.22s cubic-bezier(0.34,1.15,0.64,1), box-shadow 0.22s ease, border-color 0.18s ease, background 0.2s ease; }
+
+    /* ════ BETTER EMPTY STATE ════ */
+    .empty-state {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 4rem 2rem;
+    }
+    .empty-state .empty-icon svg { opacity: 0.2; }
+
+    /* ════ POLISHED BUTTONS ════ */
+    .btn { transition: all 0.18s cubic-bezier(0.34,1.2,0.64,1); }
+    .btn:active { transform: scale(0.96) !important; }
+
+    /* ════ SEARCH BOX REFINEMENT ════ */
+    .search-box:focus { box-shadow: 0 0 0 2px var(--ag); }
+
+    /* ════ LOADING SKELETON ════ */
+    .widget-loading {
+      background: linear-gradient(90deg, var(--ib) 25%, var(--ibr) 50%, var(--ib) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border: none;
+    }
+    @keyframes shimmer { to { background-position: -200% 0; } }
+
     /* ════ CLOCK ════ */
     #headerClock {
       font-family:'DM Mono',monospace; font-size:0.75rem; font-weight:500;
@@ -1530,7 +1621,9 @@
     <!-- HEADER -->
     <header>
       <div class="header-left">
-        <img id="headerAvatar" src="icons/rei.png" style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.65);box-shadow:0 2px 12px rgba(0,0,0,0.15),0 0 0 3px var(--ag);transition:box-shadow 0.3s;flex-shrink:0" alt="avatar" onerror="this.onerror=null;this.style.display='none'">
+        <div class="logo-avatar-wrap" title="KuruDash">
+          <img id="headerAvatar" src="icons/rei.png" class="logo-avatar" alt="KuruDash" onerror="this.style.opacity='0'">
+        </div>
         <span class="logo-text">KuruDash</span>
       </div>
       <span class="header-hint">Click to select · Double-click to open · Right-click to edit · <kbd style="font-family:'DM Mono',monospace;font-size:0.72em;padding:1px 4px;background:var(--ib);border:1px solid var(--glass-b);border-radius:4px">W</kbd> Widgets</span>
@@ -2040,17 +2133,26 @@
         <button class="modal-close" id="widgetModalClose"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
       </div>
       <div class="modal-body">
-        <p style="font-size:0.82rem;color:var(--tm);margin-bottom:1rem;line-height:1.55">Add stat tiles above your dashboard. Widgets fetch data from a URL you configure (e.g. a <strong style="color:var(--ac)">Netdata</strong>, <strong style="color:var(--ac)">Prometheus</strong>, or custom JSON endpoint).</p>
+        <p style="font-size:0.82rem;color:var(--tm);margin-bottom:1rem;line-height:1.55">Add stat tiles above your dashboard. Widgets pull data from a JSON endpoint — works great with <strong style="color:var(--ac)">KuruAgent</strong>, <strong style="color:var(--ac)">Netdata</strong>, <strong style="color:var(--ac)">Prometheus</strong> or any custom URL.</p>
         <div class="widget-modal-grid" id="widgetChoiceGrid"></div>
-        <div id="widgetConfigArea" style="display:none;margin-top:1rem">
+        <div id="widgetConfigArea" style="display:none;margin-top:1rem;border-top:1px solid var(--glass-b);padding-top:1rem">
+          <div id="widgetPresetInfo" style="margin-bottom:0.85rem;font-size:0.78rem;color:var(--tm);line-height:1.6;background:var(--ag);border:1px solid var(--ac);border-radius:10px;padding:0.7rem 0.85rem;display:none"></div>
           <div class="fg"><label>Widget Label</label><input type="text" id="wLabel" placeholder="CPU Load"></div>
-          <div class="fg"><label>Data URL (JSON endpoint)</label><input type="text" id="wUrl" placeholder="http://server:19999/api/v1/data?chart=system.cpu"></div>
-          <div class="fg"><label>JSON Path (e.g. <code style="font-family:DM Mono,monospace;font-size:0.78em">data.0.0</code>)</label><input type="text" id="wPath" placeholder="data.0.0"></div>
-          <div class="fg"><label>Unit</label><input type="text" id="wUnit" placeholder="%" style="max-width:90px"></div>
-          <div class="fg"><label>Warn above</label><input type="number" id="wWarn" placeholder="70" style="max-width:90px"></div>
-          <div class="fg"><label>Alert above</label><input type="number" id="wAlert" placeholder="90" style="max-width:90px"></div>
+          <div class="fg">
+            <label>Data URL <span style="font-weight:400;opacity:0.65">(JSON endpoint)</span></label>
+            <div style="display:flex;gap:0.4rem">
+              <input type="text" id="wUrl" placeholder="http://server:19999/api/v1/data?chart=system.cpu" style="flex:1">
+              <button type="button" class="btn btn-s" id="wTestBtn" title="Test connection" style="font-size:0.72rem;padding:0.28rem 0.65rem;white-space:nowrap;flex-shrink:0">Test</button>
+            </div>
+            <small id="wTestResult" style="min-height:1.2em;display:block;margin-top:0.2rem"></small>
+          </div>
+          <div class="fg"><label>JSON Path <span style="font-weight:400;opacity:0.65">(e.g. <code style="font-family:DM Mono,monospace;font-size:0.78em">data.0.0</code>)</span></label><input type="text" id="wPath" placeholder="data.0.0"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.45rem">
+            <div class="fg"><label>Unit</label><input type="text" id="wUnit" placeholder="%"></div>
+            <div class="fg"><label>Warn ≥</label><input type="number" id="wWarn" placeholder="70"></div>
+            <div class="fg"><label>Alert ≥</label><input type="number" id="wAlert" placeholder="90"></div>
+          </div>
         </div>
-        <div id="widgetPresetInfo" style="margin-top:0.75rem;font-size:0.78rem;color:var(--tm);line-height:1.6;display:none"></div>
       </div>
       <div class="modal-ft" style="justify-content:space-between">
         <button class="btn btn-d" id="widgetClearAllBtn" style="margin-right:auto">Clear All</button>
@@ -4215,9 +4317,15 @@ function normalizeUrlCached(url) {
     const valEl = document.getElementById('wval_' + w.id);
     const barEl = document.getElementById('wbar_' + w.id);
     const graphEl = document.getElementById('wgraph_' + w.id);
+    const tileEl = document.getElementById('wtile_' + w.id);
     if (valEl) {
       valEl.textContent = result.val;
       valEl.className = 'widget-value ' + (result.cls || '');
+    }
+    // Update tile border status class
+    if (tileEl) {
+      tileEl.classList.remove('status-ok', 'status-warn', 'status-err');
+      if (result.cls) tileEl.classList.add('status-' + result.cls);
     }
     if (barEl && result.pct !== null && result.pct !== undefined) {
       barEl.style.width = Math.round(result.pct) + '%';
@@ -4288,6 +4396,7 @@ function normalizeUrlCached(url) {
     _selectedWidgetPreset = null;
     document.getElementById('widgetConfigArea').style.display = 'none';
     document.getElementById('widgetPresetInfo').style.display = 'none';
+    document.getElementById('wTestResult').textContent = '';
     // Build preset grid
     const grid = document.getElementById('widgetChoiceGrid');
     grid.innerHTML = WIDGET_PRESETS.map(p => `
@@ -4313,10 +4422,37 @@ function normalizeUrlCached(url) {
         document.getElementById('wAlert').value = _selectedWidgetPreset.alert || '';
         document.getElementById('wUrl').value = '';
         document.getElementById('wUrl').placeholder = _selectedWidgetPreset.urlHint;
-        info.innerHTML = `<strong style="color:var(--ac)">Hint:</strong> ${eH(_selectedWidgetPreset.urlHint)}`;
+        document.getElementById('wTestResult').textContent = '';
+        info.innerHTML = `<strong style="color:var(--ac)">💡 Hint:</strong> ${eH(_selectedWidgetPreset.urlHint)}`;
       });
     });
     document.getElementById('widgetOverlay').classList.add('open');
+  });
+
+  // Widget "Test" button
+  document.getElementById('wTestBtn').addEventListener('click', async () => {
+    const url = document.getElementById('wUrl').value.trim();
+    const path = document.getElementById('wPath').value.trim() || 'data.0.0';
+    const resultEl = document.getElementById('wTestResult');
+    if (!url) { resultEl.style.color = 'var(--err)'; resultEl.textContent = '⚠ Enter a URL first'; return; }
+    resultEl.style.color = 'var(--tm)'; resultEl.textContent = '⏳ Testing…';
+    try {
+      const ctrl = new AbortController();
+      const tid = setTimeout(() => ctrl.abort(), 6000);
+      const res = await fetch(url, { signal: ctrl.signal, cache: 'no-store' });
+      clearTimeout(tid);
+      if (!res.ok) { resultEl.style.color = 'var(--err)'; resultEl.textContent = `✗ HTTP ${res.status} — check the URL`; return; }
+      const json = await res.json();
+      const raw = getNestedVal(json, path);
+      if (raw === null || raw === undefined) {
+        resultEl.style.color = 'var(--warn)'; resultEl.textContent = `⚠ Connected, but path "${path}" not found. Got: ${JSON.stringify(json).slice(0,80)}`;
+      } else {
+        resultEl.style.color = 'var(--ok)'; resultEl.textContent = `✓ Connected! Value at "${path}": ${raw}`;
+      }
+    } catch(e) {
+      resultEl.style.color = 'var(--err)';
+      resultEl.textContent = e.name === 'AbortError' ? '✗ Timeout — server didn\'t respond in 6s' : `✗ ${e.message}`;
+    }
   });
 
   document.getElementById('widgetModalClose').addEventListener('click', () => document.getElementById('widgetOverlay').classList.remove('open'));
