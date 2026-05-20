@@ -8,7 +8,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KuruDash — Your Homelab, Your Way</title>
-  <meta name="description" content="A fully local homelab dashboard with live stat widgets, built-in SSH terminal, 12 themes, and no backend. One HTML file.">
+  <meta name="description" content="A simple, fully local homelab dashboard with live stat widgets, built-in SSH terminal, and no backend. One HTML file.">
   <meta name="theme-color" content="#b8dcf4">
   <meta property="og:title" content="KuruDash — Your Homelab, Your Way">
   <meta property="og:description" content="Fully local homelab dashboard. No backend, no tracking. One HTML file.">
@@ -365,6 +365,49 @@
     .gpl-badge { display: inline-flex; align-items: center; padding: 0.22rem 0.68rem; background: rgba(255,255,255,0.62); border: 1px solid rgba(255,255,255,0.9); border-radius: 20px; font-size: 0.69rem; font-weight: 700; color: var(--text); }
 
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SIMPLIFICATION OVERRIDES — flat, neutral, matches the dashboard
+       ═══════════════════════════════════════════════════════════════ */
+    :root {
+      --glass:   #ffffff !important;
+      --glass-b: #d9dee4 !important;
+      --glass-s: transparent !important;
+      --refract: transparent !important;
+      --shadow:  rgba(0,30,60,0.08) !important;
+      --text:    #1a2530 !important;
+      --muted:   #5a6878 !important;
+      --ac:      #2e7ec4 !important;
+      --ag:      rgba(46,126,196,0.14) !important;
+      --agr:     linear-gradient(145deg,#4a98dc,#2e7ec4 55%,#1e63a0) !important;
+    }
+
+    /* Flat neutral background, no orbs */
+    body { background: #eef1f4 !important; }
+    body::before { display: none !important; }
+
+    /* Kill every backdrop-filter site-wide */
+    *, *::before, *::after {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    /* Solid nav bar */
+    nav { background: #ffffff !important; border-bottom: 1px solid #d9dee4 !important; box-shadow: none !important; }
+    nav.scrolled { background: #ffffff !important; box-shadow: 0 1px 3px rgba(0,30,60,0.06) !important; }
+
+    /* Calm down hover lifts and glows site-wide */
+    .back-to-top:hover,
+    .nav-logo:hover .nav-logo-img,
+    .pill:hover,
+    .cta-primary:hover,
+    .cta-secondary:hover,
+    .feature:hover,
+    .ss-card:hover,
+    .footer-brand:hover { transform: none !important; box-shadow: 0 1px 3px var(--shadow) !important; }
+
+    /* Kill the slow glow keyframes */
+    .nav-fallback-dot { animation: none !important; box-shadow: none !important; }
   </style>
 </head>
 <body>
@@ -443,7 +486,7 @@
   <div class="pill"><span class="pill-dot"></span>100% local storage</div>
   <div class="pill"><span class="pill-dot"></span>Live stat widgets</div>
   <div class="pill"><span class="pill-dot"></span>Built-in SSH terminal</div>
-  <div class="pill"><span class="pill-dot"></span>12 themes + Custom</div>
+  <div class="pill"><span class="pill-dot"></span>8 themes + Custom</div>
   <div class="pill"><span class="pill-dot"></span>CPU · RAM · Disk · Temp</div>
   <div class="pill"><span class="pill-dot"></span>Live status checks</div>
   <div class="pill"><span class="pill-dot"></span>Auto favicon fetch</div>
@@ -477,7 +520,7 @@
       </div>
       <div class="feat-card glass-card fade-up">
         <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" style="width:18px;height:18px"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg></div>
-        <h3>12 Themes + Custom</h3><p>Aero, Dark, Mocha, Nord, Solarized, Sakura, Terminal, Flat, and more — or build your own with the color picker.</p>
+        <h3>8 Themes + Custom</h3><p>Light, Dark, Nord, Solarized, Mocha, Terminal, Sakura, Sakura Dark — or build your own with the color picker.</p>
       </div>
       <div class="feat-card glass-card fade-up">
         <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" style="width:18px;height:18px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
@@ -653,9 +696,9 @@
     <div class="ss-grid">
       <div class="ss-card fade-up">
         <div class="ss-bar"><div class="m-dot" style="background:#ff5f57;width:9px;height:9px"></div><div class="m-dot" style="background:#febc2e;width:9px;height:9px"></div><div class="m-dot" style="background:#28c840;width:9px;height:9px"></div></div>
-        <img class="ss-img" src="docs/screenshot-aero.png" alt="Aero theme" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="ss-placeholder" style="display:none">Frutiger Aero theme</div>
-        <div class="ss-label">Frutiger Aero — the default</div>
+        <img class="ss-img" src="docs/screenshot-light.png" alt="Light theme" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="ss-placeholder" style="display:none">Light theme</div>
+        <div class="ss-label">Light — the default</div>
       </div>
       <div class="ss-card fade-up">
         <div class="ss-bar"><div class="m-dot" style="background:#ff5f57;width:9px;height:9px"></div><div class="m-dot" style="background:#febc2e;width:9px;height:9px"></div><div class="m-dot" style="background:#28c840;width:9px;height:9px"></div></div>

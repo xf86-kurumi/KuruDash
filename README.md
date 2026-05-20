@@ -1,6 +1,6 @@
 # KuruDash
 
-A fully local homelab service dashboard with built-in SSH terminal, live stat widgets, custom backgrounds, and liquid glass UI.
+A simple, fully local homelab service dashboard with built-in SSH terminal, live stat widgets, and custom backgrounds.
 No backend. No database. No tracking. One HTML file.
 
 ---
@@ -38,7 +38,6 @@ Add services, group them into folders, monitor their uptime, pull live stats fro
 - Configurable data URL, JSON path (dot notation), unit, warn threshold, alert threshold
 - **Test button** — verify your URL and JSON path live before saving, shows the exact value found
 - Color-coded progress bar and tile border — green/yellow/red based on thresholds
-- Sparkline history graph per widget (last 30 data points)
 - Pauses polling when browser tab is hidden
 - Works with **KuruAgent** (included), Netdata, Prometheus node_exporter, Home Assistant, Docker API, smart plug APIs, or any custom JSON endpoint
 - Widgets included in export/import/clear
@@ -52,21 +51,20 @@ Add services, group them into folders, monitor their uptime, pull live stats fro
 - Adjustable font size and command snippets
 
 **Themes**
-- 12 built-in themes: Aero, Aero Dark, Dark, Mocha, Nord, Solarized, Sakura, Sakura Dark, Terminal, Flat Dark, Flat Light, Custom
+- 8 built-in themes: Light, Dark, Nord, Solarized, Mocha, Terminal, Sakura, Sakura Dark
+- Light/Dark toggle in the header — remembers your last light and last dark theme separately
 - Full custom theme builder with color picker for all surface colors
 
 **Custom Backgrounds**
 - Upload a local image file (saved as base64, max 5MB)
 - Paste any direct image URL
 - Build a gradient with a 3-stop color picker and direction selector
-- Fine-tune overlay opacity, panel blur strength, and card transparency
+- Overlay opacity slider for dimming over a background image
 - Auto-pick accent color from your background image
 
 **Performance**
-- GPU compositing layers on all glass elements (`will-change: transform`, `translateZ(0)`)
-- Reduced backdrop-filter values (24–28px) tuned for visual quality without jank
+- Flat, solid UI — no backdrop blur, no GPU compositing tricks
 - `prefers-reduced-motion` respected — all animations disabled automatically
-- Lightweight mode disables all blur effects for low-spec devices
 
 ---
 
@@ -316,18 +314,17 @@ kurudash/
 
 | Name | Description |
 |------|-------------|
-| Aero | Frutiger Aero light — glassy sky blues (default) |
-| Aero Dark | Deep navy with cyan accents |
-| Dark | GitHub-style dark |
-| Mocha | Catppuccin Mocha |
+| Light | Clean neutral light (default) |
+| Dark | Flat dark blue-grey |
 | Nord | Nord palette |
 | Solarized | Solarized Light |
-| Sakura | Pink and cherry blossom light |
-| Sakura Dark | Deep rose dark with pink accents |
+| Mocha | Catppuccin Mocha |
 | Terminal | Classic green on black |
-| Flat Dark | Flat UI dark |
-| Flat Light | Flat UI light |
+| Sakura | Light pink, cherry blossom |
+| Sakura Dark | Deep rose dark |
 | Custom | Build your own with the color picker |
+
+The light/dark toggle button in the header swaps between your most recently selected light theme and your most recently selected dark theme, so picking Nord then clicking the toggle takes you to Solarized (or whichever light theme you last used), not always back to the default.
 
 ---
 
@@ -340,8 +337,7 @@ kurudash-theme          Selected theme
 kurudash-custom-theme   Custom theme colors
 kurudash-bg             Background image or gradient CSS
 kurudash-bg-type        Background source type
-kurudash-bg-opts        Overlay opacity, blur, card transparency
-kurudash-perf-mode      Lightweight mode state
+kurudash-bg-opts        Overlay opacity for background image
 kurudash-ui             Clock, compact header, notifications prefs
 kurudash-notes          Per-service notes
 kurudash-pinned         Pinned service IDs
@@ -350,7 +346,9 @@ kurudash-ssh-font       SSH terminal font size
 kurudash-lock-pin       Lock screen PIN (stored locally only)
 kurudash-custom-css     User-injected custom CSS
 kurudash-widgets        Widget configurations
-kurudash-widget-hist    Widget sparkline history data
+kurudash-widget-hist    Widget value history (legacy, no longer rendered)
+kurudash-last-light     Last-used light theme (for the light/dark toggle)
+kurudash-last-dark      Last-used dark theme (for the light/dark toggle)
 ```
 
 ---

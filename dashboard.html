@@ -33,212 +33,168 @@
       -webkit-overflow-scrolling: touch;
     }
 
-    /* ═══════════ THEMES ═══════════ */
-    [data-theme="aero"] {
-      --bg: linear-gradient(145deg,#b8dcf4 0%,#9ecde8 30%,#88c2e8 60%,#a0d4f0 100%);
-      --orb1: rgba(255,255,255,0.55); --orb2: rgba(140,210,245,0.45); --orb3: rgba(255,255,255,0.3);
-      --glass: rgba(255,255,255,0.55); --glass-b: rgba(255,255,255,0.72); --glass-s: rgba(255,255,255,0.82);
-      --glass-inner: rgba(255,255,255,0.32);
-      --tp: #0a3d55; --tm: #2a6880;
-      --ac: #0088cc; --ag: rgba(0,136,204,0.25); --agr: linear-gradient(145deg,#40c0f0,#0088cc 55%,#0066a0);
-      --ok: #00a878; --okg: rgba(0,168,120,0.4);
-      --err: #e03c2e; --errg: rgba(224,60,46,0.4);
-      --warn: #e8960a;
-      --ib: rgba(255,255,255,0.35); --ibr: rgba(255,255,255,0.6);
-      --sw: 290px;
-      --icon-filter: brightness(0) saturate(100%) invert(30%) sepia(60%) saturate(500%) hue-rotate(161deg);
-      --icon-white: brightness(0) invert(1);
-      --refract: rgba(255,255,255,0.4);
-      --shadow: rgba(0,60,120,0.18);
-    }
-    [data-theme="dark"] {
-      --bg: linear-gradient(145deg,#080c14 0%,#0d1520 35%,#111825 100%);
-      --orb1: rgba(60,120,220,0.12); --orb2: rgba(40,90,180,0.08); --orb3: rgba(80,150,255,0.05);
-      --glass: rgba(255,255,255,0.06); --glass-b: rgba(255,255,255,0.14); --glass-s: rgba(255,255,255,0.08);
-      --glass-inner: rgba(255,255,255,0.03);
-      --tp: #dce8f5; --tm: #7a9ab8;
-      --ac: #4da6ff; --ag: rgba(77,166,255,0.22); --agr: linear-gradient(145deg,#70b8ff,#4da6ff 55%,#2d88ee);
-      --ok: #3fc07a; --okg: rgba(63,192,122,0.4);
-      --err: #f06060; --errg: rgba(240,96,96,0.4);
-      --warn: #e8b040;
-      --ib: rgba(255,255,255,0.06); --ibr: rgba(255,255,255,0.12);
-      --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(60%) sepia(36%) saturate(152%) hue-rotate(173deg);
-      --icon-white: brightness(0) invert(1);
-      --refract: rgba(255,255,255,0.08);
-      --shadow: rgba(0,0,0,0.5);
-    }
-    [data-theme="mocha"] {
-      --bg: linear-gradient(145deg,#0a0a14 0%,#121020 35%,#181525 100%);
-      --orb1: rgba(180,120,255,0.1); --orb2: rgba(100,130,255,0.07); --orb3: transparent;
-      --glass: rgba(255,255,255,0.05); --glass-b: rgba(180,140,255,0.18); --glass-s: rgba(200,170,255,0.08);
-      --glass-inner: rgba(180,140,255,0.03);
-      --tp: #cdd0f5; --tm: #9898c0;
-      --ac: #c0a0f8; --ag: rgba(192,160,248,0.22); --agr: linear-gradient(145deg,#d8b8ff,#c0a0f8 55%,#9878e0);
-      --ok: #a0e0a0; --okg: rgba(160,224,160,0.35);
-      --err: #f898b0; --errg: rgba(248,152,176,0.35);
-      --warn: #f0c090;
-      --ib: rgba(255,255,255,0.05); --ibr: rgba(180,140,255,0.15);
-      --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(67%) sepia(29%) saturate(120%) hue-rotate(204deg);
-      --icon-white: brightness(0) invert(1);
-      --refract: rgba(200,170,255,0.08);
-      --shadow: rgba(0,0,0,0.55);
-    }
-    [data-theme="nord"] {
-      --bg: linear-gradient(145deg,#1e2432 0%,#252d3e 35%,#2d3648 100%);
-      --orb1: rgba(120,190,215,0.1); --orb2: rgba(100,160,195,0.07); --orb3: transparent;
-      --glass: rgba(255,255,255,0.06); --glass-b: rgba(136,192,208,0.22); --glass-s: rgba(150,200,220,0.08);
-      --glass-inner: rgba(136,192,208,0.04);
-      --tp: #eceff4; --tm: #a0b8c8;
-      --ac: #88c0d0; --ag: rgba(136,192,208,0.25); --agr: linear-gradient(145deg,#a0d0e0,#88c0d0 55%,#60a0b5);
-      --ok: #a3be8c; --okg: rgba(163,190,140,0.35);
-      --err: #bf6168; --errg: rgba(191,97,104,0.35);
-      --warn: #ebcb8b;
-      --ib: rgba(255,255,255,0.06); --ibr: rgba(136,192,208,0.2);
-      --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(71%) sepia(32%) saturate(133%) hue-rotate(168deg);
-      --icon-white: brightness(0) invert(1);
-      --refract: rgba(136,192,208,0.1);
-      --shadow: rgba(0,0,0,0.45);
-    }
-    [data-theme="solarized"] {
-      --bg: linear-gradient(145deg,#f5e8c8 0%,#ecdec0 35%,#e2d4b4 100%);
-      --orb1: rgba(255,255,200,0.5); --orb2: rgba(200,170,100,0.15); --orb3: rgba(255,255,255,0.3);
-      --glass: rgba(255,248,230,0.62); --glass-b: rgba(255,255,255,0.78); --glass-s: rgba(255,255,255,0.65);
-      --glass-inner: rgba(255,248,230,0.38);
-      --tp: #053640; --tm: #507080;
-      --ac: #2080c0; --ag: rgba(32,128,192,0.22); --agr: linear-gradient(145deg,#40a0e0,#2080c0 55%,#1060a0);
-      --ok: #607800; --okg: rgba(96,120,0,0.35);
-      --err: #c02020; --errg: rgba(192,32,32,0.35);
-      --warn: #a07000;
-      --ib: rgba(255,255,255,0.5); --ibr: rgba(200,190,160,0.7);
-      --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(30%) sepia(40%) saturate(300%) hue-rotate(164deg);
-      --icon-white: brightness(0) invert(1);
-      --refract: rgba(255,255,255,0.45);
-      --shadow: rgba(0,60,80,0.15);
-    }
-    [data-theme="sakura"] {
-      --bg: linear-gradient(145deg,#f8d8e8 0%,#f0c8e0 35%,#e8b8d8 100%);
-      --orb1: rgba(255,255,255,0.6); --orb2: rgba(255,180,220,0.45); --orb3: rgba(255,220,240,0.35);
-      --glass: rgba(255,255,255,0.52); --glass-b: rgba(255,255,255,0.78); --glass-s: rgba(255,255,255,0.7);
-      --glass-inner: rgba(255,255,255,0.3);
-      --tp: #601840; --tm: #a05070;
-      --ac: #d01878; --ag: rgba(208,24,120,0.22); --agr: linear-gradient(145deg,#f050b0,#d01878 55%,#a00060);
-      --ok: #408060; --okg: rgba(64,128,96,0.35);
-      --err: #d02020; --errg: rgba(208,32,32,0.35);
-      --warn: #d07000;
-      --ib: rgba(255,255,255,0.42); --ibr: rgba(255,220,240,0.7);
-      --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(30%) sepia(50%) saturate(400%) hue-rotate(300deg);
-      --icon-white: brightness(0) invert(1);
-      --refract: rgba(255,200,230,0.45);
-      --shadow: rgba(80,0,40,0.15);
-    }
-    [data-theme="aero-dark"] {
-      --bg: linear-gradient(145deg,#041824 0%,#061e30 35%,#081c2e 100%);
-      --orb1: rgba(0,140,220,0.14); --orb2: rgba(0,100,180,0.09); --orb3: rgba(0,180,255,0.06);
-      --glass: rgba(255,255,255,0.06); --glass-b: rgba(0,160,230,0.2); --glass-s: rgba(0,200,255,0.08);
-      --glass-inner: rgba(0,140,220,0.04);
-      --tp: #c8e8f8; --tm: #6aa8cc;
-      --ac: #20a8f0; --ag: rgba(32,168,240,0.25); --agr: linear-gradient(145deg,#50c8ff,#20a8f0 55%,#0080c0);
-      --ok: #30d890; --okg: rgba(48,216,144,0.4);
-      --err: #f06858; --errg: rgba(240,104,88,0.4);
-      --warn: #e8b040;
-      --ib: rgba(255,255,255,0.06); --ibr: rgba(0,160,230,0.18);
-      --sw: 290px;
-      --icon-filter: brightness(0) saturate(100%) invert(61%) sepia(59%) saturate(245%) hue-rotate(166deg);
-      --icon-white: brightness(0) invert(1);
-      --refract: rgba(0,200,255,0.1);
-      --shadow: rgba(0,0,0,0.55);
-    }
-
-    [data-theme="sakura-dark"] {
-      --bg: linear-gradient(145deg,#1a0818 0%,#200a20 35%,#2a0828 100%);
-      --orb1: rgba(255,100,180,0.1); --orb2: rgba(200,80,150,0.07); --orb3: transparent;
-      --glass: rgba(255,255,255,0.06); --glass-b: rgba(255,140,200,0.2); --glass-s: rgba(255,180,220,0.08);
-      --glass-inner: rgba(255,100,180,0.04);
-      --tp: #f8d0e8; --tm: #c080a8;
-      --ac: #f060b8; --ag: rgba(240,96,184,0.25); --agr: linear-gradient(145deg,#ff90cc,#f060b8 55%,#c03090);
-      --ok: #80e0b0; --okg: rgba(128,224,176,0.35);
-      --err: #f87890; --errg: rgba(248,120,144,0.35);
-      --warn: #f0c080;
-      --ib: rgba(255,255,255,0.05); --ibr: rgba(255,140,200,0.18);
-      --sw: 290px;
-      --icon-filter: brightness(0) saturate(100%) invert(63%) sepia(40%) saturate(168%) hue-rotate(286deg);
-      --icon-white: brightness(0) invert(1);
-      --refract: rgba(255,180,220,0.12);
-      --shadow: rgba(80,0,60,0.55);
-    }
-
-    [data-theme="terminal"] {
-      --bg: linear-gradient(145deg,#000600 0%,#000a00 35%,#001200 100%);
-      --orb1: rgba(0,255,65,0.06); --orb2: rgba(0,200,50,0.04); --orb3: transparent;
-      --glass: rgba(0,255,65,0.04); --glass-b: rgba(0,255,65,0.18); --glass-s: rgba(0,255,65,0.06);
-      --glass-inner: rgba(0,255,65,0.02);
-      --tp: #00ff41; --tm: #00a028;
-      --ac: #00ff41; --ag: rgba(0,255,65,0.25); --agr: linear-gradient(145deg,#60ff80,#00ff41 55%,#00cc30);
-      --ok: #00ff41; --okg: rgba(0,255,65,0.4);
-      --err: #ff4040; --errg: rgba(255,64,64,0.4);
-      --warn: #ffcc00;
-      --ib: rgba(0,255,65,0.05); --ibr: rgba(0,255,65,0.15);
-      --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(31%) sepia(100%) saturate(500%) hue-rotate(99deg);
-      --icon-white: brightness(0) invert(1);
-      --refract: rgba(0,255,65,0.08);
-      --shadow: rgba(0,0,0,0.7);
-    }
-    [data-theme="flat"] {
-      --bg: linear-gradient(145deg,#22303f 0%,#1e2c3a 35%,#1a2533 100%);
+    /* ═══════════ THEMES (simplified — 6 clean themes) ═══════════ */
+    /* Light — clean, neutral, no glass */
+    [data-theme="light"] {
+      --bg: #eef1f4;
       --orb1: transparent; --orb2: transparent; --orb3: transparent;
-      --glass: rgba(255,255,255,0.07); --glass-b: rgba(255,255,255,0.14); --glass-s: rgba(255,255,255,0.05);
-      --glass-inner: rgba(255,255,255,0.03);
-      --tp: #ecf0f1; --tm: #9aaab8;
-      --ac: #2e86c1; --ag: rgba(46,134,193,0.25); --agr: linear-gradient(145deg,#4aa8e0,#2e86c1 55%,#1a6699);
-      --ok: #27ae60; --okg: rgba(39,174,96,0.35);
-      --err: #e74c3c; --errg: rgba(231,76,60,0.35);
-      --warn: #f39c12;
-      --ib: rgba(255,255,255,0.07); --ibr: rgba(255,255,255,0.12);
-      --sw: 258px;
-      --icon-filter: brightness(0) saturate(100%) invert(66%) sepia(21%) saturate(100%) hue-rotate(172deg);
-      --icon-white: brightness(0) invert(1);
-      --refract: rgba(255,255,255,0.06);
-      --shadow: rgba(0,0,0,0.4);
-    }
-    [data-theme="flat-light"] {
-      --bg: linear-gradient(145deg,#f0f3f5 0%,#e8ecf0 35%,#e0e6eb 100%);
-      --orb1: transparent; --orb2: transparent; --orb3: transparent;
-      --glass: rgba(255,255,255,0.55); --glass-b: rgba(255,255,255,0.88); --glass-s: rgba(255,255,255,0.5);
-      --glass-inner: rgba(255,255,255,0.3);
-      --tp: #1a2a38; --tm: #607080;
-      --ac: #2e86c1; --ag: rgba(46,134,193,0.2); --agr: linear-gradient(145deg,#4aa8e0,#2e86c1 55%,#1a6699);
-      --ok: #27ae60; --okg: rgba(39,174,96,0.3);
-      --err: #c0392b; --errg: rgba(192,57,43,0.3);
+      --glass: #ffffff; --glass-b: #d9dee4; --glass-s: transparent;
+      --glass-inner: #f4f6f8;
+      --tp: #1a2530; --tm: #5a6878;
+      --ac: #2e7ec4; --ag: rgba(46,126,196,0.14); --agr: linear-gradient(145deg,#4a98dc,#2e7ec4 55%,#1e63a0);
+      --ok: #2a9d62; --okg: rgba(42,157,98,0.2);
+      --err: #c43d2e; --errg: rgba(196,61,46,0.18);
       --warn: #d68910;
-      --ib: rgba(255,255,255,0.6); --ibr: rgba(200,215,225,0.8);
+      --ib: #f4f6f8; --ibr: #d9dee4;
       --sw: 258px;
       --icon-filter: brightness(0) saturate(100%) invert(32%) sepia(20%) saturate(200%) hue-rotate(174deg);
       --icon-white: brightness(0) invert(1);
-      --refract: rgba(255,255,255,0.5);
-      --shadow: rgba(0,30,60,0.12);
+      --refract: transparent;
+      --shadow: rgba(0,30,60,0.08);
     }
-    [data-theme="custom"] {
-      --bg: var(--c-bg, linear-gradient(145deg,#0a0a14,#111020));
-      --orb1: var(--c-orb1, transparent); --orb2: var(--c-orb2, transparent); --orb3: transparent;
-      --glass: var(--c-glass, rgba(255,255,255,0.06)); --glass-b: var(--c-glassb, rgba(180,140,255,0.18)); --glass-s: rgba(255,255,255,0.08);
-      --glass-inner: rgba(255,255,255,0.03);
-      --tp: var(--c-tp, #cdd0f5); --tm: var(--c-tm, #9898c0);
-      --ac: var(--c-ac, #c0a0f8); --ag: var(--c-ag, rgba(192,160,248,0.22)); --agr: var(--c-agr, linear-gradient(145deg,#d8b8ff,#c0a0f8,#9878e0));
-      --ok: #a0e0a0; --okg: rgba(160,224,160,0.35);
-      --err: #f898b0; --errg: rgba(248,152,176,0.35);
-      --warn: #f0c090;
-      --ib: rgba(255,255,255,0.05); --ibr: rgba(180,140,255,0.15);
+    /* Dark — flat, no glass */
+    [data-theme="dark"] {
+      --bg: #11151c;
+      --orb1: transparent; --orb2: transparent; --orb3: transparent;
+      --glass: #1a2029; --glass-b: #2a3340; --glass-s: transparent;
+      --glass-inner: #232b36;
+      --tp: #dce4ed; --tm: #8a9aaf;
+      --ac: #4da6ff; --ag: rgba(77,166,255,0.18); --agr: linear-gradient(145deg,#70b8ff,#4da6ff 55%,#2d88ee);
+      --ok: #3fc07a; --okg: rgba(63,192,122,0.22);
+      --err: #f06060; --errg: rgba(240,96,96,0.22);
+      --warn: #e8b040;
+      --ib: #232b36; --ibr: #2a3340;
+      --sw: 258px;
+      --icon-filter: brightness(0) saturate(100%) invert(60%) sepia(36%) saturate(152%) hue-rotate(173deg);
+      --icon-white: brightness(0) invert(1);
+      --refract: transparent;
+      --shadow: rgba(0,0,0,0.4);
+    }
+    /* Nord — dark, blue-grey */
+    [data-theme="nord"] {
+      --bg: #2e3440;
+      --orb1: transparent; --orb2: transparent; --orb3: transparent;
+      --glass: #3b4252; --glass-b: #4c566a; --glass-s: transparent;
+      --glass-inner: #434c5e;
+      --tp: #eceff4; --tm: #a0b0c0;
+      --ac: #88c0d0; --ag: rgba(136,192,208,0.18); --agr: linear-gradient(145deg,#a0d0e0,#88c0d0 55%,#60a0b5);
+      --ok: #a3be8c; --okg: rgba(163,190,140,0.22);
+      --err: #bf616a; --errg: rgba(191,97,106,0.22);
+      --warn: #ebcb8b;
+      --ib: #434c5e; --ibr: #4c566a;
+      --sw: 258px;
+      --icon-filter: brightness(0) saturate(100%) invert(71%) sepia(32%) saturate(133%) hue-rotate(168deg);
+      --icon-white: brightness(0) invert(1);
+      --refract: transparent;
+      --shadow: rgba(0,0,0,0.35);
+    }
+    /* Solarized Light */
+    [data-theme="solarized"] {
+      --bg: #fdf6e3;
+      --orb1: transparent; --orb2: transparent; --orb3: transparent;
+      --glass: #ffffff; --glass-b: #e0d8c0; --glass-s: transparent;
+      --glass-inner: #f4ecd8;
+      --tp: #073642; --tm: #586e75;
+      --ac: #268bd2; --ag: rgba(38,139,210,0.16); --agr: linear-gradient(145deg,#4aa0e0,#268bd2 55%,#176aac);
+      --ok: #859900; --okg: rgba(133,153,0,0.22);
+      --err: #dc322f; --errg: rgba(220,50,47,0.2);
+      --warn: #b58900;
+      --ib: #f4ecd8; --ibr: #e0d8c0;
+      --sw: 258px;
+      --icon-filter: brightness(0) saturate(100%) invert(30%) sepia(40%) saturate(300%) hue-rotate(164deg);
+      --icon-white: brightness(0) invert(1);
+      --refract: transparent;
+      --shadow: rgba(0,60,80,0.1);
+    }
+    /* Mocha — dark catppuccin-ish */
+    [data-theme="mocha"] {
+      --bg: #1e1e2e;
+      --orb1: transparent; --orb2: transparent; --orb3: transparent;
+      --glass: #28283c; --glass-b: #3a3a52; --glass-s: transparent;
+      --glass-inner: #313148;
+      --tp: #cdd6f4; --tm: #9090b0;
+      --ac: #cba6f7; --ag: rgba(203,166,247,0.18); --agr: linear-gradient(145deg,#dcbcff,#cba6f7 55%,#a080d8);
+      --ok: #a6e3a1; --okg: rgba(166,227,161,0.22);
+      --err: #f38ba8; --errg: rgba(243,139,168,0.22);
+      --warn: #f9e2af;
+      --ib: #313148; --ibr: #3a3a52;
       --sw: 258px;
       --icon-filter: brightness(0) saturate(100%) invert(67%) sepia(29%) saturate(120%) hue-rotate(204deg);
       --icon-white: brightness(0) invert(1);
-      --refract: rgba(200,170,255,0.08);
-      --shadow: rgba(0,0,0,0.55);
+      --refract: transparent;
+      --shadow: rgba(0,0,0,0.45);
+    }
+    /* Terminal — green-on-black */
+    [data-theme="terminal"] {
+      --bg: #000800;
+      --orb1: transparent; --orb2: transparent; --orb3: transparent;
+      --glass: #001a00; --glass-b: #003a18; --glass-s: transparent;
+      --glass-inner: #002408;
+      --tp: #00ff41; --tm: #00a830;
+      --ac: #00ff41; --ag: rgba(0,255,65,0.18); --agr: linear-gradient(145deg,#60ff80,#00ff41 55%,#00cc30);
+      --ok: #00ff41; --okg: rgba(0,255,65,0.22);
+      --err: #ff4040; --errg: rgba(255,64,64,0.22);
+      --warn: #ffcc00;
+      --ib: #002408; --ibr: #003a18;
+      --sw: 258px;
+      --icon-filter: brightness(0) saturate(100%) invert(31%) sepia(100%) saturate(500%) hue-rotate(99deg);
+      --icon-white: brightness(0) invert(1);
+      --refract: transparent;
+      --shadow: rgba(0,0,0,0.6);
+    }
+    /* Sakura — light pink */
+    [data-theme="sakura"] {
+      --bg: #fbe4ee;
+      --orb1: transparent; --orb2: transparent; --orb3: transparent;
+      --glass: #ffffff; --glass-b: #f0c8d8; --glass-s: transparent;
+      --glass-inner: #fdf0f6;
+      --tp: #5a1838; --tm: #a05070;
+      --ac: #d0407a; --ag: rgba(208,64,122,0.14); --agr: linear-gradient(145deg,#f078ac,#d0407a 55%,#a02858);
+      --ok: #4a8060; --okg: rgba(74,128,96,0.2);
+      --err: #c43d2e; --errg: rgba(196,61,46,0.18);
+      --warn: #c87010;
+      --ib: #fdf0f6; --ibr: #f0c8d8;
+      --sw: 258px;
+      --icon-filter: brightness(0) saturate(100%) invert(30%) sepia(50%) saturate(400%) hue-rotate(300deg);
+      --icon-white: brightness(0) invert(1);
+      --refract: transparent;
+      --shadow: rgba(80,0,40,0.1);
+    }
+    /* Sakura Dark — deep rose dark */
+    [data-theme="sakura-dark"] {
+      --bg: #1f0a18;
+      --orb1: transparent; --orb2: transparent; --orb3: transparent;
+      --glass: #2e1224; --glass-b: #4a1c38; --glass-s: transparent;
+      --glass-inner: #381a2c;
+      --tp: #f8d0e0; --tm: #c080a0;
+      --ac: #f060a8; --ag: rgba(240,96,168,0.18); --agr: linear-gradient(145deg,#ff90c8,#f060a8 55%,#c03080);
+      --ok: #80d0a0; --okg: rgba(128,208,160,0.22);
+      --err: #f87890; --errg: rgba(248,120,144,0.22);
+      --warn: #f0c080;
+      --ib: #381a2c; --ibr: #4a1c38;
+      --sw: 258px;
+      --icon-filter: brightness(0) saturate(100%) invert(63%) sepia(40%) saturate(168%) hue-rotate(286deg);
+      --icon-white: brightness(0) invert(1);
+      --refract: transparent;
+      --shadow: rgba(80,0,50,0.5);
+    }
+    /* Custom — driven by color picker */
+    [data-theme="custom"] {
+      --bg: var(--c-bg, #1e1e2e);
+      --orb1: transparent; --orb2: transparent; --orb3: transparent;
+      --glass: var(--c-glass, #28283c); --glass-b: var(--c-glassb, #3a3a52); --glass-s: transparent;
+      --glass-inner: var(--c-glassi, #313148);
+      --tp: var(--c-tp, #cdd6f4); --tm: var(--c-tm, #9090b0);
+      --ac: var(--c-ac, #cba6f7); --ag: var(--c-ag, rgba(203,166,247,0.18)); --agr: var(--c-agr, linear-gradient(145deg,#dcbcff,#cba6f7,#a080d8));
+      --ok: #3fc07a; --okg: rgba(63,192,122,0.22);
+      --err: #f06060; --errg: rgba(240,96,96,0.22);
+      --warn: #e8b040;
+      --ib: var(--c-ib, #313148); --ibr: var(--c-ibr, #3a3a52);
+      --sw: 258px;
+      --icon-filter: brightness(0) saturate(100%) invert(67%) sepia(29%) saturate(120%) hue-rotate(204deg);
+      --icon-white: brightness(0) invert(1);
+      --refract: transparent;
+      --shadow: rgba(0,0,0,0.4);
     }
 
     /* ═══════════ RESET ═══════════ */
@@ -885,38 +841,6 @@
       will-change: opacity;
     }
 
-    /* ════ PERFORMANCE MODE ════ */
-    body.perf-mode .card,
-    body.perf-mode header,
-    body.perf-mode .sidebar,
-    body.perf-mode .panel,
-    body.perf-mode .modal,
-    body.perf-mode .ssh-panel,
-    body.perf-mode .overlay,
-    body.perf-mode .toast,
-    body.perf-mode .hbtn,
-    body.perf-mode .sb-icon-btn,
-    body.perf-mode .toggle-btn,
-    body.perf-mode .btn-s,
-    body.perf-mode .pact,
-    body.perf-mode .ssh-action-btn,
-    body.perf-mode .pin-key {
-      backdrop-filter: none !important;
-      -webkit-backdrop-filter: none !important;
-      /* Drop will-change in perf mode too */
-      will-change: auto !important;
-    }
-    body.perf-mode .card {
-      background: var(--glass-solid, var(--glass));
-      /* Remove all transforms in perf mode for max speed */
-      transform: none !important;
-    }
-    body.perf-mode .card:hover {
-      transform: translateY(-2px) !important;
-    }
-    /* In perf mode, disable orb animations */
-    body.perf-mode body::before { display: none; }
-
     /* ════ TOGGLE SWITCH ════ */
     .toggle-row {
       display: flex; align-items: center; justify-content: space-between;
@@ -1279,10 +1203,9 @@
       background: #1a1a2e;
       color: #e0e0f0;
     }
-    [data-theme="aero"] .fg select option,
+    [data-theme="light"] .fg select option,
     [data-theme="solarized"] .fg select option,
-    [data-theme="sakura"] .fg select option,
-    [data-theme="flat-light"] .fg select option {
+    [data-theme="sakura"] .fg select option {
       background: #f0f4f8;
       color: #1a2a38;
     }
@@ -1580,9 +1503,103 @@
       letter-spacing: 0.01em;
     }
 
+
+    /* ═══════════════════════════════════════════════════════════════
+       SIMPLIFICATION OVERRIDES — flat homelab look
+       Disables all backdrop-blur, refraction lines, GPU layer hacks,
+       and over-the-top hover transforms.
+       ═══════════════════════════════════════════════════════════════ */
+
+    /* Kill every backdrop-filter site-wide */
+    *, *::before, *::after {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    /* Kill the body orb gradients */
+    body::before { display: none !important; }
+
+    /* Kill refraction shine lines on glass/card/modal */
+    .glass::before,
+    .card::before,
+    .card::after,
+    .modal::before { display: none !important; }
+
+    /* Drop pointless GPU compositing hints — but DON'T touch transforms
+       on .panel/.modal/.toast/.ssh-panel because those elements use
+       transform to slide/scale in and out. Touching it pins them on screen. */
+    .glass, header, .sidebar, .card, .modal, .panel, .ssh-panel, .toast {
+      will-change: auto !important;
+    }
+
+    /* Solid panels — no transparency */
+    header, .sidebar, .modal, .panel, .ssh-panel, .toast, .glass {
+      background: var(--glass) !important;
+      box-shadow: 0 1px 3px var(--shadow), 0 0 0 1px var(--glass-b) inset !important;
+    }
+
+    /* Cards: solid, simple hover */
+    .card {
+      background: var(--glass) !important;
+      box-shadow: 0 1px 3px var(--shadow) !important;
+    }
+    .card:hover {
+      transform: none !important;
+      box-shadow: 0 2px 8px var(--shadow), 0 0 0 1px var(--ac) inset !important;
+      border-color: var(--ac);
+    }
+    .card.selected {
+      box-shadow: 0 0 0 2px var(--ac) inset, 0 2px 8px var(--shadow) !important;
+    }
+
+    /* Flatten the icon-area gradient on cards */
+    .card-icon-area, .card-placeholder {
+      background: var(--glass-inner) !important;
+    }
+
+    /* Tone down button "lift" animations — NO element shifts on hover */
+    .btn-p:hover, .btn-d:hover, .btn-ok:hover, .pact:hover,
+    .hbtn:hover, .sb-icon-btn:hover, .toggle-btn:hover, .btn-s:hover,
+    .ssh-action-btn:hover, .ssh-connect-btn:hover, .ssh-tab:hover,
+    .pin-key:hover, .widget-tile:hover, .widget-choice:hover,
+    .folder-card:hover, .add-btn:hover, .nav-cta:hover,
+    .back-to-top:hover, .t-swatch:hover, .modal-close:hover,
+    .panel-close:hover, .card-image, .card:hover .card-image {
+      transform: none !important;
+    }
+    .pact:hover { box-shadow: 0 0 0 1px var(--ac) inset !important; }
+    .hbtn:hover, .sb-icon-btn:hover, .toggle-btn:hover {
+      box-shadow: 0 0 0 1px var(--ac) inset !important;
+    }
+    .widget-tile:hover, .folder-card:hover, .add-btn:hover,
+    .widget-choice:hover, .ssh-connect-btn:hover {
+      box-shadow: 0 0 0 1px var(--ac) inset !important;
+    }
+    .btn-p:hover { box-shadow: 0 1px 4px var(--shadow) !important; filter: brightness(1.05); }
+    .btn-d:hover, .btn-ok:hover { box-shadow: 0 1px 4px var(--shadow) !important; }
+    .btn:active { transform: none !important; filter: brightness(0.95); }
+    .pin-key:active { transform: none !important; filter: brightness(0.92); }
+
+    /* Tone down theme swatch hover */
+    .t-swatch:hover { box-shadow: 0 0 0 1px var(--ac) inset !important; }
+
+    /* Hide ALL sparklines (service status + widget graphs) */
+    .sparkline, .widget-spark, .widget-graph, .widget-graph-no-data {
+      display: none !important;
+    }
+
+    /* Smaller, simpler service card icon area */
+    .card-icon-area { height: 100px !important; padding: 10px !important; }
+    .card-image { width: 64px !important; height: 64px !important; filter: none !important; }
+    .card:hover .card-image { transform: none !important; }
+    .card-placeholder { height: 100px !important; }
+
+    /* Themed scrollbar — solid */
+    ::-webkit-scrollbar-thumb { background: var(--glass-b) !important; }
+
   </style>
 </head>
-<body data-theme="aero">
+<body data-theme="light">
   <div id="bgLayer"></div>
   <div id="bgOverlay"></div>
 
@@ -1636,7 +1653,7 @@
           <span id="sshBadge" style="display:none;position:absolute;top:3px;right:3px;width:7px;height:7px;border-radius:50%;background:var(--ok);border:1.5px solid var(--glass)"></span>
         </button>
         <button class="hbtn" id="settingsBtn" title="Settings"><img src="icons/settings.png" style="width:17px;height:17px;opacity:0.85" alt="settings" onerror="this.onerror=null;this.style.display='none'"></button>
-        <button class="hbtn" id="themeToggle" title="Toggle theme"><img id="moonIcon" src="icons/moon.png" style="width:17px;height:17px;opacity:0.85" alt="moon" onerror="this.onerror=null;this.style.display='none'"><img id="sunIcon" src="icons/sun.png" style="width:17px;height:17px;opacity:0.85;display:none" alt="sun" onerror="this.onerror=null;this.style.display='none'"></button>
+        <button class="hbtn" id="themeToggle" title="Toggle light / dark"><svg id="moonIcon" viewBox="0 0 24 24" style="width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg><svg id="sunIcon" viewBox="0 0 24 24" style="width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:none"><circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2.5" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.5"/><line x1="2.5" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.5" y2="12"/><line x1="5" y1="5" x2="6.8" y2="6.8"/><line x1="17.2" y1="17.2" x2="19" y2="19"/><line x1="5" y1="19" x2="6.8" y2="17.2"/><line x1="17.2" y1="6.8" x2="19" y2="5"/></svg></button>
       </div>
     </header>
 
@@ -1892,10 +1909,6 @@
               <div><label>Desktop notifications</label><small>Get notified when a service goes down.</small></div>
               <div class="sw" id="notifSw" onclick="toggleNotifications()"><div class="sw-knob"></div></div>
             </div>
-            <div class="toggle-row">
-              <div><label>Lightweight mode</label><small>Disables blur effects for low-spec devices.</small></div>
-              <div class="sw" id="perfModeSw" onclick="togglePerfMode()"><div class="sw-knob"></div></div>
-            </div>
           </div>
 
           <div class="ss">
@@ -1974,21 +1987,6 @@
               <label>Overlay opacity</label>
               <input type="range" id="bgOverlayOpacity" min="0" max="85" value="40" oninput="updateBgOverlay()">
               <span id="bgOpacityLabel">40%</span>
-            </div>
-            <div class="slider-row">
-              <label>Image blur</label>
-              <input type="range" id="bgImageBlur" min="0" max="20" value="0" oninput="updateBgImageBlur()">
-              <span id="bgImageBlurLabel">0px</span>
-            </div>
-            <div class="slider-row">
-              <label>Panel blur</label>
-              <input type="range" id="bgBlurLevel" min="4" max="48" value="28" oninput="updateCardBlur()">
-              <span id="bgBlurLabel">28px</span>
-            </div>
-            <div class="slider-row">
-              <label>Card opacity</label>
-              <input type="range" id="bgCardOpacity" min="5" max="60" value="22" oninput="updateCardOpacity()">
-              <span id="bgCardLabel">22%</span>
             </div>
             <div style="display:flex;gap:0.45rem;flex-wrap:wrap;margin-top:0.5rem">
               <button class="btn btn-s" onclick="autoPickAccentFromBg()">Auto-pick accent</button>
@@ -2290,19 +2288,35 @@
   // THEMES
   // ═══════════════════════════════════
   const THEMES = [
-    {id:'aero',       name:'Aero',          c:['#c8e4f5','#0096d6','#0f4a65']},
-    {id:'aero-dark',  name:'Aero Dark',     c:['#041824','#20a8f0','#c8e8f8']},
-    {id:'dark',       name:'Dark',          c:['#0d1117','#58a6ff','#e6edf3']},
-    {id:'mocha',      name:'Mocha',         c:['#11111b','#cba6f7','#cdd6f4']},
+    {id:'light',      name:'Light',         c:['#eef1f4','#2e7ec4','#1a2530']},
+    {id:'dark',       name:'Dark',          c:['#11151c','#4da6ff','#dce4ed']},
     {id:'nord',       name:'Nord',          c:['#2e3440','#88c0d0','#eceff4']},
     {id:'solarized',  name:'Solarized',     c:['#fdf6e3','#268bd2','#073642']},
-    {id:'sakura',     name:'Sakura',        c:['#ffe4f0','#e01880','#7a1a4a']},
-    {id:'sakura-dark',name:'Sakura Dark',   c:['#1a0818','#f060b8','#f8d0e8']},
+    {id:'mocha',      name:'Mocha',         c:['#1e1e2e','#cba6f7','#cdd6f4']},
     {id:'terminal',   name:'Terminal',      c:['#000800','#00ff41','#003300']},
-    {id:'flat',       name:'Flat Dark',     c:['#2c3e50','#3498db','#ecf0f1']},
-    {id:'flat-light', name:'Flat Light',    c:['#ecf0f1','#3498db','#2c3e50']},
+    {id:'sakura',     name:'Sakura',        c:['#fbe4ee','#d0407a','#5a1838']},
+    {id:'sakura-dark',name:'Sakura Dark',   c:['#1f0a18','#f060a8','#f8d0e0']},
     {id:'custom',     name:'Custom',        c:['#1e1e2e','#cba6f7','#cdd6f4']},
   ];
+
+  // Which themes are "dark" (used by the light/dark toggle)
+  const DARK_THEMES = ['dark','nord','mocha','terminal','sakura-dark'];
+  const LIGHT_THEMES = ['light','solarized','sakura'];
+  function isThemeDark(id){
+    if (DARK_THEMES.includes(id)) return true;
+    if (LIGHT_THEMES.includes(id)) return false;
+    // Custom theme: detect from saved bgStart luminance
+    if (id === 'custom') {
+      try {
+        const cd = JSON.parse(localStorage.getItem(CUSTOM_KEY)||'{}');
+        const hex = (cd.bgStart||'#1e1e2e').replace('#','');
+        const n = parseInt(hex.length===3?hex.split('').map(c=>c+c).join(''):hex,16);
+        const r=(n>>16)&255, g=(n>>8)&255, b=n&255;
+        return (0.299*r + 0.587*g + 0.114*b) < 128;
+      } catch { return true; }
+    }
+    return false;
+  }
 
   const CCOLORS = [
     {prop:'bgStart',    label:'BG Start',   def:'#1e1e2e'},
@@ -2314,12 +2328,23 @@
     {prop:'inputBg',    label:'Input BG',   def:'#181825'},
   ];
 
+  // Remember the user's most-recent light theme and dark theme so toggle ping-pongs
+  // between them instead of always slamming to a hardcoded pair.
+  const LAST_LIGHT_KEY = 'kurudash-last-light';
+  const LAST_DARK_KEY  = 'kurudash-last-dark';
+
   function applyTheme(id, cd) {
     document.body.setAttribute('data-theme', id);
     localStorage.setItem(THEME_KEY, id);
-    const isDark = ['dark','mocha','nord','terminal','flat','custom','aero-dark','sakura-dark'].includes(id);
-    document.getElementById('moonIcon').style.display = isDark ? 'none' : 'block';
-    document.getElementById('sunIcon').style.display  = isDark ? 'block' : 'none';
+    const dark = isThemeDark(id);
+    // Remember the choice in its slot, so toggle restores it
+    if (dark) localStorage.setItem(LAST_DARK_KEY, id);
+    else      localStorage.setItem(LAST_LIGHT_KEY, id);
+    // Show the icon for the opposite mode — what you'll switch TO
+    const moon = document.getElementById('moonIcon');
+    const sun  = document.getElementById('sunIcon');
+    if (moon) moon.style.display = dark ? 'none'  : 'block';
+    if (sun)  sun.style.display  = dark ? 'block' : 'none';
     if (id === 'custom' && cd) applyCustomVars(cd);
     renderThemeGrid();
     // Re-adjust icon filter if background is active
@@ -2358,15 +2383,32 @@
   function darken(h,a){return lighten(h,-a);}
 
   function initTheme() {
-    const saved = localStorage.getItem(THEME_KEY) || 'aero';
+    let saved = localStorage.getItem(THEME_KEY) || 'light';
+    // Migrate removed themes to closest equivalent
+    const migrate = {
+      'aero': 'light',
+      'aero-dark': 'dark',
+      'flat': 'dark',
+      'flat-light': 'light',
+    };
+    if (migrate[saved]) saved = migrate[saved];
     const cd = JSON.parse(localStorage.getItem(CUSTOM_KEY) || '{}');
     applyTheme(saved, cd);
   }
 
   document.getElementById('themeToggle').addEventListener('click', () => {
     const cur = document.body.getAttribute('data-theme');
-    const isDark = ['dark','mocha','nord','terminal','custom','aero-dark','sakura-dark'].includes(cur);
-    applyTheme(isDark ? 'aero' : 'dark');
+    if (isThemeDark(cur)) {
+      // Switching to light — restore last-used light theme (default: light)
+      const target = localStorage.getItem(LAST_LIGHT_KEY) || 'light';
+      const cd = target === 'custom' ? JSON.parse(localStorage.getItem(CUSTOM_KEY)||'{}') : null;
+      applyTheme(target, cd);
+    } else {
+      // Switching to dark — restore last-used dark theme (default: dark)
+      const target = localStorage.getItem(LAST_DARK_KEY) || 'dark';
+      const cd = target === 'custom' ? JSON.parse(localStorage.getItem(CUSTOM_KEY)||'{}') : null;
+      applyTheme(target, cd);
+    }
   });
 
   // ═══════════════════════════════════
@@ -2483,7 +2525,7 @@
     return JSON.stringify({
       version:2,
       exported:new Date().toISOString(),
-      theme:localStorage.getItem(THEME_KEY)||'aero',
+      theme:localStorage.getItem(THEME_KEY)||'light',
       customTheme:JSON.parse(localStorage.getItem(CUSTOM_KEY)||'{}'),
       collapsed:[...collapsedIds],
       tree,
@@ -2514,7 +2556,7 @@
     if(!confirm('Delete ALL services, folders, widgets and settings?'))return;
     tree=[];collapsedIds=new Set();widgets=[];notesMap={};
     [TREE_KEY,COL_KEY,CUSTOM_KEY,WIDGET_KEY,NOTES_KEY].forEach(k=>localStorage.removeItem(k));
-    localStorage.setItem(THEME_KEY,'aero');applyTheme('aero');
+    localStorage.setItem(THEME_KEY,'light');applyTheme('light');
     renderWidgets();renderTree();render();toast('All data cleared');
   });
 
@@ -3405,15 +3447,14 @@ function normalizeUrlCached(url) {
     // Use body theme variables for xterm colors
     const theme=document.body.getAttribute('data-theme');
     const themes={
-      aero:{background:'#0d1a28',foreground:'#c8e8f8',cursor:'#0096d6',selectionBackground:'rgba(0,150,214,0.3)'},
+      light:{background:'#1a2530',foreground:'#eef1f4',cursor:'#2e7ec4',selectionBackground:'rgba(46,126,196,0.3)'},
       dark:{background:'#0d1117',foreground:'#e6edf3',cursor:'#58a6ff',selectionBackground:'rgba(88,166,255,0.3)'},
       mocha:{background:'#11111b',foreground:'#cdd6f4',cursor:'#cba6f7',selectionBackground:'rgba(203,166,247,0.3)'},
       nord:{background:'#2e3440',foreground:'#eceff4',cursor:'#88c0d0',selectionBackground:'rgba(136,192,208,0.3)'},
       solarized:{background:'#002b36',foreground:'#839496',cursor:'#268bd2',selectionBackground:'rgba(38,139,210,0.3)'},
-      sakura:{background:'#1a0010',foreground:'#ffd6e8',cursor:'#e01880',selectionBackground:'rgba(224,24,128,0.3)'},
       terminal:{background:'#000800',foreground:'#00ff41',cursor:'#00ff41',selectionBackground:'rgba(0,255,65,0.3)',cursorAccent:'#000'},
-      flat:{background:'#1a2534',foreground:'#ecf0f1',cursor:'#3498db',selectionBackground:'rgba(52,152,219,0.3)'},
-      'flat-light':{background:'#1a2534',foreground:'#ecf0f1',cursor:'#3498db',selectionBackground:'rgba(52,152,219,0.3)'},
+      sakura:{background:'#fbe4ee',foreground:'#5a1838',cursor:'#d0407a',selectionBackground:'rgba(208,64,122,0.3)'},
+      'sakura-dark':{background:'#1f0a18',foreground:'#f8d0e0',cursor:'#f060a8',selectionBackground:'rgba(240,96,168,0.3)'},
     };
     return themes[theme]||themes.dark;
   }
@@ -3497,7 +3538,6 @@ function normalizeUrlCached(url) {
   const BG_KEY      = 'kurudash-bg';
   const BG_TYPE_KEY = 'kurudash-bg-type';
   const BG_OPT_KEY  = 'kurudash-bg-opts';
-  const PERF_KEY    = 'kurudash-perf-mode';
 
   function getBgOpts() {
     try { return JSON.parse(localStorage.getItem(BG_OPT_KEY) || '{}'); } catch(_){ return {}; }
@@ -3531,26 +3571,9 @@ function normalizeUrlCached(url) {
       layer.style.backgroundPosition = 'center';
     }
 
-    // Apply blur & card opacity
-    const blur = opts.blur !== undefined ? opts.blur : 28;
-    const cardOp = opts.cardOpacity !== undefined ? opts.cardOpacity : 22;
-    const bgBlur = opts.bgBlur !== undefined ? opts.bgBlur : 0;
-    document.documentElement.style.setProperty('--card-blur', `blur(${blur}px) saturate(160%) brightness(1.01)`);
-    // Use theme glass color tinted to the right opacity rather than flat white
-    const style = getComputedStyle(document.documentElement);
-    const themeGlass = style.getPropertyValue('--glass').trim() || 'rgba(255,255,255,0.15)';
-    // Parse the alpha from the theme glass and scale it by cardOp
-    const glassAlpha = (cardOp / 100) * 0.9;
-    const isDark = ['dark','mocha','nord','terminal','flat','custom','aero-dark','sakura-dark']
-      .includes(document.body.getAttribute('data-theme'));
-    const cardGlass = isDark
-      ? themeGlass.replace(/[\d.]+\)$/, glassAlpha + ')')
-      : `rgba(255,255,255,${glassAlpha})`;
-    document.documentElement.style.setProperty('--card-glass', cardGlass);
-    document.documentElement.style.setProperty('--panel-glass', cardGlass);
-    // Background image blur — scale(1.06) prevents edge artifacts at higher blur values
-    layer.style.filter = bgBlur > 0 ? `blur(${bgBlur}px)` : '';
-    layer.style.transform = bgBlur > 0 ? `translateZ(0) scale(${1 + bgBlur*0.004})` : 'translateZ(0)';
+    // Reset any leftover layer effects (sliders for these were removed)
+    layer.style.filter = '';
+    layer.style.transform = '';
     updateIconFilterForBg();
   }
 
@@ -3633,37 +3656,6 @@ function normalizeUrlCached(url) {
     updateIconFilterForBg();
   }
 
-  function updateCardBlur() {
-    const v = document.getElementById('bgBlurLevel').value;
-    document.getElementById('bgBlurLabel').textContent = v + 'px';
-    const opts = getBgOpts(); opts.blur = parseInt(v); saveBgOpts(opts);
-    document.documentElement.style.setProperty('--card-blur', `blur(${v}px) saturate(160%)`);
-  }
-
-  function updateCardOpacity() {
-    const v = document.getElementById('bgCardOpacity').value;
-    document.getElementById('bgCardLabel').textContent = v + '%';
-    const opts = getBgOpts(); opts.cardOpacity = parseInt(v); saveBgOpts(opts);
-    const glassAlpha = (parseInt(v) / 100) * 0.9;
-    const isDark = ['dark','mocha','nord','terminal','flat','custom','aero-dark','sakura-dark']
-      .includes(document.body.getAttribute('data-theme'));
-    const themeGlass = getComputedStyle(document.documentElement).getPropertyValue('--glass').trim();
-    const cardGlass = isDark
-      ? themeGlass.replace(/[\d.]+\)$/, glassAlpha + ')')
-      : `rgba(255,255,255,${glassAlpha})`;
-    document.documentElement.style.setProperty('--card-glass', cardGlass);
-    document.documentElement.style.setProperty('--panel-glass', cardGlass);
-  }
-
-  function updateBgImageBlur() {
-    const v = document.getElementById('bgImageBlur').value;
-    document.getElementById('bgImageBlurLabel').textContent = v + 'px';
-    const opts = getBgOpts(); opts.bgBlur = parseInt(v); saveBgOpts(opts);
-    const layer = document.getElementById('bgLayer');
-    layer.style.filter = parseInt(v) > 0 ? `blur(${v}px)` : '';
-    layer.style.transform = parseInt(v) > 0 ? 'scale(1.05)' : '';
-  }
-
 
   // ═══════════════════════════════════
   // ICON FILTER — adjust for background
@@ -3686,19 +3678,16 @@ function normalizeUrlCached(url) {
 
     // Get the theme's native icon filter from computed style
     // We stored it as a CSS var on :root — read it from the stylesheet instead
-    const theme = document.body.getAttribute('data-theme') || 'aero';
+    const theme = document.body.getAttribute('data-theme') || 'light';
     const themeFilters = {
-      'aero':        'brightness(0) saturate(100%) invert(30%) sepia(60%) saturate(500%) hue-rotate(161deg)',
-      'aero-dark':   'brightness(0) saturate(100%) invert(61%) sepia(59%) saturate(245%) hue-rotate(166deg)',
+      'light':       'brightness(0) saturate(100%) invert(32%) sepia(20%) saturate(200%) hue-rotate(174deg)',
       'dark':        'brightness(0) saturate(100%) invert(60%) sepia(36%) saturate(152%) hue-rotate(173deg)',
       'mocha':       'brightness(0) saturate(100%) invert(67%) sepia(29%) saturate(120%) hue-rotate(204deg)',
       'nord':        'brightness(0) saturate(100%) invert(71%) sepia(32%) saturate(133%) hue-rotate(168deg)',
       'solarized':   'brightness(0) saturate(100%) invert(30%) sepia(40%) saturate(300%) hue-rotate(164deg)',
+      'terminal':    'brightness(0) saturate(100%) invert(31%) sepia(100%) saturate(500%) hue-rotate(99deg)',
       'sakura':      'brightness(0) saturate(100%) invert(30%) sepia(50%) saturate(400%) hue-rotate(300deg)',
       'sakura-dark': 'brightness(0) saturate(100%) invert(63%) sepia(40%) saturate(168%) hue-rotate(286deg)',
-      'terminal':    'brightness(0) saturate(100%) invert(31%) sepia(100%) saturate(500%) hue-rotate(99deg)',
-      'flat':        'brightness(0) saturate(100%) invert(66%) sepia(21%) saturate(100%) hue-rotate(172deg)',
-      'flat-light':  'brightness(0) saturate(100%) invert(32%) sepia(20%) saturate(200%) hue-rotate(174deg)',
       'custom':      'brightness(0) saturate(100%) invert(67%) sepia(29%) saturate(120%) hue-rotate(204deg)',
     };
     const base = themeFilters[theme] || themeFilters['dark'];
@@ -3759,14 +3748,6 @@ function normalizeUrlCached(url) {
     img.src = val;
   }
 
-  // Performance mode toggle
-  function togglePerfMode() {
-    const on = document.body.classList.toggle('perf-mode');
-    localStorage.setItem(PERF_KEY, on ? '1' : '');
-    document.getElementById('perfModeSw').classList.toggle('on', on);
-    toast(on ? 'Lightweight mode on' : 'Lightweight mode off');
-  }
-
   // Init background system settings UI state
   function initBgUI() {
     const type = localStorage.getItem(BG_TYPE_KEY);
@@ -3779,18 +3760,6 @@ function normalizeUrlCached(url) {
     if (opts.overlayOpacity !== undefined) {
       document.getElementById('bgOverlayOpacity').value = opts.overlayOpacity;
       document.getElementById('bgOpacityLabel').textContent = opts.overlayOpacity + '%';
-    }
-    if (opts.blur !== undefined) {
-      document.getElementById('bgBlurLevel').value = opts.blur;
-      document.getElementById('bgBlurLabel').textContent = opts.blur + 'px';
-    }
-    if (opts.cardOpacity !== undefined) {
-      document.getElementById('bgCardOpacity').value = opts.cardOpacity;
-      document.getElementById('bgCardLabel').textContent = opts.cardOpacity + '%';
-    }
-    if (opts.bgBlur !== undefined) {
-      document.getElementById('bgImageBlur').value = opts.bgBlur;
-      document.getElementById('bgImageBlurLabel').textContent = opts.bgBlur + 'px';
     }
     // bg source tabs
     document.querySelectorAll('.bg-tab').forEach(t=>{
@@ -3811,14 +3780,6 @@ function normalizeUrlCached(url) {
       });
     });
     updateGradPreview();
-  }
-
-  // Init performance mode
-  function initPerfMode() {
-    if (localStorage.getItem(PERF_KEY)==='1') {
-      document.body.classList.add('perf-mode');
-      document.getElementById('perfModeSw').classList.add('on');
-    }
   }
 
   // Wire settings open to also init bg UI
@@ -4509,7 +4470,6 @@ function normalizeUrlCached(url) {
 
   initTheme();
   applyBackground();
-  initPerfMode();
   initUIPrefs();
   renderWidgets();
   renderTree();
